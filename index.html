@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPCM / FPS Analyst Study Hub</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="topbar">
+    <strong>Study hub</strong>
+    <button id="menu-toggle">Menu</button>
+  </div>
+  <div class="shell">
+    <nav class="sidebar" id="sidebar">
+      <h1>CPCM / FPS study hub</h1>
+      <div class="navgroup">
+        <div class="navgroup-title">Course</div>
+        <a class="navlink" data-view="overview" href="#/">Overview</a>
+        <a class="navlink" data-view="block-A" href="#/block/A">Block A &middot; Foundations</a>
+      </div>
+      <div class="navgroup">
+        <div class="navgroup-title">Practice</div>
+        <a class="navlink" data-view="flashcards" href="#/flashcards">Flashcards</a>
+        <a class="navlink" data-view="quiz" href="#/quiz">Quiz mode</a>
+        <a class="navlink" data-view="glossary" href="#/glossary">Glossary</a>
+      </div>
+    </nav>
+    <main class="main" id="app"></main>
+  </div>
+
+  <script src="data/course-map.js"></script>
+  <script src="data/block-a.js"></script>
+  <script src="data/glossary-extra.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
