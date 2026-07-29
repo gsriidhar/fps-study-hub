@@ -1,6 +1,5 @@
 /* Study hub — plain JS, no build step, no dependencies. Data lives in data/*.js
-   (loaded as globals BLOCK_A, COURSE_MAP, GLOSSARY_EXTRA) so this works from
-   file:// as well as any static host. */
+   (loaded as globals) so this works from file:// as well as any static host. */
 
 const STORE_KEY = "fps-study-progress-v1";
 
@@ -24,7 +23,14 @@ function nl2p(s) {
   return String(s).split("\n\n").map((p) => `<p>${esc(p)}</p>`).join("");
 }
 
-const BLOCKS_BY_ID = { A: BLOCK_A };
+/* Every course/block registered here. Add a new block's data file, then add
+   one line below — everything else (routing, rendering, flashcards, quiz,
+   glossary) is generic. */
+const BLOCKS_BY_ID = { A: BLOCK_A, F1: FPS_BLOCK1 };
+const COURSES = [
+  { key: "cpcm", title: "CPCM curriculum", subtitle: "General payments & cash management foundation (40 lessons)", map: COURSE_MAP },
+  { key: "fps", title: "FPS analyst deep-dive", subtitle: "UK Faster Payments operations, investigation & testing", map: FPS_COURSE_MAP },
+];
 
 /* ---------- diagram renderer ---------- */
 function renderDiagram(d) {
@@ -61,72 +67,85 @@ function renderDiagram(d) {
 /* ---------- router ---------- */
 function parseHash() {
   const h = location.hash.replace(/^#\/?/, "");
-  const parts = h.split("/").filter(Boolean);
-  return parts;
+  return h.split("/").filter(Boolean);
 }
-
 function navActive(view) {
-  document.querySelectorAll(".navlink").forEach((a) => {
-    a.classList.toggle("active", a.dataset.view === view);
-  });
+  document.querySelectorAll(".navlink").forEach((a) => a.classList.toggle("active", a.dataset.view === view));
 }
 
 function render() {
   const parts = parseHash();
   const app = document.getElementById("app");
-  window.scrollTo(0, 0);
-  document.getElementById("sidebar").classList.remove("open");
+  window.scrollTo && window.scrollTo(0, 0);
+  const sidebar = document.getElementById("sidebar");
+  if (sidebar) sidebar.classList.remove("open");
 
   if (parts.length === 0) { app.innerHTML = viewOverview(); navActive("overview"); return; }
   if (parts[0] === "block" && parts[1]) { app.innerHTML = viewBlock(parts[1]); navActive("block-" + parts[1]); return; }
-  if (parts[0] === "lesson" && parts[1] && parts[2]) { app.innerHTML = viewLesson(parts[1], Number(parts[2])); navActive("block-" + parts[1]); bindLessonEvents(parts[1], Number(parts[2])); return; }
-  if (parts[0] === "flashcards") { app.innerHTML = viewFlashcardsShell(); navActive("flashcards"); initFlashcards(); return; }
-  if (parts[0] === "quiz") { app.innerHTML = viewQuizShell(); navActive("quiz"); initQuiz(); return; }
+  if (parts[0] === "lesson" && parts[1] && parts[2]) {
+    app.innerHTML = viewLesson(parts[1], Number(parts[2]));
+    navActive("block-" + parts[1]);
+    bindLessonEvents(parts[1], Number(parts[2]));
+    return;
+  }
+  if (parts[0] === "flashcards") { const id = parts[1] || "A"; app.innerHTML = viewFlashcardsShell(id); navActive("flashcards"); initFlashcards(id); return; }
+  if (parts[0] === "quiz") { const id = parts[1] || "A"; app.innerHTML = viewQuizShell(id); navActive("quiz"); initQuiz(id); return; }
   if (parts[0] === "glossary") { app.innerHTML = viewGlossary(); navActive("glossary"); bindGlossaryEvents(); return; }
   app.innerHTML = viewOverview(); navActive("overview");
 }
 
 /* ---------- Overview ---------- */
 function viewOverview() {
-  const readCount = BLOCK_A.lessons.filter((l) => PROGRESS.read["A" + l.n]).length;
-  const pct = Math.round((readCount / BLOCK_A.lessons.length) * 100);
+  const courseProgress = COURSES.map((c) => {
+    const readyBlocks = c.map.filter((b) => b.status === "ready");
+    let total = 0, done = 0;
+    readyBlocks.forEach((b) => {
+      const block = BLOCKS_BY_ID[b.id];
+      if (!block) return;
+      total += block.lessons.length;
+      done += block.lessons.filter((l) => PROGRESS.read[b.id + l.n]).length;
+    });
+    return { c, total, done };
+  });
+
   return `
     <h2>CPCM / FPS analyst study hub</h2>
-    <p class="subtitle">40-lesson curriculum, condensed into readable lessons, flashcards, and self-scoring quizzes. Progress is saved on this device.</p>
+    <p class="subtitle">Two tracks: the general CPCM curriculum, and a dedicated FPS analyst deep-dive. Condensed into readable lessons, flashcards, and self-scoring quizzes. Progress is saved on this device.</p>
 
     <div class="quick-links">
-      <a href="#/block/A">Start Block A &rarr;</a>
-      <a href="#/flashcards">Flashcards</a>
-      <a href="#/quiz">Quiz mode</a>
+      <a href="#/block/A">Start CPCM &rarr;</a>
+      <a href="#/block/F1">Start FPS deep-dive &rarr;</a>
       <a href="#/glossary">Glossary</a>
     </div>
 
-    <div class="panel">
-      <h3>Block A progress</h3>
-      <div class="progress-bar-track"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
-      <p class="subtitle" style="margin:6px 0 0;">${readCount} of ${BLOCK_A.lessons.length} lessons marked read</p>
-    </div>
-
-    <h3 style="font-size:13px; text-transform:uppercase; letter-spacing:0.03em; color:var(--muted); margin:22px 0 10px;">Course roadmap</h3>
-    <div class="block-grid">
-      ${COURSE_MAP.map((b) => {
-        const range = `Lessons ${b.lessons[0]}-${b.lessons[b.lessons.length - 1]}`;
-        if (b.status === "ready") {
-          return `<a class="block-card ready" href="#/block/${b.id}">
-            <span class="status">Ready</span>
-            <div class="id">BLOCK ${b.id} &middot; ${range}</div>
-            <div class="title">${esc(b.title)}</div>
-            <div class="desc">${esc(b.desc)}</div>
-          </a>`;
-        }
-        return `<div class="block-card soon">
-            <span class="status">Coming soon</span>
-            <div class="id">BLOCK ${b.id} &middot; ${range}</div>
-            <div class="title">${esc(b.title)}</div>
-            <div class="desc">${esc(b.desc)}</div>
-          </div>`;
-      }).join("")}
-    </div>
+    ${COURSES.map((c, i) => `
+      <h3 style="font-size:13px; text-transform:uppercase; letter-spacing:0.03em; color:var(--muted); margin:24px 0 10px;">${esc(c.title)}</h3>
+      <p class="subtitle" style="margin-top:-6px;">${esc(c.subtitle)}</p>
+      ${courseProgress[i].total ? `
+        <div class="panel">
+          <div class="progress-bar-track"><div class="progress-bar-fill" style="width:${Math.round(courseProgress[i].done / courseProgress[i].total * 100)}%"></div></div>
+          <p class="subtitle" style="margin:6px 0 0;">${courseProgress[i].done} of ${courseProgress[i].total} lessons read</p>
+        </div>` : ""}
+      <div class="block-grid">
+        ${c.map.map((b) => {
+          const range = `Lessons ${b.lessons[0]}-${b.lessons[b.lessons.length - 1]}`;
+          if (b.status === "ready") {
+            return `<a class="block-card ready" href="#/block/${b.id}">
+              <span class="status">Ready</span>
+              <div class="id">BLOCK ${b.id} &middot; ${range}</div>
+              <div class="title">${esc(b.title)}</div>
+              <div class="desc">${esc(b.desc)}</div>
+            </a>`;
+          }
+          return `<div class="block-card soon">
+              <span class="status">Coming soon</span>
+              <div class="id">BLOCK ${b.id} &middot; ${range}</div>
+              <div class="title">${esc(b.title)}</div>
+              <div class="desc">${esc(b.desc)}</div>
+            </div>`;
+        }).join("")}
+      </div>
+    `).join("")}
   `;
 }
 
@@ -140,7 +159,7 @@ function viewBlock(blockId) {
     <p class="subtitle">${block.lessons.length} lessons. Read each one, do the MCQs, then use the revision pack below.</p>
     <div class="lesson-list">
       ${block.lessons.map((l) => {
-        const done = PROGRESS.read["A" + l.n];
+        const done = PROGRESS.read[blockId + l.n];
         return `<a class="lesson-row" href="#/lesson/${block.id}/${l.n}">
           <span class="num">L${l.n}</span>
           <span class="lt">${esc(l.title)}</span>
@@ -152,8 +171,8 @@ function viewBlock(blockId) {
       <h3>Revision pack (covers lessons ${block.lessons[0]}-${block.lessons[block.lessons.length - 1]})</h3>
       <p>${esc(block.revisionSummary)}</p>
       <div class="quick-links" style="margin-top:14px;">
-        <a href="#/flashcards">Flashcards (${block.flashcards.length})</a>
-        <a href="#/quiz">Quiz (${block.lessons.reduce((n, l) => n + l.mcqs.length, 0)} questions)</a>
+        <a href="#/flashcards/${block.id}">Flashcards (${block.flashcards.length + block.additionalQuestions.length})</a>
+        <a href="#/quiz/${block.id}">Quiz (${block.lessons.reduce((n, l) => n + l.mcqs.length, 0)} questions)</a>
       </div>
     </div>
   `;
@@ -162,9 +181,9 @@ function viewBlock(blockId) {
 /* ---------- Lesson ---------- */
 function viewLesson(blockId, n) {
   const block = BLOCKS_BY_ID[blockId];
-  const lesson = block.lessons.find((l) => l.n === n);
+  const lesson = block && block.lessons.find((l) => l.n === n);
   if (!lesson) return `<h2>Not found</h2>`;
-  const done = !!PROGRESS.read["A" + n];
+  const done = !!PROGRESS.read[blockId + n];
   const idx = block.lessons.findIndex((l) => l.n === n);
   const prev = block.lessons[idx - 1];
   const next = block.lessons[idx + 1];
@@ -214,8 +233,8 @@ function viewLesson(blockId, n) {
     </div>
 
     <div class="panel">
-      <h3>10 exam-style MCQs</h3>
-      <p class="subtitle">Answered as part of the Block ${block.id} quiz — <a href="#/quiz">open quiz mode</a>.</p>
+      <h3>${lesson.mcqs.length} exam-style MCQs</h3>
+      <p class="subtitle">Answered as part of the Block ${block.id} quiz — <a href="#/quiz/${block.id}">open quiz mode</a>.</p>
     </div>
 
     <div class="panel">
@@ -247,19 +266,21 @@ function bindLessonEvents(blockId, n) {
 /* ---------- Flashcards ---------- */
 let deck = [];
 let deckPos = 0;
-function buildDeck() {
-  const cards = BLOCK_A.flashcards.map((c, i) => ({ id: "core" + i, q: c[0], a: c[1] }))
-    .concat(BLOCK_A.additionalQuestions.map((c, i) => ({ id: "extra" + i, q: c[0], a: c[1] })));
-  // weighted shuffle: cards rated "again" surface earlier
+let deckBlockId = "A";
+function buildDeck(blockId) {
+  const block = BLOCKS_BY_ID[blockId];
+  const cards = block.flashcards.map((c, i) => ({ id: blockId + "core" + i, q: c[0], a: c[1] }))
+    .concat(block.additionalQuestions.map((c, i) => ({ id: blockId + "extra" + i, q: c[0], a: c[1] })));
   const weighted = cards.map((c) => ({ c, w: PROGRESS.ratings[c.id] === "again" ? 0 : Math.random() }));
   weighted.sort((a, b) => a.w - b.w);
   return weighted.map((x) => x.c);
 }
-function viewFlashcardsShell() {
+function viewFlashcardsShell(blockId) {
+  const block = BLOCKS_BY_ID[blockId];
   return `
     <p class="crumbs"><a href="#/">Overview</a> / Flashcards</p>
-    <h2>Flashcards &mdash; Block A</h2>
-    <p class="subtitle">${BLOCK_A.flashcards.length + BLOCK_A.additionalQuestions.length} cards. Tap a card to flip it, then rate yourself &mdash; cards marked "review again" resurface sooner.</p>
+    <h2>Flashcards &mdash; Block ${block.id}: ${esc(block.title)}</h2>
+    <p class="subtitle">${block.flashcards.length + block.additionalQuestions.length} cards. Tap a card to flip it, then rate yourself &mdash; cards marked "review again" resurface sooner.</p>
     <div class="deck-controls">
       <button id="fc-shuffle">Reshuffle deck</button>
     </div>
@@ -267,10 +288,11 @@ function viewFlashcardsShell() {
     <div id="fc-area"></div>
   `;
 }
-function initFlashcards() {
-  deck = buildDeck();
+function initFlashcards(blockId) {
+  deckBlockId = blockId;
+  deck = buildDeck(blockId);
   deckPos = 0;
-  document.getElementById("fc-shuffle").addEventListener("click", () => { deck = buildDeck(); deckPos = 0; renderCard(); });
+  document.getElementById("fc-shuffle").addEventListener("click", () => { deck = buildDeck(deckBlockId); deckPos = 0; renderCard(); });
   renderCard();
 }
 function renderCard() {
@@ -297,7 +319,7 @@ function renderCard() {
       </div>
     </div>
   `;
-  document.getElementById("flip-card").addEventListener("click", (e) => {
+  document.getElementById("flip-card").addEventListener("click", () => {
     document.getElementById("flip-card").classList.toggle("flipped");
   });
   document.getElementById("rate-again").addEventListener("click", (e) => { e.stopPropagation(); rateCard(card.id, "again"); });
@@ -316,29 +338,33 @@ let quizPos = 0;
 let quizScore = 0;
 let quizAnswered = false;
 let quizWrong = [];
-function buildQuiz() {
+let quizBlockId = "A";
+function buildQuiz(blockId) {
+  const block = BLOCKS_BY_ID[blockId];
   const all = [];
-  BLOCK_A.lessons.forEach((l) => l.mcqs.forEach((m) => all.push({ ...m, lessonTitle: l.title })));
+  block.lessons.forEach((l) => l.mcqs.forEach((m) => all.push({ ...m, lessonTitle: l.title })));
   return all.sort(() => Math.random() - 0.5);
 }
-function viewQuizShell() {
+function viewQuizShell(blockId) {
+  const block = BLOCKS_BY_ID[blockId];
   return `
     <p class="crumbs"><a href="#/">Overview</a> / Quiz</p>
-    <h2>Quiz mode &mdash; Block A</h2>
-    <p class="subtitle">${BLOCK_A.lessons.reduce((n, l) => n + l.mcqs.length, 0)} questions across lessons 1-5, shuffled.</p>
+    <h2>Quiz mode &mdash; Block ${block.id}: ${esc(block.title)}</h2>
+    <p class="subtitle">${block.lessons.reduce((n, l) => n + l.mcqs.length, 0)} questions across lessons ${block.lessons[0].n}-${block.lessons[block.lessons.length - 1].n}, shuffled.</p>
     <div id="quiz-area"></div>
   `;
 }
-function initQuiz() {
-  quizQs = buildQuiz();
+function initQuiz(blockId) {
+  quizBlockId = blockId;
+  quizQs = buildQuiz(blockId);
   quizPos = 0; quizScore = 0; quizAnswered = false; quizWrong = [];
   renderQuiz();
 }
 function renderQuiz() {
   const area = document.getElementById("quiz-area");
   if (quizPos >= quizQs.length) {
-    const best = PROGRESS.quizBest.A || 0;
-    if (quizScore > best) { PROGRESS.quizBest.A = quizScore; saveProgress(PROGRESS); }
+    const best = PROGRESS.quizBest[quizBlockId] || 0;
+    if (quizScore > best) { PROGRESS.quizBest[quizBlockId] = quizScore; saveProgress(PROGRESS); }
     area.innerHTML = `
       <div class="panel">
         <h3>Result</h3>
@@ -349,7 +375,7 @@ function renderQuiz() {
           <div class="review-item"><strong>${esc(w.q)}</strong><br>Correct answer: ${esc(w.options[w.a])}${w.why ? `<br><span style="color:var(--muted)">${esc(w.why)}</span>` : ""}</div>
         `).join("")}` : `<p style="margin-top:14px;">Perfect score &mdash; nice work.</p>`}
       </div>`;
-    document.getElementById("quiz-restart").addEventListener("click", initQuiz);
+    document.getElementById("quiz-restart").addEventListener("click", () => initQuiz(quizBlockId));
     return;
   }
   const q = quizQs[quizPos];
@@ -388,7 +414,9 @@ function renderQuiz() {
 /* ---------- Glossary ---------- */
 function allGlossaryTerms() {
   const coreTerms = [];
-  BLOCK_A.lessons.forEach((l) => l.keyTerms.forEach(([t, d]) => coreTerms.push({ term: t, def: d, group: "Block A core terms" })));
+  Object.values(BLOCKS_BY_ID).forEach((block) => {
+    block.lessons.forEach((l) => l.keyTerms.forEach(([t, d]) => coreTerms.push({ term: t, def: d, group: "Block " + block.id + " core terms" })));
+  });
   const extra = GLOSSARY_EXTRA.map(([t, d, g]) => ({ term: t, def: d, group: g }));
   return coreTerms.concat(extra);
 }
@@ -396,7 +424,7 @@ function viewGlossary() {
   return `
     <p class="crumbs"><a href="#/">Overview</a> / Glossary</p>
     <h2>Glossary</h2>
-    <p class="subtitle">${allGlossaryTerms().length} terms &mdash; Block A core terms plus the supplementary payments terminology reference.</p>
+    <p class="subtitle">${allGlossaryTerms().length} terms &mdash; core terms from every built block, plus the supplementary payments terminology reference.</p>
     <input type="text" class="glossary-search" id="gloss-search" placeholder="Search terms...">
     <div id="gloss-results"></div>
   `;
@@ -424,8 +452,7 @@ function renderGlossaryResults(query) {
 /* ---------- boot ---------- */
 window.addEventListener("hashchange", render);
 window.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("menu-toggle").addEventListener("click", () => {
-    document.getElementById("sidebar").classList.toggle("open");
-  });
+  const menuToggle = document.getElementById("menu-toggle");
+  if (menuToggle) menuToggle.addEventListener("click", () => document.getElementById("sidebar").classList.toggle("open"));
   render();
 });
