@@ -1,0 +1,75 @@
+name: Build & deploy docs site
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "data/**"
+      - "docs-site/**"
+      - "scripts/convert-to-markdown.js"
+      - ".github/workflows/docs-deploy.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: docs-site/requirements.txt
+
+      - name: Regenerate Markdown from lesson data
+        run: node scripts/convert-to-markdown.js . docs-site/content
+
+      - name: Install MkDocs dependencies
+        run: pip install -r docs-site/requirements.txt
+
+      - name: Build knowledge-assistant index
+        run: node scripts/build-search-index.js docs-site/content docs-site/content/assets/embeddings/index.json
+
+      - name: Build docs site
+        working-directory: docs-site
+        run: mkdocs build --strict
+
+      - name: Assemble combined Pages output
+        run: |
+          mkdir -p publish
+          cp -r docs-site/site/. publish/
+          mkdir -p publish/app
+          cp index.html app.js styles.css publish/app/
+          cp -r data publish/app/data
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: publish
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
