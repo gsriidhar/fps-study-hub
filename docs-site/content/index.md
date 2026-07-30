@@ -35,7 +35,8 @@ All content here is written in original wording, with original worked examples, 
 | A — Foundations | Introduction to payments & cash management, the ecosystem, participants, payment types & instruments | Ready |
 | B — UK Domestic Clearing | Clearing & settlement basics, UK payment systems, Bacs, Faster Payments, CHAPS | Ready |
 | C — Cross-Border & High-Value Payments | RTGS, SWIFT, correspondent banking, SEPA, ACH | Ready |
-| D–H | Full CPCM curriculum (in progress) | Coming soon |
+| D — Cards & Merchant Payments | Cross-border wires, card payments, Visa/Mastercard, payment gateways, merchant acquiring | Ready |
+| E–H | Full CPCM curriculum (in progress) | Coming soon |
 
 ## Other sections
 

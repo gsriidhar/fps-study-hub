@@ -82,6 +82,7 @@ nav:
       - "Block A · Foundations": cpcm/block-a-foundations/index.md
       - "Block B · UK Domestic Clearing": cpcm/block-b-uk-domestic-clearing/index.md
       - "Block C · Cross-Border & High-Value": cpcm/block-c-cross-border-and-high-value-payments/index.md
+      - "Block D · Cards & Merchant Payments": cpcm/block-d-cards-and-merchant-payments/index.md
   - Glossary: glossary/index.md
   - Knowledge Assistant: assistant/index.md
   - Interview prep: interview-prep/index.md
