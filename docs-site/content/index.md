@@ -33,7 +33,8 @@ All content here is written in original wording, with original worked examples, 
 | Block | Focus | Status |
 |---|---|---|
 | A — Foundations | Introduction to payments & cash management, the ecosystem, participants, payment types & instruments | Ready |
-| B–H | Full CPCM curriculum (in progress) | Coming soon |
+| B — UK Domestic Clearing | Clearing & settlement basics, UK payment systems, Bacs, Faster Payments, CHAPS | Ready |
+| C–H | Full CPCM curriculum (in progress) | Coming soon |
 
 ## Other sections
 
