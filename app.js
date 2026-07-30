@@ -3,11 +3,32 @@
 
 const STORE_KEY = "fps-study-progress-v1";
 
+function defaultProgress() {
+  return {
+    read: {}, ratings: {}, quizBest: {},
+    activity: {}, missedTopics: {},
+    profileName: "Student", activeTrack: "cpcm",
+    lastReset: { overall: null, cpcm: null, fps: null },
+    freshStartLock: { cpcm: false, fps: false },
+    archive: [],
+  };
+}
 function loadProgress() {
+  const defaults = defaultProgress();
   try {
-    return JSON.parse(localStorage.getItem(STORE_KEY)) || { read: {}, ratings: {}, quizBest: {} };
+    const saved = JSON.parse(localStorage.getItem(STORE_KEY)) || {};
+    return Object.assign({}, defaults, saved, {
+      read: Object.assign({}, defaults.read, saved.read),
+      ratings: Object.assign({}, defaults.ratings, saved.ratings),
+      quizBest: Object.assign({}, defaults.quizBest, saved.quizBest),
+      activity: Object.assign({}, defaults.activity, saved.activity),
+      missedTopics: Object.assign({}, defaults.missedTopics, saved.missedTopics),
+      lastReset: Object.assign({}, defaults.lastReset, saved.lastReset),
+      freshStartLock: Object.assign({}, defaults.freshStartLock, saved.freshStartLock),
+      archive: saved.archive || defaults.archive,
+    });
   } catch (e) {
-    return { read: {}, ratings: {}, quizBest: {} };
+    return defaults;
   }
 }
 function saveProgress(p) {
@@ -81,6 +102,7 @@ function render() {
   if (sidebar) sidebar.classList.remove("open");
 
   if (parts.length === 0) { app.innerHTML = viewOverview(); navActive("overview"); return; }
+  if (parts[0] === "dashboard") { app.innerHTML = viewDashboard(); navActive("dashboard"); bindDashboardEvents(); return; }
   if (parts[0] === "block" && parts[1]) { app.innerHTML = viewBlock(parts[1]); navActive("block-" + parts[1]); return; }
   if (parts[0] === "lesson" && parts[1] && parts[2]) {
     app.innerHTML = viewLesson(parts[1], Number(parts[2]));
@@ -264,7 +286,12 @@ function bindLessonEvents(blockId, n) {
   if (!btn) return;
   btn.addEventListener("click", () => {
     const key = blockId + n;
-    PROGRESS.read[key] = !PROGRESS.read[key];
+    if (PROGRESS.read[key]) {
+      delete PROGRESS.read[key];
+    } else {
+      PROGRESS.read[key] = Date.now();
+      logActivity();
+    }
     saveProgress(PROGRESS);
     render();
   });
@@ -334,6 +361,7 @@ function renderCard() {
 }
 function rateCard(id, rating) {
   PROGRESS.ratings[id] = rating;
+  logActivity();
   saveProgress(PROGRESS);
   deckPos++;
   renderCard();
@@ -410,7 +438,12 @@ function renderQuiz() {
         else if (i === chosen) b.classList.add("incorrect");
       });
       if (chosen === q.a) quizScore++;
-      else quizWrong.push(q);
+      else {
+        quizWrong.push(q);
+        PROGRESS.missedTopics[q.lessonTitle] = (PROGRESS.missedTopics[q.lessonTitle] || 0) + 1;
+      }
+      logActivity();
+      saveProgress(PROGRESS);
       if (q.why) document.getElementById("quiz-explain").innerHTML = `<div class="quiz-explain">${esc(q.why)}</div>`;
       document.getElementById("quiz-next").style.display = "inline-block";
     });
@@ -577,6 +610,504 @@ function bindSearchEvents() {
   renderSearchResults(input.value);
   input.addEventListener("input", () => renderSearchResults(input.value));
   input.focus();
+}
+
+/* ---------- Dashboard ---------- */
+function todayStr() { return new Date().toISOString().slice(0, 10); }
+function logActivity() {
+  const d = todayStr();
+  PROGRESS.activity[d] = (PROGRESS.activity[d] || 0) + 1;
+}
+function computeStreak() {
+  let streak = 0;
+  const d = new Date();
+  for (;;) {
+    const key = d.toISOString().slice(0, 10);
+    if (PROGRESS.activity[key]) { streak++; d.setDate(d.getDate() - 1); }
+    else break;
+  }
+  return streak;
+}
+function estHours() {
+  const total = Object.values(PROGRESS.activity).reduce((a, b) => a + b, 0);
+  return Math.round((total * 2 / 60) * 10) / 10; // ~2 min per logged study action
+}
+function trackInfo(trackKey) { return COURSES.find((c) => c.key === trackKey); }
+function trackBlocks(trackKey) { return trackInfo(trackKey).map.filter((b) => b.status === "ready"); }
+
+function blockStats(blockId) {
+  const block = BLOCKS_BY_ID[blockId];
+  const lessonsTotal = block.lessons.length;
+  const lessonsDone = block.lessons.filter((l) => PROGRESS.read[blockId + l.n]).length;
+  const cardIds = block.flashcards.map((c, i) => blockId + "core" + i)
+    .concat(block.additionalQuestions.map((c, i) => blockId + "extra" + i));
+  const flashTotal = cardIds.length;
+  const flashMastered = cardIds.filter((id) => PROGRESS.ratings[id] === "know").length;
+  const flashAgain = cardIds.filter((id) => PROGRESS.ratings[id] === "again").length;
+  const quizTotal = block.lessons.reduce((n, l) => n + l.mcqs.length, 0);
+  const quizBest = PROGRESS.quizBest[blockId] || 0;
+  const quizPct = quizTotal ? Math.round((quizBest / quizTotal) * 100) : 0;
+  const lastRead = block.lessons.reduce((m, l) => Math.max(m, PROGRESS.read[blockId + l.n] || 0), 0);
+  const tagCounts = {};
+  block.lessons.forEach((l) => { tagCounts[l.tag] = (tagCounts[l.tag] || 0) + 1; });
+  const difficulty = Object.entries(tagCounts).sort((a, b) => b[1] - a[1])[0][0];
+  return { blockId, block, lessonsTotal, lessonsDone, flashTotal, flashMastered, flashAgain, quizTotal, quizBest, quizPct, lastRead, cardIds, difficulty };
+}
+function trackStats(trackKey) {
+  const blocks = trackBlocks(trackKey);
+  let lessonsTotal = 0, lessonsDone = 0, flashTotal = 0, flashMastered = 0, flashAgain = 0,
+    quizTotalAll = 0, quizBestAll = 0, modulesCompleted = 0;
+  blocks.forEach((b) => {
+    const s = blockStats(b.id);
+    lessonsTotal += s.lessonsTotal; lessonsDone += s.lessonsDone;
+    flashTotal += s.flashTotal; flashMastered += s.flashMastered; flashAgain += s.flashAgain;
+    quizTotalAll += s.quizTotal; quizBestAll += s.quizBest;
+    if (s.lessonsTotal && s.lessonsDone === s.lessonsTotal) modulesCompleted++;
+  });
+  const quizAvgPct = quizTotalAll ? Math.round((quizBestAll / quizTotalAll) * 100) : 0;
+  const lessonPct = lessonsTotal ? Math.round((lessonsDone / lessonsTotal) * 100) : 0;
+  const flashPct = flashTotal ? Math.round((flashMastered / flashTotal) * 100) : 0;
+  const examReadiness = Math.round(lessonPct * 0.5 + quizAvgPct * 0.3 + flashPct * 0.2);
+  return { modulesTotal: blocks.length, modulesCompleted, lessonsTotal, lessonsDone, lessonPct, flashTotal, flashMastered, flashAgain, quizAvgPct, examReadiness };
+}
+function pickContinueBlock(trackKey) {
+  const blocks = trackBlocks(trackKey);
+  let inProgress = null, notStarted = null;
+  blocks.forEach((b) => {
+    const s = blockStats(b.id);
+    if (s.lessonsDone > 0 && s.lessonsDone < s.lessonsTotal) {
+      if (!inProgress || s.lastRead > inProgress.s.lastRead) inProgress = { b, s };
+    } else if (s.lessonsDone === 0 && !notStarted) {
+      notStarted = { b, s };
+    }
+  });
+  return inProgress || notStarted || null;
+}
+function weakTopics(trackKey, limit) {
+  const titles = new Set();
+  trackBlocks(trackKey).forEach((b) => BLOCKS_BY_ID[b.id].lessons.forEach((l) => titles.add(l.title)));
+  return Object.entries(PROGRESS.missedTopics)
+    .filter(([title]) => titles.has(title))
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, limit || 5)
+    .map(([title]) => title);
+}
+function weeklyActivity() {
+  const days = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const key = d.toISOString().slice(0, 10);
+    days.push({ label: d.toLocaleDateString(undefined, { weekday: "short" }), count: PROGRESS.activity[key] || 0 });
+  }
+  return days;
+}
+function computeBadges() {
+  const badges = [];
+  if (Object.keys(PROGRESS.read).length) badges.push("First lesson");
+  let quizMaster = false;
+  ["cpcm", "fps"].forEach((t) => {
+    const s = trackStats(t);
+    if (s.modulesTotal && s.modulesCompleted === s.modulesTotal) badges.push(trackInfo(t).title.split(" ")[0] + " graduate");
+    trackBlocks(t).forEach((b) => { if (blockStats(b.id).quizPct >= 90) quizMaster = true; });
+  });
+  if (quizMaster) badges.push("Quiz master");
+  const know = Object.values(PROGRESS.ratings).filter((r) => r === "know").length;
+  if (know >= 50) badges.push("Flashcard pro");
+  const streak = computeStreak();
+  if (streak >= 7) badges.push("7-day streak");
+  else if (streak >= 3) badges.push("3-day streak");
+  return badges;
+}
+
+/* -- reset & archive -- */
+function archiveSnapshot(scope, label) {
+  PROGRESS.archive.unshift({
+    id: Date.now(), scope, label, date: todayStr(),
+    cpcm: trackStats("cpcm"), fps: trackStats("fps"),
+    streak: computeStreak(), hours: estHours(),
+  });
+  PROGRESS.archive = PROGRESS.archive.slice(0, 20);
+}
+function clearModuleData(blockId) {
+  const block = BLOCKS_BY_ID[blockId];
+  block.lessons.forEach((l) => delete PROGRESS.read[blockId + l.n]);
+  const cardIds = block.flashcards.map((c, i) => blockId + "core" + i)
+    .concat(block.additionalQuestions.map((c, i) => blockId + "extra" + i));
+  cardIds.forEach((id) => delete PROGRESS.ratings[id]);
+  delete PROGRESS.quizBest[blockId];
+}
+function clearTrackMissedTopics(trackKey) {
+  const titles = new Set();
+  trackBlocks(trackKey).forEach((b) => BLOCKS_BY_ID[b.id].lessons.forEach((l) => titles.add(l.title)));
+  Object.keys(PROGRESS.missedTopics).forEach((title) => { if (titles.has(title)) delete PROGRESS.missedTopics[title]; });
+}
+function resetModuleProgress(blockId) {
+  archiveSnapshot("module", "Block " + blockId + " reset");
+  clearModuleData(blockId);
+  PROGRESS.lastReset[blockId] = todayStr();
+  saveProgress(PROGRESS);
+}
+function resetTrackProgress(trackKey) {
+  archiveSnapshot(trackKey, trackInfo(trackKey).title + " reset");
+  trackBlocks(trackKey).forEach((b) => clearModuleData(b.id));
+  clearTrackMissedTopics(trackKey);
+  PROGRESS.lastReset[trackKey] = todayStr();
+  PROGRESS.freshStartLock[trackKey] = true;
+  saveProgress(PROGRESS);
+}
+function resetTrackFlashcards(trackKey) {
+  archiveSnapshot(trackKey + "-flashcards", trackInfo(trackKey).title + " flashcards reset");
+  trackBlocks(trackKey).forEach((b) => {
+    const block = BLOCKS_BY_ID[b.id];
+    const cardIds = block.flashcards.map((c, i) => b.id + "core" + i)
+      .concat(block.additionalQuestions.map((c, i) => b.id + "extra" + i));
+    cardIds.forEach((id) => delete PROGRESS.ratings[id]);
+  });
+  saveProgress(PROGRESS);
+}
+function freshStartReset() {
+  archiveSnapshot("fresh-start", "Fresh start — full reset");
+  ["cpcm", "fps"].forEach((t) => {
+    trackBlocks(t).forEach((b) => clearModuleData(b.id));
+    clearTrackMissedTopics(t);
+    PROGRESS.freshStartLock[t] = true;
+  });
+  PROGRESS.activity = {};
+  PROGRESS.lastReset.overall = todayStr();
+  PROGRESS.lastReset.cpcm = todayStr();
+  PROGRESS.lastReset.fps = todayStr();
+  saveProgress(PROGRESS);
+}
+
+/* -- dashboard sub-components -- */
+function progressRing(pct, size, color) {
+  size = size || 64;
+  const r = size / 2 - 6;
+  const c = 2 * Math.PI * r;
+  const p = Math.min(100, Math.max(0, pct || 0));
+  const offset = c - (p / 100) * c;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" class="dash-ring">
+    <circle cx="${size / 2}" cy="${size / 2}" r="${r}" class="dash-ring-track"></circle>
+    <circle cx="${size / 2}" cy="${size / 2}" r="${r}" class="dash-ring-fill" style="stroke:${color}; stroke-dasharray:${c}; stroke-dashoffset:${offset};"></circle>
+    <text x="50%" y="52%" class="dash-ring-text" dominant-baseline="middle" text-anchor="middle">${Math.round(p)}%</text>
+  </svg>`;
+}
+function moduleCardHtml(b, state) {
+  const s = blockStats(b.id);
+  const pct = s.lessonsTotal ? Math.round((s.lessonsDone / s.lessonsTotal) * 100) : 0;
+  const diffLabel = s.difficulty === "essential" ? "Core" : "Important";
+  if (state === "locked") {
+    return `<div class="dash-card dash-module locked">
+      <div class="dash-module-head"><span class="dash-module-id">${esc(b.id)}</span><span class="dash-lock">&#128274; Locked</span></div>
+      <div class="dash-module-title">${esc(b.title)}</div>
+      <div class="dash-module-desc">Complete the previous module to unlock.</div>
+    </div>`;
+  }
+  return `<div class="dash-card dash-module">
+    <div class="dash-module-head"><span class="dash-module-id">${esc(b.id)}</span><span class="dash-pct">${pct}%</span></div>
+    <div class="dash-module-title">${esc(b.title)}</div>
+    <div class="dash-module-meta">
+      <span>${diffLabel}</span>
+      <span>${s.lessonsTotal} lessons</span>
+      <span>${s.flashTotal} flashcards</span>
+      <span>Quiz ${s.quizPct}%</span>
+    </div>
+    <div class="dash-progress-track"><div class="dash-progress-fill" style="width:${pct}%"></div></div>
+    <a class="dash-btn dash-btn-primary" href="#/block/${b.id}">${pct > 0 ? "Continue" : "Start"}</a>
+  </div>`;
+}
+function continueLearningHtml(active, continueBlock) {
+  if (!continueBlock) {
+    return `<div class="dash-card dash-glow"><div class="dash-card-title">All caught up</div><p class="dash-muted">Every ready module in this track is fully read. Check the quiz center to sharpen weak spots.</p></div>`;
+  }
+  const { b, s } = continueBlock;
+  const pct = s.lessonsTotal ? Math.round((s.lessonsDone / s.lessonsTotal) * 100) : 0;
+  const lastStudied = s.lastRead ? new Date(s.lastRead).toLocaleDateString() : "Not started";
+  return `<div class="dash-card dash-glow">
+    <div class="dash-card-title">${esc(b.id)}: ${esc(b.title)}</div>
+    <div class="dash-progress-track"><div class="dash-progress-fill" style="width:${pct}%"></div></div>
+    <div class="dash-module-meta">
+      <span>${s.lessonsTotal} lessons</span>
+      <span>${s.flashTotal} flashcards</span>
+      <span>Quizzes: ${s.quizPct}%</span>
+      <span>Last studied: ${esc(lastStudied)}</span>
+    </div>
+    <a class="dash-btn dash-btn-primary" href="#/block/${b.id}">Continue learning &rarr;</a>
+  </div>`;
+}
+function roadmapHtml(steps) {
+  return `<div class="dash-roadmap">${steps.map((st, i) => `
+    <div class="dash-roadmap-step ${st.state}">
+      <div class="dash-roadmap-dot"></div>
+      <div class="dash-roadmap-label">${esc(st.b.title)}${st.state === "locked" ? " (locked)" : st.state === "complete" ? " &#10003;" : ""}</div>
+    </div>
+    ${i < steps.length - 1 ? '<div class="dash-roadmap-line"></div>' : ""}
+  `).join("")}
+  <div class="dash-roadmap-step ${steps.length && steps[steps.length - 1].state === "complete" ? "complete" : ""}">
+    <div class="dash-roadmap-dot"></div>
+    <div class="dash-roadmap-label">Exam ready</div>
+  </div>
+  </div>`;
+}
+function flashcardPanelHtml(active, activeStats, continueBlock) {
+  const firstBlock = trackBlocks(active)[0];
+  const reviewHref = continueBlock ? `#/flashcards/${continueBlock.b.id}` : (firstBlock ? `#/flashcards/${firstBlock.id}` : "#/dashboard");
+  const learning = Math.max(0, activeStats.flashTotal - activeStats.flashMastered - activeStats.flashAgain);
+  return `<div class="dash-card">
+    <div class="dash-eyebrow">Flashcard mastery — ${esc(trackInfo(active).title)}</div>
+    <div class="dash-flash-row">
+      <div class="dash-stat"><span class="v" style="color:var(--dash-green)">${activeStats.flashMastered}</span><span class="l">Mastered</span></div>
+      <div class="dash-stat"><span class="v" style="color:var(--dash-blue)">${learning}</span><span class="l">Learning</span></div>
+      <div class="dash-stat"><span class="v" style="color:var(--dash-purple)">${activeStats.flashAgain}</span><span class="l">Need review</span></div>
+    </div>
+    <div class="dash-btn-row">
+      <a class="dash-btn dash-btn-primary" href="${reviewHref}">Review today</a>
+      <button class="dash-btn" data-action="reset-flashcards">Reset flashcards</button>
+      <a class="dash-btn" href="${reviewHref}">Start new deck</a>
+    </div>
+  </div>`;
+}
+function quizCenterHtml(cpcmStats, fpsStats) {
+  function side(key, stats) {
+    const info = trackInfo(key);
+    const weak = weakTopics(key, 3);
+    return `<div class="dash-quiz-col">
+      <div class="dash-eyebrow">${esc(info.title)} quizzes</div>
+      <div class="dash-quiz-avg">${stats.quizAvgPct}%<span>avg score</span></div>
+      <div class="dash-muted">${stats.modulesCompleted}/${stats.modulesTotal} modules quiz-ready</div>
+      ${weak.length ? `<div class="dash-weak-title">Weak topics</div><ul class="dash-weak-list">${weak.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : `<div class="dash-muted" style="margin-top:8px;">No weak topics flagged yet.</div>`}
+    </div>`;
+  }
+  return `<div class="dash-card"><div class="dash-quiz-grid">${side("cpcm", cpcmStats)}${side("fps", fpsStats)}</div></div>`;
+}
+function weeklyChartHtml(week, maxWeek) {
+  return `<div class="dash-week-chart">${week.map((d) => `
+    <div class="dash-week-col">
+      <div class="dash-week-bar" style="height:${Math.max(4, Math.round((d.count / maxWeek) * 64))}px"></div>
+      <div class="dash-week-label">${esc(d.label)}</div>
+    </div>`).join("")}</div>`;
+}
+function resetPanelHtml(active) {
+  const lastOverall = PROGRESS.lastReset.overall ? new Date(PROGRESS.lastReset.overall).toLocaleDateString() : "Never";
+  const lastCpcm = PROGRESS.lastReset.cpcm ? new Date(PROGRESS.lastReset.cpcm).toLocaleDateString() : "Never";
+  const lastFps = PROGRESS.lastReset.fps ? new Date(PROGRESS.lastReset.fps).toLocaleDateString() : "Never";
+  const cb = pickContinueBlock(active);
+  return `<div class="dash-card dash-reset-panel">
+    <div class="dash-eyebrow">Reset &amp; new start</div>
+    <div class="dash-btn-row">
+      <button class="dash-btn" data-action="reset-module" ${cb ? "" : "disabled"}>Reset current module${cb ? " (" + esc(cb.b.id) + ")" : ""}</button>
+      <button class="dash-btn dash-btn-danger" data-action="reset-cpcm">Reset CPCM Study Hub</button>
+      <button class="dash-btn dash-btn-danger" data-action="reset-fps">Reset FPS Study Hub</button>
+      <button class="dash-btn dash-btn-danger" data-action="fresh-start">Fresh start mode</button>
+    </div>
+    <div class="dash-reset-meta">
+      <span>Last reset — overall: ${lastOverall}</span>
+      <span>CPCM: ${lastCpcm}</span>
+      <span>FPS: ${lastFps}</span>
+    </div>
+    ${PROGRESS.archive.length ? `<details class="dash-archive"><summary>Previous achievements archive (${PROGRESS.archive.length})</summary>
+      ${PROGRESS.archive.map((a) => `<div class="dash-archive-item"><strong>${esc(a.label)}</strong> &middot; ${esc(a.date)} &middot; CPCM ${a.cpcm.lessonPct}% / FPS ${a.fps.lessonPct}%, streak ${a.streak}d</div>`).join("")}
+    </details>` : ""}
+  </div>`;
+}
+
+/* -- modal -- */
+let dashModal = null;
+function openDashModal(cfg) { dashModal = cfg; renderDashModal(); }
+function closeDashModal() { dashModal = null; renderDashModal(); }
+function renderDashModal() {
+  const root = document.getElementById("dash-modal-root");
+  if (!root) return;
+  if (!dashModal) { root.innerHTML = ""; return; }
+  root.innerHTML = `
+    <div class="dash-modal-backdrop" id="dash-modal-backdrop">
+      <div class="dash-modal">
+        <div class="dash-modal-title">${esc(dashModal.title)}</div>
+        <p class="dash-modal-msg">${esc(dashModal.message)}</p>
+        <div class="dash-btn-row">
+          <button class="dash-btn" id="dash-modal-cancel">Cancel</button>
+          <button class="dash-btn dash-btn-danger" id="dash-modal-confirm">${esc(dashModal.confirmLabel || "Confirm")}</button>
+        </div>
+      </div>
+    </div>`;
+  document.getElementById("dash-modal-cancel").addEventListener("click", closeDashModal);
+  document.getElementById("dash-modal-confirm").addEventListener("click", () => {
+    const action = dashModal.onConfirm;
+    dashModal = null;
+    action();
+    render();
+  });
+  document.getElementById("dash-modal-backdrop").addEventListener("click", (e) => { if (e.target.id === "dash-modal-backdrop") closeDashModal(); });
+}
+
+/* -- main dashboard view -- */
+function viewDashboard() {
+  const active = PROGRESS.activeTrack || "cpcm";
+  const cpcmStats = trackStats("cpcm");
+  const fpsStats = trackStats("fps");
+  const overallPct = Math.round(((cpcmStats.lessonPct || 0) + (fpsStats.lessonPct || 0)) / 2);
+  const level = overallPct < 25 ? "Beginner" : overallPct < 60 ? "Intermediate" : overallPct < 90 ? "Advanced" : "Expert";
+  const streak = computeStreak();
+  const hours = estHours();
+  const badges = computeBadges();
+  const activeStats = active === "cpcm" ? cpcmStats : fpsStats;
+  const continueBlock = pickContinueBlock(active);
+  const activeBlocks = trackBlocks(active);
+  const weak = weakTopics(active, 5);
+  const week = weeklyActivity();
+  const maxWeek = Math.max(1, ...week.map((d) => d.count));
+
+  const roadmapSteps = activeBlocks.map((b, i) => {
+    const s = blockStats(b.id);
+    const complete = s.lessonsTotal > 0 && s.lessonsDone === s.lessonsTotal;
+    const prevComplete = i === 0 || (() => { const ps = blockStats(activeBlocks[i - 1].id); return ps.lessonsTotal > 0 && ps.lessonsDone === ps.lessonsTotal; })();
+    const locked = !!(PROGRESS.freshStartLock[active] && i > 0 && !prevComplete);
+    const state = locked ? "locked" : complete ? "complete" : s.lessonsDone > 0 ? "current" : "upcoming";
+    return { b, state };
+  });
+
+  return `
+    <div class="dash">
+      <div class="dash-profile dash-card">
+        <div class="dash-profile-top">
+          <div>
+            <input id="dash-name-input" class="dash-name-input" value="${esc(PROGRESS.profileName)}" aria-label="Your name" />
+            <div class="dash-profile-sub">${esc(trackInfo(active).title)} &middot; ${level}</div>
+          </div>
+          <div class="dash-profile-stats">
+            <div class="dash-stat"><span class="v">${streak}</span><span class="l">Day streak</span></div>
+            <div class="dash-stat"><span class="v">${hours}h</span><span class="l">Study time</span></div>
+            <div class="dash-stat"><span class="v">${overallPct}%</span><span class="l">Overall</span></div>
+          </div>
+        </div>
+        <div class="dash-badges">${badges.length ? badges.map((b) => `<span class="dash-badge">${esc(b)}</span>`).join("") : `<span class="dash-muted">No badges yet — keep studying to earn your first one.</span>`}</div>
+      </div>
+
+      <div class="dash-mode-selector">
+        <button class="dash-mode-btn ${active === "cpcm" ? "active" : ""}" data-mode="cpcm">CPCM Study Hub</button>
+        <button class="dash-mode-btn ${active === "fps" ? "active" : ""}" data-mode="fps">FPS Study Hub</button>
+      </div>
+
+      ${resetPanelHtml(active)}
+
+      <div class="dash-eyebrow" style="margin-top:6px;">Overall progress</div>
+      <div class="dash-progress-track big"><div class="dash-progress-fill" style="width:${overallPct}%"></div></div>
+
+      <div class="dash-grid-2">
+        <div class="dash-card">
+          <div class="dash-eyebrow">CPCM progress</div>
+          <div class="dash-track-row">
+            ${progressRing(cpcmStats.lessonPct, 72, "var(--dash-blue)")}
+            <div class="dash-track-meta">
+              <div>${cpcmStats.modulesCompleted}/${cpcmStats.modulesTotal} modules complete</div>
+              <div>${cpcmStats.flashMastered}/${cpcmStats.flashTotal} flashcards mastered</div>
+              <div>Quiz average: ${cpcmStats.quizAvgPct}%</div>
+              <div>Exam readiness: ${cpcmStats.examReadiness}%</div>
+            </div>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-eyebrow">FPS progress</div>
+          <div class="dash-track-row">
+            ${progressRing(fpsStats.lessonPct, 72, "var(--dash-green)")}
+            <div class="dash-track-meta">
+              <div>${fpsStats.modulesCompleted}/${fpsStats.modulesTotal} systems complete</div>
+              <div>${fpsStats.flashMastered}/${fpsStats.flashTotal} practice items mastered</div>
+              <div>SQL/system knowledge score: ${fpsStats.quizAvgPct}%</div>
+              <div>Exam readiness: ${fpsStats.examReadiness}%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-eyebrow" style="margin-top:6px;">Continue learning</div>
+      ${continueLearningHtml(active, continueBlock)}
+
+      <div class="dash-eyebrow" style="margin-top:6px;">Learning roadmap — ${esc(trackInfo(active).title)}</div>
+      <div class="dash-card">${roadmapHtml(roadmapSteps)}</div>
+
+      <div class="dash-eyebrow" style="margin-top:6px;">Modules</div>
+      <div class="dash-module-grid">
+        ${roadmapSteps.map((st) => moduleCardHtml(st.b, st.state)).join("")}
+      </div>
+
+      <div class="dash-grid-2">
+        <div class="dash-card">
+          <div class="dash-eyebrow">Weekly study activity</div>
+          ${weeklyChartHtml(week, maxWeek)}
+        </div>
+        <div class="dash-card">
+          <div class="dash-eyebrow">Your focus areas</div>
+          ${weak.length ? `<div class="dash-weak-title">Need revision</div><ul class="dash-weak-list">${weak.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : `<p class="dash-muted">No weak topics flagged yet — answer some quiz questions to populate this.</p>`}
+        </div>
+      </div>
+
+      ${flashcardPanelHtml(active, activeStats, continueBlock)}
+
+      <div class="dash-eyebrow" style="margin-top:6px;">Quiz center</div>
+      ${quizCenterHtml(cpcmStats, fpsStats)}
+
+      <div id="dash-modal-root"></div>
+    </div>
+  `;
+}
+function bindDashboardEvents() {
+  const active = PROGRESS.activeTrack || "cpcm";
+  document.querySelectorAll("[data-mode]").forEach((btn) => {
+    btn.addEventListener("click", () => { PROGRESS.activeTrack = btn.dataset.mode; saveProgress(PROGRESS); render(); });
+  });
+  const nameInput = document.getElementById("dash-name-input");
+  if (nameInput) {
+    nameInput.addEventListener("change", () => { PROGRESS.profileName = nameInput.value.trim() || "Student"; saveProgress(PROGRESS); render(); });
+  }
+  const resetModuleBtn = document.querySelector('[data-action="reset-module"]');
+  if (resetModuleBtn) resetModuleBtn.addEventListener("click", () => {
+    const cb = pickContinueBlock(active);
+    if (!cb) return;
+    openDashModal({
+      title: "Reset this module?",
+      message: `Clear progress for Block ${cb.b.id}: ${cb.b.title}? Your overall achievements stay intact.`,
+      confirmLabel: "Reset module",
+      onConfirm: () => resetModuleProgress(cb.b.id),
+    });
+  });
+  const resetCpcmBtn = document.querySelector('[data-action="reset-cpcm"]');
+  if (resetCpcmBtn) resetCpcmBtn.addEventListener("click", () => {
+    openDashModal({
+      title: "Start CPCM journey from the beginning?",
+      message: "This clears CPCM module completion, quiz scores, flashcard history, and study streak data tied to CPCM. FPS progress is unaffected.",
+      confirmLabel: "Reset CPCM",
+      onConfirm: () => resetTrackProgress("cpcm"),
+    });
+  });
+  const resetFpsBtn = document.querySelector('[data-action="reset-fps"]');
+  if (resetFpsBtn) resetFpsBtn.addEventListener("click", () => {
+    openDashModal({
+      title: "Start FPS journey from the beginning?",
+      message: "This clears FPS module completion, practice results, flashcard progress, and exam readiness score. CPCM progress is unaffected.",
+      confirmLabel: "Reset FPS",
+      onConfirm: () => resetTrackProgress("fps"),
+    });
+  });
+  const freshBtn = document.querySelector('[data-action="fresh-start"]');
+  if (freshBtn) freshBtn.addEventListener("click", () => {
+    openDashModal({
+      title: "Begin a fresh start?",
+      message: "This resets everything — both tracks, your study streak, and study history — and re-locks modules in recommended order. A snapshot is archived first.",
+      confirmLabel: "Fresh start",
+      onConfirm: () => freshStartReset(),
+    });
+  });
+  const resetFlashBtn = document.querySelector('[data-action="reset-flashcards"]');
+  if (resetFlashBtn) resetFlashBtn.addEventListener("click", () => {
+    openDashModal({
+      title: "Reset flashcards?",
+      message: `Clear flashcard ratings for ${trackInfo(active).title}? Lessons and quiz scores are kept.`,
+      confirmLabel: "Reset flashcards",
+      onConfirm: () => resetTrackFlashcards(active),
+    });
+  });
 }
 
 /* ---------- boot ---------- */
