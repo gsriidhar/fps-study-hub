@@ -13,4 +13,5 @@ The general Certified Payments and Cash Management (CPCM) syllabus, covering the
 | [Block C · Cross-Border & High-Value Payments](block-c-cross-border-and-high-value-payments/index.md) | RTGS, SWIFT, correspondent banking, SEPA, ACH |
 | [Block D · Cards & Merchant Payments](block-d-cards-and-merchant-payments/index.md) | Cross-border wires, card payments, Visa/Mastercard, payment gateways, merchant acquiring |
 | [Block E · Corporate Cash & Treasury](block-e-corporate-cash-and-treasury/index.md) | Cash management, liquidity management, treasury, corporate banking, reconciliation |
-| Blocks F–H | Coming soon |
+| [Block F · Modern Infrastructure](block-f-modern-infrastructure/index.md) | ISO 20022, Open Banking, APIs, fraud, AML |
+| Blocks G–H | Coming soon |
