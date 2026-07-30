@@ -46,6 +46,17 @@ function saveProgress(p) {
 }
 let PROGRESS = loadProgress();
 
+const LINKS_STORE_KEY = "fps-study-links-v1";
+function loadLinks() {
+  try { return JSON.parse(localStorage.getItem(LINKS_STORE_KEY)) || []; }
+  catch (e) { return []; }
+}
+function saveLinks(links) {
+  try { localStorage.setItem(LINKS_STORE_KEY, JSON.stringify(links)); }
+  catch (e) { /* localStorage unavailable */ }
+}
+let LINKS = loadLinks();
+
 function esc(s) {
   return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
@@ -99,8 +110,14 @@ function parseHash() {
   const h = location.hash.replace(/^#\/?/, "");
   return h.split("/").filter(Boolean);
 }
-function navActive(view) {
-  document.querySelectorAll(".navlink").forEach((a) => a.classList.toggle("active", a.dataset.view === view));
+function navActive(view, blockId) {
+  document.querySelectorAll(".navlink").forEach((a) =>
+    a.classList.toggle("active", a.dataset.view === view && (!blockId || !a.dataset.block || a.dataset.block === blockId))
+  );
+  document.querySelectorAll(".topbar-dash-link").forEach((a) => a.classList.toggle("active", a.dataset.view === view));
+  if (blockId) {
+    document.querySelectorAll(".navblock").forEach((nb) => nb.classList.toggle("open", nb.dataset.block === blockId));
+  }
 }
 
 function render() {
@@ -112,15 +129,15 @@ function render() {
 
   if (parts.length === 0) { app.innerHTML = viewOverview(); navActive("overview"); return; }
   if (parts[0] === "dashboard") { app.innerHTML = viewDashboard(); navActive("dashboard"); bindDashboardEvents(); return; }
-  if (parts[0] === "block" && parts[1]) { app.innerHTML = viewBlock(parts[1]); navActive("block-" + parts[1]); return; }
+  if (parts[0] === "block" && parts[1]) { app.innerHTML = viewBlock(parts[1]); navActive("block-" + parts[1], parts[1]); return; }
   if (parts[0] === "lesson" && parts[1] && parts[2]) {
     app.innerHTML = viewLesson(parts[1], Number(parts[2]));
-    navActive("block-" + parts[1]);
+    navActive("block-" + parts[1], parts[1]);
     bindLessonEvents(parts[1], Number(parts[2]));
     return;
   }
-  if (parts[0] === "flashcards") { const id = parts[1] || "A"; app.innerHTML = viewFlashcardsShell(id); navActive("flashcards"); initFlashcards(id); return; }
-  if (parts[0] === "quiz") { const id = parts[1] || "A"; app.innerHTML = viewQuizShell(id); navActive("quiz"); initQuiz(id); return; }
+  if (parts[0] === "flashcards") { const id = parts[1] || "A"; app.innerHTML = viewFlashcardsShell(id); navActive("flashcards", id); initFlashcards(id); return; }
+  if (parts[0] === "quiz") { const id = parts[1] || "A"; app.innerHTML = viewQuizShell(id); navActive("quiz", id); initQuiz(id); return; }
   if (parts[0] === "glossary") { app.innerHTML = viewGlossary(); navActive("glossary"); bindGlossaryEvents(); return; }
   if (parts[0] === "search") {
     const q = parts.slice(1).join("/");
@@ -986,6 +1003,30 @@ function backupPanelHtml() {
   </div>`;
 }
 
+/* -- useful links -- */
+function normalizeUrl(u) {
+  u = u.trim();
+  if (!u) return "";
+  if (!/^https?:\/\//i.test(u)) u = "https://" + u;
+  return u;
+}
+function usefulLinksPanelHtml() {
+  return `<div class="dash-card">
+    <div class="dash-eyebrow">Useful links</div>
+    ${LINKS.length ? `<ul class="dash-link-list">${LINKS.map((l) => `
+      <li>
+        <a href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.title)}</a>
+        <button class="dash-link-remove" data-remove-link="${esc(l.id)}" aria-label="Remove link">&times;</button>
+      </li>`).join("")}</ul>` : `<p class="dash-muted">No links yet — add sites you find useful (exam board, regulator pages, reference tools).</p>`}
+    <div class="dash-link-form">
+      <input type="text" id="dash-link-title" placeholder="Link title, e.g. Bank of England" class="dash-link-input" />
+      <input type="text" id="dash-link-url" placeholder="URL, e.g. bankofengland.co.uk" class="dash-link-input" />
+      <button class="dash-btn dash-btn-primary" data-action="add-link">Add link</button>
+    </div>
+    <div id="dash-link-msg" class="dash-muted" style="margin-top:6px;"></div>
+  </div>`;
+}
+
 /* -- modal -- */
 let dashModal = null;
 function openDashModal(cfg) { dashModal = cfg; renderDashModal(); }
@@ -1065,6 +1106,7 @@ function viewDashboard() {
 
       ${resetPanelHtml(active)}
       ${backupPanelHtml()}
+      ${usefulLinksPanelHtml()}
 
       <div class="dash-eyebrow" style="margin-top:6px;">Overall progress</div>
       <div class="dash-progress-track big"><div class="dash-progress-fill" style="width:${overallPct}%"></div></div>
@@ -1191,6 +1233,29 @@ function bindDashboardEvents() {
     if (file) importProgressFile(file);
     importInput.value = "";
   });
+  const addLinkBtn = document.querySelector('[data-action="add-link"]');
+  if (addLinkBtn) addLinkBtn.addEventListener("click", () => {
+    const titleInput = document.getElementById("dash-link-title");
+    const urlInput = document.getElementById("dash-link-url");
+    const msg = document.getElementById("dash-link-msg");
+    const title = titleInput.value.trim();
+    const url = normalizeUrl(urlInput.value);
+    if (!title || !url) {
+      msg.textContent = "Enter both a title and a URL.";
+      msg.style.color = "#ff9b9b";
+      return;
+    }
+    LINKS.push({ id: "l" + Date.now(), title, url });
+    saveLinks(LINKS);
+    render();
+  });
+  document.querySelectorAll("[data-remove-link]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      LINKS = LINKS.filter((l) => l.id !== btn.dataset.removeLink);
+      saveLinks(LINKS);
+      render();
+    });
+  });
 }
 
 /* ---------- boot ---------- */
@@ -1198,6 +1263,10 @@ window.addEventListener("hashchange", render);
 window.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.getElementById("menu-toggle");
   if (menuToggle) menuToggle.addEventListener("click", () => document.getElementById("sidebar").classList.toggle("open"));
+
+  document.querySelectorAll(".navblock-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => btn.closest(".navblock").classList.toggle("open"));
+  });
 
   const topSearch = document.getElementById("top-search");
   if (topSearch) {
