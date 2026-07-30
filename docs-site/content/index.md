@@ -11,7 +11,7 @@ All content here is written in original wording, with original worked examples, 
 ## Where to start
 
 - **New to payments?** Start with [CPCM &middot; Block A &middot; Foundations](cpcm/block-a-foundations/index.md).
-- **Preparing for an FPS Analyst interview?** Start with [FPS &middot; F1 &middot; Fundamentals](fps/f1-fps-fundamentals/index.md) and work through F1 → F4 in order.
+- **Preparing for an FPS Analyst interview?** Start with [FPS &middot; F1 &middot; Fundamentals](fps/f1-fps-fundamentals/index.md) and work through F1 → F8 in order — all 40 lessons are complete.
 - **Looking something up?** Use the search bar above, or browse the [Glossary](glossary/index.md).
 - **Want quick answers instead of full lessons?** Try the [Knowledge Assistant](assistant/index.md).
 
@@ -26,7 +26,7 @@ All content here is written in original wording, with original worked examples, 
 | F5 — Reconciliation & Architecture | Reconciliation fundamentals, breaks, settlement, bank architecture | Ready |
 | F6 — Systems & SQL | Middleware, databases, SQL for failed-payment analysis | Ready |
 | F7 — Testing FPS | Happy-path, negative, CoP and fraud testing | Ready |
-| F8 — Monitoring & Live Simulation | Production monitoring, end-to-end investigation simulation | Coming soon |
+| F8 — Monitoring & Live Simulation | Production monitoring, end-to-end investigation simulation | Ready |
 
 ## CPCM curriculum track
 

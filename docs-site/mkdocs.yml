@@ -76,6 +76,7 @@ nav:
       - "F5 · Reconciliation & Architecture": fps/f5-reconciliation-and-architecture/index.md
       - "F6 · Systems & SQL": fps/f6-systems-and-sql/index.md
       - "F7 · Testing FPS": fps/f7-testing-fps/index.md
+      - "F8 · Monitoring & Live Simulation": fps/f8-monitoring-and-live-simulation/index.md
   - CPCM curriculum:
       - cpcm/index.md
       - "Block A · Foundations": cpcm/block-a-foundations/index.md

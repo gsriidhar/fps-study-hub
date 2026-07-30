@@ -9,5 +9,5 @@ const FPS_COURSE_MAP = [
   { id: "F5", title: "Reconciliation & Architecture", lessons: [22,23,24,25], desc: "Reconciliation fundamentals, breaks, Nostro/settlement reconciliation, and typical bank system architecture.", status: "ready" },
   { id: "F6", title: "Systems & SQL", lessons: [26,27,28,29,30], desc: "Middleware, databases in FPS systems, SQL basics, and failed-payment analysis using SQL.", status: "ready" },
   { id: "F7", title: "Testing FPS", lessons: [31,32,33,34,35,36], desc: "Happy-path, negative, CoP, and fraud testing for FPS payments.", status: "ready" },
-  { id: "F8", title: "Monitoring & Live Simulation", lessons: [37,38,39,40], desc: "Monitoring FPS systems in production, and an end-to-end investigation simulation.", status: "soon" },
+  { id: "F8", title: "Monitoring & Live Simulation", lessons: [37,38,39,40], desc: "Monitoring FPS systems in production, and an end-to-end investigation simulation.", status: "ready" },
 ];
