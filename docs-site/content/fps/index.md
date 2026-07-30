@@ -13,6 +13,6 @@ A dedicated, interview-focused curriculum on the UK Faster Payments Service (FPS
 | [F3 · Payment Data & Operations](f3-payment-data-and-operations/index.md) | 11–15 | Payment fields, statuses, references, the Ops team, exception queues |
 | [F4 · Investigations](f4-investigations/index.md) | 16–21 | Returns, rejections, missing/delayed/duplicate payment investigation, fraud |
 | [F5 · Reconciliation & Architecture](f5-reconciliation-and-architecture/index.md) | 22–25 | Reconciliation fundamentals, breaks, Nostro/settlement reconciliation, typical bank architecture |
-| F6 · Systems & SQL | 26–30 | Coming soon |
+| [F6 · Systems & SQL](f6-systems-and-sql/index.md) | 26–30 | Middleware (MQ/Kafka/Tibco), FPS databases, SQL basics, failed-payment analysis, operational reporting |
 | F7 · Testing FPS | 31–36 | Coming soon |
 | F8 · Monitoring & Live Simulation | 37–40 | Coming soon |
