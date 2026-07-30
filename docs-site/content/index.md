@@ -10,6 +10,7 @@ title: "FPS & Payments Knowledge Academy"
 
 <div class="home-hero-ctas" markdown="1">
 [Ask the assistant](assistant/index.md){ .md-button .md-button--primary }
+<a href="app/index.html" class="md-button">Open study dashboard</a>
 [Browse the glossary](glossary/index.md){ .md-button }
 </div>
 

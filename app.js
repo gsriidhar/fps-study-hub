@@ -1009,6 +1009,25 @@ function backupPanelHtml() {
   </div>`;
 }
 
+/* -- study site (docs pages) -- */
+const STUDY_SITE_LINKS = [
+  { title: "Interview prep", desc: "Q&A by topic, linked back to lessons.", href: "../interview-prep/" },
+  { title: "Mock exams", desc: "50-question timed practice paper with answer key.", href: "../mock-exams/" },
+  { title: "Case studies", desc: "Real incidents plus practice investigation scenarios.", href: "../case-studies/" },
+  { title: "Resources", desc: "Curated external reference links.", href: "../resources/" },
+];
+function studySitePanelHtml() {
+  return `<div class="dash-card">
+    <div class="dash-eyebrow">Study site</div>
+    <p class="dash-muted">Extra material on the documentation site — interview questions, a mock exam, case studies, and reference links.</p>
+    <ul class="dash-study-links">${STUDY_SITE_LINKS.map((it) => `
+      <li>
+        <a href="${esc(it.href)}">${esc(it.title)}</a>
+        <span class="dash-muted">${esc(it.desc)}</span>
+      </li>`).join("")}</ul>
+  </div>`;
+}
+
 /* -- useful links -- */
 function normalizeUrl(u) {
   u = u.trim();
@@ -1112,6 +1131,7 @@ function viewDashboard() {
 
       ${resetPanelHtml(active)}
       ${backupPanelHtml()}
+      ${studySitePanelHtml()}
       ${usefulLinksPanelHtml()}
 
       <div class="dash-eyebrow" style="margin-top:6px;">Overall progress</div>
@@ -1271,7 +1291,7 @@ function viewLinks() {
     <p class="crumbs"><a href="#/">Overview</a> / Useful links</p>
     <h2>Useful links</h2>
     <p class="subtitle">Your own bookmarked reference sites &mdash; exam boards, regulators, tools. Stored locally on this device.</p>
-    <div class="dash">${usefulLinksPanelHtml()}</div>
+    <div class="dash">${studySitePanelHtml()}${usefulLinksPanelHtml()}</div>
   `;
 }
 
