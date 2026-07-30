@@ -73,6 +73,7 @@ nav:
       - "F2 · Checks, Submission & Settlement": fps/f2-checks-submission-and-settlement/index.md
       - "F3 · Payment Data & Operations": fps/f3-payment-data-and-operations/index.md
       - "F4 · Investigations": fps/f4-investigations/index.md
+      - "F5 · Reconciliation & Architecture": fps/f5-reconciliation-and-architecture/index.md
   - CPCM curriculum:
       - cpcm/index.md
       - "Block A · Foundations": cpcm/block-a-foundations/index.md

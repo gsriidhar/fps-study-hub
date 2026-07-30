@@ -17,18 +17,20 @@ function slugify(s) {
     .replace(/(^-|-$)/g, "");
 }
 
-function loadData(files) {
-  const ctx = {};
-  const code = files.map((f) => fs.readFileSync(path.join(SRC, "data", f), "utf8")).join("\n");
+// Auto-discovers every data/*.js file and evaluates them all together in one
+// sandboxed context, then returns every top-level `const NAME = ...` it
+// declared. This means adding a new block (e.g. data/fps-block6.js,
+// data/block-b.js) never requires editing this script — it's picked up
+// automatically as long as it's referenced by id in a course-map file below.
+function loadAllData() {
+  const dataDir = path.join(SRC, "data");
+  const files = fs.readdirSync(dataDir).filter((f) => f.endsWith(".js"));
+  const code = files.map((f) => fs.readFileSync(path.join(dataDir, f), "utf8")).join("\n");
+  const names = Array.from(code.matchAll(/^const\s+([A-Z][A-Z0-9_]*)\s*=/gm)).map((m) => m[1]);
+  const unique = [...new Set(names)];
+  const obj = "{ " + unique.join(", ") + " }";
   // eslint-disable-next-line no-new-func
-  new Function(
-    code +
-      "\nreturn { COURSE_MAP, BLOCK_A, FPS_COURSE_MAP, FPS_BLOCK1, FPS_BLOCK2, FPS_BLOCK3, FPS_BLOCK4, GLOSSARY_EXTRA };"
-  ).call(ctx);
-  return new Function(
-    code +
-      "\nreturn { COURSE_MAP, BLOCK_A, FPS_COURSE_MAP, FPS_BLOCK1, FPS_BLOCK2, FPS_BLOCK3, FPS_BLOCK4, GLOSSARY_EXTRA };"
-  )();
+  return new Function(code + `\nreturn ${obj};`)();
 }
 
 function esc(s) {
@@ -183,21 +185,25 @@ function glossaryMarkdown(entries) {
 }
 
 // --- Main ---
-const data = loadData([
-  "course-map.js",
-  "block-a.js",
-  "fps-course-map.js",
-  "fps-block1.js",
-  "fps-block2.js",
-  "fps-block3.js",
-  "fps-block4.js",
-  "glossary-extra.js",
-]);
+const data = loadAllData();
 
 fs.mkdirSync(OUT, { recursive: true });
 
+// Build { id: blockObject } maps by looking up each id from the course-map
+// registries against the corresponding data global — BLOCK_A for CPCM id
+// "A", FPS_BLOCK5 for FPS id "F5", etc. A block whose data file hasn't been
+// written yet (status "soon") is silently skipped rather than erroring.
+function blocksFromMap(courseMap, globalNameFor) {
+  const out = {};
+  (courseMap || []).forEach((entry) => {
+    const block = data[globalNameFor(entry.id)];
+    if (block) out[entry.id] = block;
+  });
+  return out;
+}
+
 // CPCM track
-const cpcmBlocks = { A: data.BLOCK_A };
+const cpcmBlocks = blocksFromMap(data.COURSE_MAP, (id) => "BLOCK_" + id);
 const cpcmDir = path.join(OUT, "cpcm");
 fs.mkdirSync(cpcmDir, { recursive: true });
 Object.entries(cpcmBlocks).forEach(([id, block]) => {
@@ -214,12 +220,7 @@ Object.entries(cpcmBlocks).forEach(([id, block]) => {
 });
 
 // FPS track
-const fpsBlocks = {
-  F1: data.FPS_BLOCK1,
-  F2: data.FPS_BLOCK2,
-  F3: data.FPS_BLOCK3,
-  F4: data.FPS_BLOCK4,
-};
+const fpsBlocks = blocksFromMap(data.FPS_COURSE_MAP, (id) => "FPS_BLOCK" + id.slice(1));
 const fpsDir = path.join(OUT, "fps");
 fs.mkdirSync(fpsDir, { recursive: true });
 Object.entries(fpsBlocks).forEach(([id, block]) => {
