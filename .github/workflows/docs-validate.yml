@@ -56,16 +56,16 @@ jobs:
         working-directory: docs-site
         run: mkdocs build --strict
 
+      - name: Assemble combined Pages output
+        run: |
+          mkdir -p publish
+          cp -r docs-site/site/. publish/
+          mkdir -p publish/app
+          cp index.html app.js styles.css publish/app/
+          cp -r data publish/app/data
+
       - name: Check internal links for 404s
-        uses: lycheeverse/lychee-action@v1
-        with:
-          args: >-
-            --offline
-            --base docs-site/site
-            --remap '^https://gsriidhar\.github\.io/fps-study-hub/?(.*)$ docs-site/site/$1'
-            --no-progress
-            'docs-site/site/**/*.html'
-          fail: true
+        run: node scripts/check-internal-links.js publish
 
       - name: Validate legacy app JS syntax
         run: |
