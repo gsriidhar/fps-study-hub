@@ -62,6 +62,7 @@ jobs:
           args: >-
             --offline
             --base docs-site/site
+            --remap '^https://gsriidhar\.github\.io/fps-study-hub/?(.*)$ docs-site/site/$1'
             --no-progress
             'docs-site/site/**/*.html'
           fail: true
