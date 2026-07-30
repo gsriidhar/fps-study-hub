@@ -10,15 +10,29 @@
 (function () {
   let INDEX = null;
 
-  function siteRoot() {
-    // Works whether the site is served at the domain root or a subpath.
-    const base = document.querySelector('link[rel="canonical"]');
-    return "";
+  // Resolve the site's base path from this script's own resolved URL, so
+  // everything below works whether the site is served at the domain root
+  // or under a subpath (e.g. GitHub Pages project sites like
+  // https://user.github.io/repo/). document.currentScript is only reliable
+  // during this initial synchronous execution, so capture it now.
+  const SITE_BASE = (function () {
+    const script = document.currentScript;
+    if (script && script.src) {
+      const marker = "assets/javascripts/assistant.js";
+      const idx = script.src.indexOf(marker);
+      if (idx !== -1) return script.src.slice(0, idx);
+    }
+    return "/";
+  })();
+
+  function withBase(rootRelativePath) {
+    return SITE_BASE + String(rootRelativePath).replace(/^\//, "");
   }
 
   async function loadIndex() {
     if (INDEX) return INDEX;
-    const res = await fetch("/assets/embeddings/index.json");
+    const res = await fetch(withBase("/assets/embeddings/index.json"));
+    if (!res.ok) throw new Error("Index fetch failed: " + res.status);
     INDEX = await res.json();
     return INDEX;
   }
@@ -62,13 +76,13 @@
   function renderHits(hits) {
     const el = document.getElementById("assistant-results");
     if (!hits.length) {
-      el.innerHTML = `<p>No matching passages found. Try different wording, or browse the <a href="/glossary/">glossary</a>.</p>`;
+      el.innerHTML = `<p>No matching passages found. Try different wording, or browse the <a href="${withBase("/glossary/")}">glossary</a>.</p>`;
       return;
     }
     el.innerHTML = hits
       .map(
         (h) => `<div class="assistant-hit">
-          <div><strong><a href="${h.url}">${h.title}</a></strong> &middot; ${h.section}</div>
+          <div><strong><a href="${withBase(h.url)}">${h.title}</a></strong> &middot; ${h.section}</div>
           <div>${h.text.slice(0, 320)}${h.text.length > 320 ? "…" : ""}</div>
         </div>`
       )
@@ -125,10 +139,17 @@
     if (!question) return;
 
     status.textContent = "Searching the knowledge base…";
-    await loadIndex();
-    const hits = retrieve(question, 5);
-    renderHits(hits);
-    status.textContent = hits.length ? "" : "";
+    let hits;
+    try {
+      await loadIndex();
+      hits = retrieve(question, 5);
+      renderHits(hits);
+      status.textContent = "";
+    } catch (e) {
+      status.textContent = "Could not load the knowledge base index — please refresh and try again.";
+      console.error(e);
+      return;
+    }
 
     if (apiKey && hits.length) {
       await synthesize(question, hits, apiKey);
