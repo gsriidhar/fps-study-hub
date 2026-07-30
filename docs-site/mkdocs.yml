@@ -1,0 +1,84 @@
+site_name: FPS & Payments Knowledge Academy
+site_description: Searchable knowledge base for UK Faster Payments, CPCM, and Payments Operations analyst preparation.
+site_url: https://gsriidhar.github.io/fps-study-hub/
+repo_url: https://github.com/gsriidhar/fps-study-hub
+repo_name: gsriidhar/fps-study-hub
+docs_dir: content
+site_dir: site
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.tabs.link
+    - toc.follow
+
+extra_css:
+  - assets/stylesheets/extra.css
+extra_javascript:
+  - assets/javascripts/assistant.js
+
+plugins:
+  - search:
+      lang: en
+  - tags
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.emoji
+
+nav:
+  - Home: index.md
+  - FPS analyst deep-dive:
+      - fps/index.md
+      - "F1 · Fundamentals": fps/f1-fps-fundamentals/index.md
+      - "F2 · Checks, Submission & Settlement": fps/f2-checks-submission-and-settlement/index.md
+      - "F3 · Payment Data & Operations": fps/f3-payment-data-and-operations/index.md
+      - "F4 · Investigations": fps/f4-investigations/index.md
+  - CPCM curriculum:
+      - cpcm/index.md
+      - "Block A · Foundations": cpcm/block-a-foundations/index.md
+  - Glossary: glossary/index.md
+  - Knowledge Assistant: assistant/index.md
+  - Interview prep: interview-prep/index.md
+  - Mock exams: mock-exams/index.md
+  - Case studies: case-studies/index.md
+  - Resources: resources/index.md
