@@ -2,16 +2,60 @@
 title: "FPS & Payments Knowledge Academy"
 ---
 
+<div class="home-hero" markdown="1">
+
 # FPS & Payments Knowledge Academy
 
-A searchable, self-paced knowledge base for UK Faster Payments (FPS), Confirmation of Payee, payment operations, investigations, and general Certified Payments and Cash Management (CPCM) fundamentals — built for FPS Analyst and Payments Operations interview preparation.
+<p class="home-hero-sub">80 original lessons on UK Faster Payments and general payments operations — written for FPS Analyst and Payments Operations interview preparation, in original wording with original worked examples.</p>
 
-All content here is written in original wording, with original worked examples, for public, copyright-safe study and reference.
+<div class="home-hero-ctas" markdown="1">
+[Ask the assistant](assistant/index.md){ .md-button .md-button--primary }
+[Browse the glossary](glossary/index.md){ .md-button }
+</div>
+
+<div class="home-hero-stats">
+<div class="stat"><strong>80</strong><span>lessons</span></div>
+<div class="stat"><strong>2</strong><span>tracks</span></div>
+<div class="stat"><strong>100%</strong><span>complete</span></div>
+</div>
+
+</div>
+
+<div class="home-tracks" markdown="1">
+
+## Pick your track
+
+Two complete, self-paced curricula — original wording throughout.
+
+<div class="track-grid" markdown="1">
+
+<div class="track-card featured" markdown="1">
+<span class="track-badge">Recommended for interviews</span>
+
+### FPS analyst deep-dive
+
+F1 &rarr; F8, 40 lessons on Faster Payments operations and investigations.
+
+[Start F1 · Fundamentals &rarr;](fps/f1-fps-fundamentals/index.md){ .md-button .md-button--primary }
+
+</div>
+
+<div class="track-card" markdown="1">
+<span class="track-badge">Broad foundations</span>
+
+### CPCM curriculum
+
+Blocks A &rarr; H, 40 lessons spanning payments, treasury, and compliance.
+
+[Start Block A · Foundations &rarr;](cpcm/block-a-foundations/index.md){ .md-button }
+
+</div>
+
+</div>
+</div>
 
 ## Where to start
 
-- **New to payments?** Start with [CPCM &middot; Block A &middot; Foundations](cpcm/block-a-foundations/index.md).
-- **Preparing for an FPS Analyst interview?** Start with [FPS &middot; F1 &middot; Fundamentals](fps/f1-fps-fundamentals/index.md) and work through F1 → F8 in order — all 40 lessons are complete.
 - **Looking something up?** Use the search bar above, or browse the [Glossary](glossary/index.md).
 - **Want quick answers instead of full lessons?** Try the [Knowledge Assistant](assistant/index.md).
 
