@@ -25,7 +25,7 @@ All content here is written in original wording, with original worked examples, 
 | F4 — Investigations | Returns, rejections, missing/delayed/duplicate payment investigation, fraud | Ready |
 | F5 — Reconciliation & Architecture | Reconciliation fundamentals, breaks, settlement, bank architecture | Ready |
 | F6 — Systems & SQL | Middleware, databases, SQL for failed-payment analysis | Ready |
-| F7 — Testing FPS | Happy-path, negative, CoP and fraud testing | Coming soon |
+| F7 — Testing FPS | Happy-path, negative, CoP and fraud testing | Ready |
 | F8 — Monitoring & Live Simulation | Production monitoring, end-to-end investigation simulation | Coming soon |
 
 ## CPCM curriculum track
