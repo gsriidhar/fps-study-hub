@@ -13,22 +13,31 @@ function defaultProgress() {
     archive: [],
   };
 }
-function loadProgress() {
+function normalizeProgress(saved) {
   const defaults = defaultProgress();
+  saved = saved || {};
+  return Object.assign({}, defaults, saved, {
+    read: Object.assign({}, defaults.read, saved.read),
+    ratings: Object.assign({}, defaults.ratings, saved.ratings),
+    quizBest: Object.assign({}, defaults.quizBest, saved.quizBest),
+    activity: Object.assign({}, defaults.activity, saved.activity),
+    missedTopics: Object.assign({}, defaults.missedTopics, saved.missedTopics),
+    lastReset: Object.assign({}, defaults.lastReset, saved.lastReset),
+    freshStartLock: Object.assign({}, defaults.freshStartLock, saved.freshStartLock),
+    archive: saved.archive || defaults.archive,
+  });
+}
+function isValidProgressShape(obj) {
+  return !!obj && typeof obj === "object"
+    && typeof obj.read === "object" && obj.read !== null
+    && typeof obj.ratings === "object" && obj.ratings !== null
+    && typeof obj.quizBest === "object" && obj.quizBest !== null;
+}
+function loadProgress() {
   try {
-    const saved = JSON.parse(localStorage.getItem(STORE_KEY)) || {};
-    return Object.assign({}, defaults, saved, {
-      read: Object.assign({}, defaults.read, saved.read),
-      ratings: Object.assign({}, defaults.ratings, saved.ratings),
-      quizBest: Object.assign({}, defaults.quizBest, saved.quizBest),
-      activity: Object.assign({}, defaults.activity, saved.activity),
-      missedTopics: Object.assign({}, defaults.missedTopics, saved.missedTopics),
-      lastReset: Object.assign({}, defaults.lastReset, saved.lastReset),
-      freshStartLock: Object.assign({}, defaults.freshStartLock, saved.freshStartLock),
-      archive: saved.archive || defaults.archive,
-    });
+    return normalizeProgress(JSON.parse(localStorage.getItem(STORE_KEY)));
   } catch (e) {
-    return defaults;
+    return defaultProgress();
   }
 }
 function saveProgress(p) {
@@ -912,6 +921,71 @@ function resetPanelHtml(active) {
   </div>`;
 }
 
+/* -- backup / cross-device transfer -- */
+function exportProgress() {
+  const data = JSON.stringify(PROGRESS, null, 2);
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `study-progress-${todayStr()}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+function setImportMsg(text, isError) {
+  const el = document.getElementById("dash-import-msg");
+  if (!el) return;
+  el.textContent = text;
+  el.style.color = isError ? "#ff9b9b" : "";
+}
+function importProgressFile(file) {
+  setImportMsg("");
+  const reader = new FileReader();
+  reader.onerror = () => setImportMsg("Couldn't read that file.", true);
+  reader.onload = () => {
+    let parsed;
+    try {
+      parsed = JSON.parse(reader.result);
+    } catch (e) {
+      setImportMsg("That file isn't valid JSON.", true);
+      return;
+    }
+    if (!isValidProgressShape(parsed)) {
+      setImportMsg("That file doesn't look like a study-progress export.", true);
+      return;
+    }
+    const normalized = normalizeProgress(parsed);
+    const prevProgress = PROGRESS;
+    PROGRESS = normalized;
+    const cpcmPreview = trackStats("cpcm");
+    const fpsPreview = trackStats("fps");
+    const streakPreview = computeStreak();
+    PROGRESS = prevProgress;
+    openDashModal({
+      title: "Import this progress file?",
+      message: `This replaces your current progress on this device. Incoming file — CPCM ${cpcmPreview.lessonPct}% complete, FPS ${fpsPreview.lessonPct}% complete, streak ${streakPreview}d.`,
+      confirmLabel: "Replace with imported data",
+      onConfirm: () => { PROGRESS = normalized; saveProgress(PROGRESS); },
+    });
+  };
+  reader.readAsText(file);
+}
+function backupPanelHtml() {
+  return `<div class="dash-card">
+    <div class="dash-eyebrow">Backup &amp; transfer</div>
+    <p class="dash-muted">Progress is stored locally on this device only — opening the site on another phone or laptop starts fresh. Export a backup file here, then import it on the other device to bring your progress across.</p>
+    <div class="dash-btn-row">
+      <button class="dash-btn dash-btn-primary" data-action="export-progress">Export progress</button>
+      <label class="dash-btn" for="dash-import-input" style="cursor:pointer;">Import progress
+        <input type="file" id="dash-import-input" accept="application/json" style="display:none;" />
+      </label>
+    </div>
+    <div id="dash-import-msg" class="dash-muted" style="margin-top:8px;"></div>
+  </div>`;
+}
+
 /* -- modal -- */
 let dashModal = null;
 function openDashModal(cfg) { dashModal = cfg; renderDashModal(); }
@@ -990,6 +1064,7 @@ function viewDashboard() {
       </div>
 
       ${resetPanelHtml(active)}
+      ${backupPanelHtml()}
 
       <div class="dash-eyebrow" style="margin-top:6px;">Overall progress</div>
       <div class="dash-progress-track big"><div class="dash-progress-fill" style="width:${overallPct}%"></div></div>
@@ -1107,6 +1182,14 @@ function bindDashboardEvents() {
       confirmLabel: "Reset flashcards",
       onConfirm: () => resetTrackFlashcards(active),
     });
+  });
+  const exportBtn = document.querySelector('[data-action="export-progress"]');
+  if (exportBtn) exportBtn.addEventListener("click", exportProgress);
+  const importInput = document.getElementById("dash-import-input");
+  if (importInput) importInput.addEventListener("change", () => {
+    const file = importInput.files[0];
+    if (file) importProgressFile(file);
+    importInput.value = "";
   });
 }
 
