@@ -79,6 +79,17 @@ a { color: var(--accent); }
 .sidebar a.navlink:hover { background: rgba(255,255,255,0.06); }
 .sidebar a.navlink.active { background: var(--accent); color: #fff; }
 
+.navgroup-toggle {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 6px;
+  background: none; border: none; color: #fff; text-align: left; cursor: pointer;
+  padding: 4px 6px 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;
+  font-weight: 600; font-family: inherit;
+}
+.navgroup-toggle .chev { font-size: 10px; color: #8f8ab0; transition: transform 0.15s; }
+.navgroup.open .navgroup-toggle .chev { transform: rotate(90deg); }
+.navgroup-body { display: none; }
+.navgroup.open .navgroup-body { display: block; }
+
 .navblock { margin-bottom: 2px; }
 .navblock-toggle {
   width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 6px;

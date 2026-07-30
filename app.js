@@ -7,7 +7,7 @@ function defaultProgress() {
   return {
     read: {}, ratings: {}, quizBest: {},
     activity: {}, missedTopics: {},
-    profileName: "Student", activeTrack: "cpcm",
+    profileName: "", activeTrack: "fps",
     lastReset: { overall: null, cpcm: null, fps: null },
     freshStartLock: { cpcm: false, fps: false },
     archive: [],
@@ -69,8 +69,8 @@ function nl2p(s) {
    glossary) is generic. */
 const BLOCKS_BY_ID = { A: BLOCK_A, B: BLOCK_B, C: BLOCK_C, D: BLOCK_D, E: BLOCK_E, F: BLOCK_F, G: BLOCK_G, H: BLOCK_H, F1: FPS_BLOCK1, F2: FPS_BLOCK2, F3: FPS_BLOCK3, F4: FPS_BLOCK4, F5: FPS_BLOCK5, F6: FPS_BLOCK6, F7: FPS_BLOCK7, F8: FPS_BLOCK8 };
 const COURSES = [
-  { key: "cpcm", title: "CPCM curriculum", subtitle: "General payments & cash management foundation (40 lessons)", map: COURSE_MAP },
   { key: "fps", title: "FPS analyst deep-dive", subtitle: "UK Faster Payments operations, investigation & testing", map: FPS_COURSE_MAP },
+  { key: "cpcm", title: "CPCM curriculum", subtitle: "General payments & cash management foundation (40 lessons)", map: COURSE_MAP },
 ];
 
 /* ---------- diagram renderer ---------- */
@@ -110,6 +110,9 @@ function parseHash() {
   const h = location.hash.replace(/^#\/?/, "");
   return h.split("/").filter(Boolean);
 }
+function groupForBlockId(blockId) {
+  return /^[A-H]$/.test(blockId) ? "cpcm" : "fps";
+}
 function navActive(view, blockId) {
   document.querySelectorAll(".navlink").forEach((a) =>
     a.classList.toggle("active", a.dataset.view === view && (!blockId || !a.dataset.block || a.dataset.block === blockId))
@@ -117,6 +120,8 @@ function navActive(view, blockId) {
   document.querySelectorAll(".topbar-dash-link").forEach((a) => a.classList.toggle("active", a.dataset.view === view));
   if (blockId) {
     document.querySelectorAll(".navblock").forEach((nb) => nb.classList.toggle("open", nb.dataset.block === blockId));
+    const g = groupForBlockId(blockId);
+    document.querySelectorAll(".navgroup[data-group]").forEach((grp) => grp.classList.toggle("open", grp.dataset.group === g));
   }
 }
 
@@ -139,6 +144,7 @@ function render() {
   if (parts[0] === "flashcards") { const id = parts[1] || "A"; app.innerHTML = viewFlashcardsShell(id); navActive("flashcards", id); initFlashcards(id); return; }
   if (parts[0] === "quiz") { const id = parts[1] || "A"; app.innerHTML = viewQuizShell(id); navActive("quiz", id); initQuiz(id); return; }
   if (parts[0] === "glossary") { app.innerHTML = viewGlossary(); navActive("glossary"); bindGlossaryEvents(); return; }
+  if (parts[0] === "links") { app.innerHTML = viewLinks(); navActive("links"); bindLinksPanelEvents(); return; }
   if (parts[0] === "search") {
     const q = parts.slice(1).join("/");
     app.innerHTML = viewSearch(decodeURIComponent(q || ""));
@@ -168,8 +174,8 @@ function viewOverview() {
     <p class="subtitle">Two tracks: the general CPCM curriculum, and a dedicated FPS analyst deep-dive. Condensed into readable lessons, flashcards, and self-scoring quizzes. Progress is saved on this device.</p>
 
     <div class="quick-links">
-      <a href="#/block/A">Start CPCM &rarr;</a>
       <a href="#/block/F1">Start FPS deep-dive &rarr;</a>
+      <a href="#/block/A">Start CPCM &rarr;</a>
       <a href="#/glossary">Glossary</a>
     </div>
 
@@ -905,7 +911,7 @@ function quizCenterHtml(cpcmStats, fpsStats) {
       ${weak.length ? `<div class="dash-weak-title">Weak topics</div><ul class="dash-weak-list">${weak.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : `<div class="dash-muted" style="margin-top:8px;">No weak topics flagged yet.</div>`}
     </div>`;
   }
-  return `<div class="dash-card"><div class="dash-quiz-grid">${side("cpcm", cpcmStats)}${side("fps", fpsStats)}</div></div>`;
+  return `<div class="dash-card"><div class="dash-quiz-grid">${side("fps", fpsStats)}${side("cpcm", cpcmStats)}</div></div>`;
 }
 function weeklyChartHtml(week, maxWeek) {
   return `<div class="dash-week-chart">${week.map((d) => `
@@ -923,17 +929,17 @@ function resetPanelHtml(active) {
     <div class="dash-eyebrow">Reset &amp; new start</div>
     <div class="dash-btn-row">
       <button class="dash-btn" data-action="reset-module" ${cb ? "" : "disabled"}>Reset current module${cb ? " (" + esc(cb.b.id) + ")" : ""}</button>
-      <button class="dash-btn dash-btn-danger" data-action="reset-cpcm">Reset CPCM Study Hub</button>
       <button class="dash-btn dash-btn-danger" data-action="reset-fps">Reset FPS Study Hub</button>
+      <button class="dash-btn dash-btn-danger" data-action="reset-cpcm">Reset CPCM Study Hub</button>
       <button class="dash-btn dash-btn-danger" data-action="fresh-start">Fresh start mode</button>
     </div>
     <div class="dash-reset-meta">
       <span>Last reset — overall: ${lastOverall}</span>
-      <span>CPCM: ${lastCpcm}</span>
       <span>FPS: ${lastFps}</span>
+      <span>CPCM: ${lastCpcm}</span>
     </div>
     ${PROGRESS.archive.length ? `<details class="dash-archive"><summary>Previous achievements archive (${PROGRESS.archive.length})</summary>
-      ${PROGRESS.archive.map((a) => `<div class="dash-archive-item"><strong>${esc(a.label)}</strong> &middot; ${esc(a.date)} &middot; CPCM ${a.cpcm.lessonPct}% / FPS ${a.fps.lessonPct}%, streak ${a.streak}d</div>`).join("")}
+      ${PROGRESS.archive.map((a) => `<div class="dash-archive-item"><strong>${esc(a.label)}</strong> &middot; ${esc(a.date)} &middot; FPS ${a.fps.lessonPct}% / CPCM ${a.cpcm.lessonPct}%, streak ${a.streak}d</div>`).join("")}
     </details>` : ""}
   </div>`;
 }
@@ -982,7 +988,7 @@ function importProgressFile(file) {
     PROGRESS = prevProgress;
     openDashModal({
       title: "Import this progress file?",
-      message: `This replaces your current progress on this device. Incoming file — CPCM ${cpcmPreview.lessonPct}% complete, FPS ${fpsPreview.lessonPct}% complete, streak ${streakPreview}d.`,
+      message: `This replaces your current progress on this device. Incoming file — FPS ${fpsPreview.lessonPct}% complete, CPCM ${cpcmPreview.lessonPct}% complete, streak ${streakPreview}d.`,
       confirmLabel: "Replace with imported data",
       onConfirm: () => { PROGRESS = normalized; saveProgress(PROGRESS); },
     });
@@ -1087,7 +1093,7 @@ function viewDashboard() {
       <div class="dash-profile dash-card">
         <div class="dash-profile-top">
           <div>
-            <input id="dash-name-input" class="dash-name-input" value="${esc(PROGRESS.profileName)}" aria-label="Your name" />
+            <input id="dash-name-input" class="dash-name-input" value="${esc(PROGRESS.profileName)}" placeholder="Your name" aria-label="Your name" />
             <div class="dash-profile-sub">${esc(trackInfo(active).title)} &middot; ${level}</div>
           </div>
           <div class="dash-profile-stats">
@@ -1100,8 +1106,8 @@ function viewDashboard() {
       </div>
 
       <div class="dash-mode-selector">
-        <button class="dash-mode-btn ${active === "cpcm" ? "active" : ""}" data-mode="cpcm">CPCM Study Hub</button>
         <button class="dash-mode-btn ${active === "fps" ? "active" : ""}" data-mode="fps">FPS Study Hub</button>
+        <button class="dash-mode-btn ${active === "cpcm" ? "active" : ""}" data-mode="cpcm">CPCM Study Hub</button>
       </div>
 
       ${resetPanelHtml(active)}
@@ -1113,18 +1119,6 @@ function viewDashboard() {
 
       <div class="dash-grid-2">
         <div class="dash-card">
-          <div class="dash-eyebrow">CPCM progress</div>
-          <div class="dash-track-row">
-            ${progressRing(cpcmStats.lessonPct, 72, "var(--dash-blue)")}
-            <div class="dash-track-meta">
-              <div>${cpcmStats.modulesCompleted}/${cpcmStats.modulesTotal} modules complete</div>
-              <div>${cpcmStats.flashMastered}/${cpcmStats.flashTotal} flashcards mastered</div>
-              <div>Quiz average: ${cpcmStats.quizAvgPct}%</div>
-              <div>Exam readiness: ${cpcmStats.examReadiness}%</div>
-            </div>
-          </div>
-        </div>
-        <div class="dash-card">
           <div class="dash-eyebrow">FPS progress</div>
           <div class="dash-track-row">
             ${progressRing(fpsStats.lessonPct, 72, "var(--dash-green)")}
@@ -1133,6 +1127,18 @@ function viewDashboard() {
               <div>${fpsStats.flashMastered}/${fpsStats.flashTotal} practice items mastered</div>
               <div>SQL/system knowledge score: ${fpsStats.quizAvgPct}%</div>
               <div>Exam readiness: ${fpsStats.examReadiness}%</div>
+            </div>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-eyebrow">CPCM progress</div>
+          <div class="dash-track-row">
+            ${progressRing(cpcmStats.lessonPct, 72, "var(--dash-blue)")}
+            <div class="dash-track-meta">
+              <div>${cpcmStats.modulesCompleted}/${cpcmStats.modulesTotal} modules complete</div>
+              <div>${cpcmStats.flashMastered}/${cpcmStats.flashTotal} flashcards mastered</div>
+              <div>Quiz average: ${cpcmStats.quizAvgPct}%</div>
+              <div>Exam readiness: ${cpcmStats.examReadiness}%</div>
             </div>
           </div>
         </div>
@@ -1176,7 +1182,7 @@ function bindDashboardEvents() {
   });
   const nameInput = document.getElementById("dash-name-input");
   if (nameInput) {
-    nameInput.addEventListener("change", () => { PROGRESS.profileName = nameInput.value.trim() || "Student"; saveProgress(PROGRESS); render(); });
+    nameInput.addEventListener("change", () => { PROGRESS.profileName = nameInput.value.trim(); saveProgress(PROGRESS); render(); });
   }
   const resetModuleBtn = document.querySelector('[data-action="reset-module"]');
   if (resetModuleBtn) resetModuleBtn.addEventListener("click", () => {
@@ -1233,6 +1239,9 @@ function bindDashboardEvents() {
     if (file) importProgressFile(file);
     importInput.value = "";
   });
+  bindLinksPanelEvents();
+}
+function bindLinksPanelEvents() {
   const addLinkBtn = document.querySelector('[data-action="add-link"]');
   if (addLinkBtn) addLinkBtn.addEventListener("click", () => {
     const titleInput = document.getElementById("dash-link-title");
@@ -1257,15 +1266,26 @@ function bindDashboardEvents() {
     });
   });
 }
+function viewLinks() {
+  return `
+    <p class="crumbs"><a href="#/">Overview</a> / Useful links</p>
+    <h2>Useful links</h2>
+    <p class="subtitle">Your own bookmarked reference sites &mdash; exam boards, regulators, tools. Stored locally on this device.</p>
+    <div class="dash">${usefulLinksPanelHtml()}</div>
+  `;
+}
 
 /* ---------- boot ---------- */
 window.addEventListener("hashchange", render);
-window.addEventListener("DOMContentLoaded", () => {
+function boot() {
   const menuToggle = document.getElementById("menu-toggle");
   if (menuToggle) menuToggle.addEventListener("click", () => document.getElementById("sidebar").classList.toggle("open"));
 
   document.querySelectorAll(".navblock-toggle").forEach((btn) => {
     btn.addEventListener("click", () => btn.closest(".navblock").classList.toggle("open"));
+  });
+  document.querySelectorAll(".navgroup-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => btn.closest(".navgroup").classList.toggle("open"));
   });
 
   const topSearch = document.getElementById("top-search");
@@ -1285,4 +1305,12 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   render();
-});
+}
+// app.js is the last script on the page, so DOMContentLoaded may already
+// have fired by the time this runs (observed under slow/sequential script
+// loading) — guard with readyState instead of relying on the event alone.
+if (document.readyState === "loading") {
+  window.addEventListener("DOMContentLoaded", boot);
+} else {
+  boot();
+}

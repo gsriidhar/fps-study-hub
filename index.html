@@ -23,75 +23,9 @@
         <a class="navlink" data-view="overview" href="#/">All courses</a>
         <a class="navlink" data-view="search" href="#/search">Search</a>
       </div>
-      <div class="navgroup">
-        <div class="navgroup-title">CPCM curriculum</div>
-        <div class="navblock" data-block="A">
-          <button class="navblock-toggle" data-toggle="A"><span>Block A &middot; Foundations</span><span class="chev">&#9656;</span></button>
-          <div class="navblock-body">
-            <a class="navlink" data-view="block-A" data-block="A" href="#/block/A">Lessons</a>
-            <a class="navlink" data-view="flashcards" data-block="A" href="#/flashcards/A">Flashcards</a>
-            <a class="navlink" data-view="quiz" data-block="A" href="#/quiz/A">Quiz mode</a>
-          </div>
-        </div>
-        <div class="navblock" data-block="B">
-          <button class="navblock-toggle" data-toggle="B"><span>Block B &middot; UK Domestic Clearing</span><span class="chev">&#9656;</span></button>
-          <div class="navblock-body">
-            <a class="navlink" data-view="block-B" data-block="B" href="#/block/B">Lessons</a>
-            <a class="navlink" data-view="flashcards" data-block="B" href="#/flashcards/B">Flashcards</a>
-            <a class="navlink" data-view="quiz" data-block="B" href="#/quiz/B">Quiz mode</a>
-          </div>
-        </div>
-        <div class="navblock" data-block="C">
-          <button class="navblock-toggle" data-toggle="C"><span>Block C &middot; Cross-Border &amp; High-Value</span><span class="chev">&#9656;</span></button>
-          <div class="navblock-body">
-            <a class="navlink" data-view="block-C" data-block="C" href="#/block/C">Lessons</a>
-            <a class="navlink" data-view="flashcards" data-block="C" href="#/flashcards/C">Flashcards</a>
-            <a class="navlink" data-view="quiz" data-block="C" href="#/quiz/C">Quiz mode</a>
-          </div>
-        </div>
-        <div class="navblock" data-block="D">
-          <button class="navblock-toggle" data-toggle="D"><span>Block D &middot; Cards &amp; Merchant Payments</span><span class="chev">&#9656;</span></button>
-          <div class="navblock-body">
-            <a class="navlink" data-view="block-D" data-block="D" href="#/block/D">Lessons</a>
-            <a class="navlink" data-view="flashcards" data-block="D" href="#/flashcards/D">Flashcards</a>
-            <a class="navlink" data-view="quiz" data-block="D" href="#/quiz/D">Quiz mode</a>
-          </div>
-        </div>
-        <div class="navblock" data-block="E">
-          <button class="navblock-toggle" data-toggle="E"><span>Block E &middot; Corporate Cash &amp; Treasury</span><span class="chev">&#9656;</span></button>
-          <div class="navblock-body">
-            <a class="navlink" data-view="block-E" data-block="E" href="#/block/E">Lessons</a>
-            <a class="navlink" data-view="flashcards" data-block="E" href="#/flashcards/E">Flashcards</a>
-            <a class="navlink" data-view="quiz" data-block="E" href="#/quiz/E">Quiz mode</a>
-          </div>
-        </div>
-        <div class="navblock" data-block="F">
-          <button class="navblock-toggle" data-toggle="F"><span>Block F &middot; Modern Infrastructure</span><span class="chev">&#9656;</span></button>
-          <div class="navblock-body">
-            <a class="navlink" data-view="block-F" data-block="F" href="#/block/F">Lessons</a>
-            <a class="navlink" data-view="flashcards" data-block="F" href="#/flashcards/F">Flashcards</a>
-            <a class="navlink" data-view="quiz" data-block="F" href="#/quiz/F">Quiz mode</a>
-          </div>
-        </div>
-        <div class="navblock" data-block="G">
-          <button class="navblock-toggle" data-toggle="G"><span>Block G &middot; Risk, Compliance &amp; Security</span><span class="chev">&#9656;</span></button>
-          <div class="navblock-body">
-            <a class="navlink" data-view="block-G" data-block="G" href="#/block/G">Lessons</a>
-            <a class="navlink" data-view="flashcards" data-block="G" href="#/flashcards/G">Flashcards</a>
-            <a class="navlink" data-view="quiz" data-block="G" href="#/quiz/G">Quiz mode</a>
-          </div>
-        </div>
-        <div class="navblock" data-block="H">
-          <button class="navblock-toggle" data-toggle="H"><span>Block H &middot; Regulation, Innovation &amp; Career</span><span class="chev">&#9656;</span></button>
-          <div class="navblock-body">
-            <a class="navlink" data-view="block-H" data-block="H" href="#/block/H">Lessons</a>
-            <a class="navlink" data-view="flashcards" data-block="H" href="#/flashcards/H">Flashcards</a>
-            <a class="navlink" data-view="quiz" data-block="H" href="#/quiz/H">Quiz mode</a>
-          </div>
-        </div>
-      </div>
-      <div class="navgroup">
-        <div class="navgroup-title">FPS deep-dive</div>
+      <div class="navgroup open" data-group="fps">
+        <button class="navgroup-toggle" data-group-toggle="fps"><span>FPS deep-dive</span><span class="chev">&#9656;</span></button>
+        <div class="navgroup-body">
         <div class="navblock" data-block="F1">
           <button class="navblock-toggle" data-toggle="F1"><span>Block F1 &middot; Fundamentals</span><span class="chev">&#9656;</span></button>
           <div class="navblock-body">
@@ -156,10 +90,81 @@
             <a class="navlink" data-view="quiz" data-block="F8" href="#/quiz/F8">Quiz mode</a>
           </div>
         </div>
+        </div>
+      </div>
+      <div class="navgroup" data-group="cpcm">
+        <button class="navgroup-toggle" data-group-toggle="cpcm"><span>CPCM curriculum</span><span class="chev">&#9656;</span></button>
+        <div class="navgroup-body">
+        <div class="navblock" data-block="A">
+          <button class="navblock-toggle" data-toggle="A"><span>Block A &middot; Foundations</span><span class="chev">&#9656;</span></button>
+          <div class="navblock-body">
+            <a class="navlink" data-view="block-A" data-block="A" href="#/block/A">Lessons</a>
+            <a class="navlink" data-view="flashcards" data-block="A" href="#/flashcards/A">Flashcards</a>
+            <a class="navlink" data-view="quiz" data-block="A" href="#/quiz/A">Quiz mode</a>
+          </div>
+        </div>
+        <div class="navblock" data-block="B">
+          <button class="navblock-toggle" data-toggle="B"><span>Block B &middot; UK Domestic Clearing</span><span class="chev">&#9656;</span></button>
+          <div class="navblock-body">
+            <a class="navlink" data-view="block-B" data-block="B" href="#/block/B">Lessons</a>
+            <a class="navlink" data-view="flashcards" data-block="B" href="#/flashcards/B">Flashcards</a>
+            <a class="navlink" data-view="quiz" data-block="B" href="#/quiz/B">Quiz mode</a>
+          </div>
+        </div>
+        <div class="navblock" data-block="C">
+          <button class="navblock-toggle" data-toggle="C"><span>Block C &middot; Cross-Border &amp; High-Value</span><span class="chev">&#9656;</span></button>
+          <div class="navblock-body">
+            <a class="navlink" data-view="block-C" data-block="C" href="#/block/C">Lessons</a>
+            <a class="navlink" data-view="flashcards" data-block="C" href="#/flashcards/C">Flashcards</a>
+            <a class="navlink" data-view="quiz" data-block="C" href="#/quiz/C">Quiz mode</a>
+          </div>
+        </div>
+        <div class="navblock" data-block="D">
+          <button class="navblock-toggle" data-toggle="D"><span>Block D &middot; Cards &amp; Merchant Payments</span><span class="chev">&#9656;</span></button>
+          <div class="navblock-body">
+            <a class="navlink" data-view="block-D" data-block="D" href="#/block/D">Lessons</a>
+            <a class="navlink" data-view="flashcards" data-block="D" href="#/flashcards/D">Flashcards</a>
+            <a class="navlink" data-view="quiz" data-block="D" href="#/quiz/D">Quiz mode</a>
+          </div>
+        </div>
+        <div class="navblock" data-block="E">
+          <button class="navblock-toggle" data-toggle="E"><span>Block E &middot; Corporate Cash &amp; Treasury</span><span class="chev">&#9656;</span></button>
+          <div class="navblock-body">
+            <a class="navlink" data-view="block-E" data-block="E" href="#/block/E">Lessons</a>
+            <a class="navlink" data-view="flashcards" data-block="E" href="#/flashcards/E">Flashcards</a>
+            <a class="navlink" data-view="quiz" data-block="E" href="#/quiz/E">Quiz mode</a>
+          </div>
+        </div>
+        <div class="navblock" data-block="F">
+          <button class="navblock-toggle" data-toggle="F"><span>Block F &middot; Modern Infrastructure</span><span class="chev">&#9656;</span></button>
+          <div class="navblock-body">
+            <a class="navlink" data-view="block-F" data-block="F" href="#/block/F">Lessons</a>
+            <a class="navlink" data-view="flashcards" data-block="F" href="#/flashcards/F">Flashcards</a>
+            <a class="navlink" data-view="quiz" data-block="F" href="#/quiz/F">Quiz mode</a>
+          </div>
+        </div>
+        <div class="navblock" data-block="G">
+          <button class="navblock-toggle" data-toggle="G"><span>Block G &middot; Risk, Compliance &amp; Security</span><span class="chev">&#9656;</span></button>
+          <div class="navblock-body">
+            <a class="navlink" data-view="block-G" data-block="G" href="#/block/G">Lessons</a>
+            <a class="navlink" data-view="flashcards" data-block="G" href="#/flashcards/G">Flashcards</a>
+            <a class="navlink" data-view="quiz" data-block="G" href="#/quiz/G">Quiz mode</a>
+          </div>
+        </div>
+        <div class="navblock" data-block="H">
+          <button class="navblock-toggle" data-toggle="H"><span>Block H &middot; Regulation, Innovation &amp; Career</span><span class="chev">&#9656;</span></button>
+          <div class="navblock-body">
+            <a class="navlink" data-view="block-H" data-block="H" href="#/block/H">Lessons</a>
+            <a class="navlink" data-view="flashcards" data-block="H" href="#/flashcards/H">Flashcards</a>
+            <a class="navlink" data-view="quiz" data-block="H" href="#/quiz/H">Quiz mode</a>
+          </div>
+        </div>
+        </div>
       </div>
       <div class="navgroup">
         <div class="navgroup-title">Reference</div>
         <a class="navlink" data-view="glossary" href="#/glossary">Glossary</a>
+        <a class="navlink" data-view="links" href="#/links">Useful links</a>
       </div>
     </nav>
     <main class="main" id="app"></main>
