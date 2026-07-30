@@ -49,6 +49,13 @@ a { color: var(--accent); }
   padding: 20px 14px;
 }
 .sidebar h1 { color: #fff; font-size: 15px; margin: 0 6px 20px; font-weight: 600; }
+.sidebar-search {
+  display: block; width: 100%; margin: 0 0 18px; padding: 8px 10px;
+  border-radius: 7px; border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06); color: #fff; font-size: 13px;
+}
+.sidebar-search::placeholder { color: #8f8ab0; }
+.sidebar-search:focus { outline: none; border-color: var(--accent); background: rgba(255,255,255,0.1); }
 .sidebar .navgroup { margin-bottom: 18px; }
 .sidebar .navgroup-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #8f8ab0; padding: 0 6px; margin-bottom: 6px; }
 .sidebar a.navlink {

@@ -91,6 +91,13 @@ function render() {
   if (parts[0] === "flashcards") { const id = parts[1] || "A"; app.innerHTML = viewFlashcardsShell(id); navActive("flashcards"); initFlashcards(id); return; }
   if (parts[0] === "quiz") { const id = parts[1] || "A"; app.innerHTML = viewQuizShell(id); navActive("quiz"); initQuiz(id); return; }
   if (parts[0] === "glossary") { app.innerHTML = viewGlossary(); navActive("glossary"); bindGlossaryEvents(); return; }
+  if (parts[0] === "search") {
+    const q = parts.slice(1).join("/");
+    app.innerHTML = viewSearch(decodeURIComponent(q || ""));
+    navActive("search");
+    bindSearchEvents();
+    return;
+  }
   app.innerHTML = viewOverview(); navActive("overview");
 }
 
@@ -449,10 +456,150 @@ function renderGlossaryResults(query) {
   `).join("");
 }
 
+/* ---------- Search ---------- */
+function courseTitleFor(blockId) {
+  const c = COURSES.find((c) => c.map.some((b) => b.id === blockId));
+  return c ? c.title : "";
+}
+let SEARCH_INDEX_CACHE = null;
+function buildSearchIndex() {
+  if (SEARCH_INDEX_CACHE) return SEARCH_INDEX_CACHE;
+  const items = [];
+  Object.entries(BLOCKS_BY_ID).forEach(([blockId, block]) => {
+    block.lessons.forEach((l) => {
+      const body = [
+        l.explanation,
+        (l.keyPoints || []).join(" "),
+        (l.examTips || []).join(" "),
+        l.memoryTrick || "",
+        l.example || "",
+        (l.keyTerms || []).map((kt) => kt.join(" — ")).join(" "),
+      ].join(" ");
+      items.push({
+        type: "lesson",
+        typeLabel: "Lesson",
+        title: `Lesson ${l.n}: ${l.title}`,
+        context: `${courseTitleFor(blockId)} · Block ${blockId}`,
+        body,
+        link: `#/lesson/${blockId}/${l.n}`,
+      });
+    });
+    block.flashcards.concat(block.additionalQuestions).forEach(([q, a]) => {
+      items.push({
+        type: "flashcard",
+        typeLabel: "Flashcard",
+        title: q,
+        context: `${courseTitleFor(blockId)} · Block ${blockId} flashcards`,
+        body: a,
+        link: `#/flashcards/${blockId}`,
+      });
+    });
+    block.lessons.forEach((l) => {
+      l.mcqs.forEach((m) => {
+        items.push({
+          type: "quiz",
+          typeLabel: "Quiz question",
+          title: m.q,
+          context: `${courseTitleFor(blockId)} · Block ${blockId} quiz`,
+          body: m.options.join(" "),
+          link: `#/quiz/${blockId}`,
+        });
+      });
+    });
+  });
+  allGlossaryTerms().forEach((t) => {
+    items.push({
+      type: "glossary",
+      typeLabel: "Glossary",
+      title: t.term,
+      context: t.group,
+      body: t.def,
+      link: "#/glossary",
+    });
+  });
+  SEARCH_INDEX_CACHE = items;
+  return items;
+}
+function runSearch(query) {
+  const q = query.trim().toLowerCase();
+  if (!q) return [];
+  const terms = q.split(/\s+/).filter(Boolean);
+  const scored = buildSearchIndex().map((item) => {
+    const titleL = item.title.toLowerCase();
+    const bodyL = item.body.toLowerCase();
+    let score = 0;
+    terms.forEach((t) => {
+      if (titleL.includes(t)) score += titleL.startsWith(t) ? 6 : 4;
+      if (bodyL.includes(t)) score += 1;
+    });
+    return { item, score };
+  }).filter((s) => s.score > 0);
+  scored.sort((a, b) => b.score - a.score);
+  return scored.slice(0, 40).map((s) => s.item);
+}
+function snippet(text, terms) {
+  const lower = text.toLowerCase();
+  let idx = -1;
+  for (const t of terms) {
+    idx = lower.indexOf(t);
+    if (idx !== -1) break;
+  }
+  if (idx === -1) return esc(text.slice(0, 160)) + (text.length > 160 ? "…" : "");
+  const start = Math.max(0, idx - 60);
+  const end = Math.min(text.length, idx + 100);
+  return (start > 0 ? "…" : "") + esc(text.slice(start, end)) + (end < text.length ? "…" : "");
+}
+function viewSearch(query) {
+  return `
+    <p class="crumbs"><a href="#/">Overview</a> / Search</p>
+    <h2>Search</h2>
+    <p class="subtitle">Search across every lesson, flashcard, quiz question, and glossary term in both courses.</p>
+    <input type="text" class="glossary-search" id="search-input" placeholder="Search e.g. Confirmation of Payee, AC04, mule account..." value="${esc(query)}">
+    <div id="search-results"></div>
+  `;
+}
+function renderSearchResults(query) {
+  const el = document.getElementById("search-results");
+  if (!query.trim()) { el.innerHTML = `<p class="subtitle">Start typing to search.</p>`; return; }
+  const results = runSearch(query);
+  const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  if (!results.length) { el.innerHTML = `<p class="subtitle">No results for "${esc(query)}".</p>`; return; }
+  el.innerHTML = `<p class="subtitle">${results.length} result${results.length === 1 ? "" : "s"}</p>` + results.map((r) => `
+    <a class="lesson-row" href="${r.link}" style="flex-direction:column; align-items:flex-start; gap:4px; height:auto; padding:12px 14px;">
+      <span><span class="tag">${esc(r.typeLabel)}</span> <strong>${esc(r.title)}</strong></span>
+      <span style="color:var(--muted); font-size:12.5px;">${esc(r.context)}</span>
+      <span style="color:var(--muted); font-size:13px;">${snippet(r.body, terms)}</span>
+    </a>
+  `).join("");
+}
+function bindSearchEvents() {
+  const input = document.getElementById("search-input");
+  renderSearchResults(input.value);
+  input.addEventListener("input", () => renderSearchResults(input.value));
+  input.focus();
+}
+
 /* ---------- boot ---------- */
 window.addEventListener("hashchange", render);
 window.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.getElementById("menu-toggle");
   if (menuToggle) menuToggle.addEventListener("click", () => document.getElementById("sidebar").classList.toggle("open"));
+
+  const topSearch = document.getElementById("top-search");
+  if (topSearch) {
+    topSearch.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        location.hash = "#/search/" + encodeURIComponent(topSearch.value);
+      }
+    });
+  }
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "/" && document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "TEXTAREA") {
+      e.preventDefault();
+      if (topSearch) topSearch.focus();
+      else location.hash = "#/search";
+    }
+  });
+
   render();
 });
