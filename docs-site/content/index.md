@@ -38,7 +38,8 @@ All content here is written in original wording, with original worked examples, 
 | D — Cards & Merchant Payments | Cross-border wires, card payments, Visa/Mastercard, payment gateways, merchant acquiring | Ready |
 | E — Corporate Cash & Treasury | Cash management, liquidity management, treasury, corporate banking, reconciliation | Ready |
 | F — Modern Infrastructure | ISO 20022, Open Banking, APIs, fraud, AML | Ready |
-| G–H | Full CPCM curriculum (in progress) | Coming soon |
+| G — Risk, Compliance & Security | KYC, sanctions, operational risk, cybersecurity, data protection | Ready |
+| H — Regulation, Innovation & Career | Regulation, emerging tech, CBDCs, payments ops in practice, career wrap-up | Coming soon |
 
 ## Other sections
 

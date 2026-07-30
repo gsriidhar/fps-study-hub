@@ -26,7 +26,7 @@ function nl2p(s) {
 /* Every course/block registered here. Add a new block's data file, then add
    one line below — everything else (routing, rendering, flashcards, quiz,
    glossary) is generic. */
-const BLOCKS_BY_ID = { A: BLOCK_A, B: BLOCK_B, C: BLOCK_C, D: BLOCK_D, E: BLOCK_E, F: BLOCK_F, F1: FPS_BLOCK1, F2: FPS_BLOCK2, F3: FPS_BLOCK3, F4: FPS_BLOCK4, F5: FPS_BLOCK5, F6: FPS_BLOCK6, F7: FPS_BLOCK7, F8: FPS_BLOCK8 };
+const BLOCKS_BY_ID = { A: BLOCK_A, B: BLOCK_B, C: BLOCK_C, D: BLOCK_D, E: BLOCK_E, F: BLOCK_F, G: BLOCK_G, F1: FPS_BLOCK1, F2: FPS_BLOCK2, F3: FPS_BLOCK3, F4: FPS_BLOCK4, F5: FPS_BLOCK5, F6: FPS_BLOCK6, F7: FPS_BLOCK7, F8: FPS_BLOCK8 };
 const COURSES = [
   { key: "cpcm", title: "CPCM curriculum", subtitle: "General payments & cash management foundation (40 lessons)", map: COURSE_MAP },
   { key: "fps", title: "FPS analyst deep-dive", subtitle: "UK Faster Payments operations, investigation & testing", map: FPS_COURSE_MAP },

@@ -5,6 +5,6 @@ const COURSE_MAP = [
   { id: "D", title: "Cards & Merchant Payments", lessons: [16,17,18,19,20], desc: "Card payments, Visa/Mastercard, payment gateways, merchant acquiring.", status: "ready" },
   { id: "E", title: "Corporate Cash & Treasury", lessons: [21,22,23,24,25], desc: "Cash management, liquidity management, treasury, corporate banking, reconciliation.", status: "ready" },
   { id: "F", title: "Modern Infrastructure", lessons: [26,27,28,29,30], desc: "ISO 20022, Open Banking, APIs, fraud, AML.", status: "ready" },
-  { id: "G", title: "Risk, Compliance & Security", lessons: [31,32,33,34,35], desc: "KYC, sanctions, operational risk, cybersecurity, data protection.", status: "soon" },
+  { id: "G", title: "Risk, Compliance & Security", lessons: [31,32,33,34,35], desc: "KYC, sanctions, operational risk, cybersecurity, data protection.", status: "ready" },
   { id: "H", title: "Regulation, Innovation & Career", lessons: [36,37,38,39,40], desc: "Regulation, emerging tech, CBDCs, payments ops in practice, career wrap-up.", status: "soon" },
 ];
