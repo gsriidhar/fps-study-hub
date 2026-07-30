@@ -36,7 +36,8 @@ All content here is written in original wording, with original worked examples, 
 | B — UK Domestic Clearing | Clearing & settlement basics, UK payment systems, Bacs, Faster Payments, CHAPS | Ready |
 | C — Cross-Border & High-Value Payments | RTGS, SWIFT, correspondent banking, SEPA, ACH | Ready |
 | D — Cards & Merchant Payments | Cross-border wires, card payments, Visa/Mastercard, payment gateways, merchant acquiring | Ready |
-| E–H | Full CPCM curriculum (in progress) | Coming soon |
+| E — Corporate Cash & Treasury | Cash management, liquidity management, treasury, corporate banking, reconciliation | Ready |
+| F–H | Full CPCM curriculum (in progress) | Coming soon |
 
 ## Other sections
 
