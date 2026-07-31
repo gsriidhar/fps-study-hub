@@ -114,6 +114,7 @@ Treat exact dates, percentages, and programme names as subject to change — che
 
 ## Other sections
 
+- [Deep dives](../deep-dives/index.md)
 - [Mock exams](../mock-exams/index.md)
 - [Case studies](../case-studies/index.md)
 - [Resources](../resources/index.md)

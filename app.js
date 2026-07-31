@@ -1011,6 +1011,7 @@ function backupPanelHtml() {
 
 /* -- study site (docs pages) -- */
 const STUDY_SITE_LINKS = [
+  { title: "Deep dives", desc: "Extra topics beyond the core curriculum, e.g. the full end-to-end payment flow.", href: "../deep-dives/" },
   { title: "Interview prep", desc: "Q&A by topic, linked back to lessons.", href: "../interview-prep/" },
   { title: "Mock exams", desc: "50-question timed practice paper with answer key.", href: "../mock-exams/" },
   { title: "Case studies", desc: "Real incidents plus practice investigation scenarios.", href: "../case-studies/" },

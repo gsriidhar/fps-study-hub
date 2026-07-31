@@ -89,6 +89,9 @@ nav:
       - "Block H · Regulation, Innovation & Career": cpcm/block-h-regulation-innovation-and-career/index.md
   - Glossary: glossary/index.md
   - Knowledge Assistant: assistant/index.md
+  - Deep dives:
+      - deep-dives/index.md
+      - "End-to-end payment flow": deep-dives/end-to-end-payment-flow/index.md
   - Interview prep: interview-prep/index.md
   - Mock exams: mock-exams/index.md
   - Case studies: case-studies/index.md
