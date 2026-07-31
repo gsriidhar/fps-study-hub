@@ -1,0 +1,41 @@
+<svg viewBox="0 0 900 460" xmlns="http://www.w3.org/2000/svg">
+
+<defs>
+  <marker id="arrowend" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+    <path d="M0,0 L6,3 L0,6 Z" fill="#7c3aed"/>
+  </marker>
+  <marker id="arrowend-muted" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+    <path d="M0,0 L6,3 L0,6 Z" fill="#94a3b8"/>
+  </marker>
+</defs>
+
+<rect x="0" y="0" width="900" height="460" fill="#ffffff"/>
+<text x="16" y="24" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#0f172a">Four-party card model</text>
+<rect x="40" y="40" width="190" height="80" rx="8" fill="#eef2ff" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="135.0" y="74.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a">Cardholder</text>
+<text x="135.0" y="93.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="400" fill="#64748b">makes the purchase</text>
+<rect x="670" y="40" width="190" height="80" rx="8" fill="#eef2ff" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="765.0" y="74.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a">Merchant</text>
+<text x="765.0" y="93.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="400" fill="#64748b">accepts the card</text>
+<rect x="40" y="300" width="190" height="80" rx="8" fill="#eef2ff" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="135.0" y="334.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a">Issuer</text>
+<text x="135.0" y="353.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="400" fill="#64748b">cardholder&#x27;s bank</text>
+<rect x="670" y="300" width="190" height="80" rx="8" fill="#eef2ff" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="765.0" y="334.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a">Acquirer</text>
+<text x="765.0" y="353.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="400" fill="#64748b">merchant&#x27;s bank</text>
+<rect x="310.0" y="180.0" width="280" height="80" rx="8" fill="#f3e8ff" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="450.0" y="205.3" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a">Card scheme</text>
+<text x="450.0" y="224.3" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="400" fill="#64748b">Visa / Mastercard</text>
+<text x="450.0" y="243.3" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="400" fill="#64748b">sets rules, routes transactions</text>
+<line x1="230" y1="80.0" x2="670" y2="80.0" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#arrowend)"/>
+<text x="450.0" y="72.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#7c3aed">pays with card</text>
+<line x1="135.0" y1="120" x2="135.0" y2="300" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#arrowend)"/>
+<text x="127.0" y="210.0" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#7c3aed">issues + bills</text>
+<line x1="765.0" y1="120" x2="765.0" y2="300" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#arrowend)"/>
+<text x="773.0" y="210.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#7c3aed">submits transaction</text>
+<line x1="230" y1="220.0" x2="306.0" y2="220.0" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#arrowend)"/>
+<text x="268.0" y="212.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#7c3aed">authorization</text>
+<line x1="594.0" y1="220.0" x2="670" y2="220.0" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#arrowend)"/>
+<text x="632.0" y="212.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#7c3aed">authorization</text>
+<text x="450.0" y="446" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#64748b">The scheme sits between issuer and acquirer, routing authorization and setting the interchange fee the acquirer pays the issuer on each transaction.</text>
+</svg>

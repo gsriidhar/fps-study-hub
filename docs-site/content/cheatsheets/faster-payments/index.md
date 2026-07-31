@@ -147,6 +147,16 @@ Scheme-level facts about the UK's Faster Payments Service (FPS), organised for a
 
 </div>
 
+## Flow diagrams
+
+<div class="cheat-diagram" markdown="1">
+![Faster Payments clearing versus settlement: payer, sending bank, FPS central infrastructure, receiving bank, and payee exchange pacs.008/pacs.002 messages that clear in seconds, while a separate deferred net settlement process nets and settles obligations between sending and receiving banks in scheduled cycles across the day.](../../assets/diagrams/fps-clearing-vs-settlement.svg)
+</div>
+
+<div class="cheat-diagram" markdown="1">
+![Direct versus indirect FPS access: an indirect participant routes payment traffic through a sponsor bank, which settles on its behalf at the FPS central infrastructure, while a direct participant connects to and settles at the central infrastructure itself.](../../assets/diagrams/fps-direct-vs-indirect-access.svg)
+</div>
+
 </div>
 
 ## Other sections

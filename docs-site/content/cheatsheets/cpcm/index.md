@@ -195,6 +195,16 @@ A glossary-style sweep across the whole [CPCM curriculum](../../cpcm/index.md) â
 
 </div>
 
+## Flow diagrams
+
+<div class="cheat-diagram" markdown="1">
+![Four-party card model: the cardholder pays the merchant, who submits the transaction to the acquirer; the acquirer and issuer exchange authorization through the card scheme (Visa or Mastercard), and the issuer bills the cardholder while also paying the acquirer via the scheme's interchange fee.](../../assets/diagrams/card-four-party-model.svg)
+</div>
+
+<div class="cheat-diagram" markdown="1">
+![Correspondent banking nostro and vostro: Bank A sends a payment instruction to its correspondent bank, which forwards it to Bank B; the account the correspondent holds in Bank A's name is Bank A's nostro account and the correspondent's vostro account â€” the same account described from opposite sides.](../../assets/diagrams/correspondent-banking-nostro-vostro.svg)
+</div>
+
 </div>
 
 ## Other sections

@@ -1,0 +1,33 @@
+<svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg">
+
+<defs>
+  <marker id="arrowend" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+    <path d="M0,0 L6,3 L0,6 Z" fill="#7c3aed"/>
+  </marker>
+  <marker id="arrowend-muted" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+    <path d="M0,0 L6,3 L0,6 Z" fill="#94a3b8"/>
+  </marker>
+</defs>
+
+<rect x="0" y="0" width="1000" height="300" fill="#ffffff"/>
+<text x="16" y="24" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#0f172a">Correspondent banking — nostro / vostro</text>
+<rect x="20" y="50" width="240" height="90" rx="8" fill="#eef2ff" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="140.0" y="89.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a">Bank A</text>
+<text x="140.0" y="108.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="400" fill="#64748b">no branch presence in Country B</text>
+<rect x="380" y="50" width="240" height="90" rx="8" fill="#f3e8ff" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="500.0" y="89.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a">Correspondent bank</text>
+<text x="500.0" y="108.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="400" fill="#64748b">operates in Country B</text>
+<rect x="780" y="50" width="200" height="90" rx="8" fill="#eef2ff" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="880.0" y="89.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a">Bank B</text>
+<text x="880.0" y="108.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="400" fill="#64748b">the ultimate destination</text>
+<line x1="260" y1="85.0" x2="380" y2="85.0" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#arrowend)"/>
+<text x="320.0" y="77.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#7c3aed">payment instruction</text>
+<line x1="620" y1="85.0" x2="780" y2="85.0" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#arrowend)"/>
+<text x="700.0" y="77.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#7c3aed">forwards to Bank B</text>
+<rect x="340.0" y="190" width="320" height="70" rx="8" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="500.0" y="220.1" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a">Account held at the correspondent, in Bank A&#x27;s name</text>
+<text x="500.0" y="237.6" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.0" font-weight="400" fill="#64748b">Bank A calls it a nostro account — &quot;ours, held at yours&quot;</text>
+<line x1="500.0" y1="140" x2="500.0" y2="190" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#arrowend)"/>
+<text x="500.0" y="176" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#7c3aed">same account, two names</text>
+<text x="500.0" y="286" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#64748b">Nostro and vostro describe the same account from opposite sides: Bank A&#x27;s nostro is the correspondent&#x27;s vostro (&quot;yours, held at ours&quot;).</text>
+</svg>
