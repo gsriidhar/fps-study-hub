@@ -171,6 +171,22 @@ Dense reference for the message families, naming pattern, and structural pieces 
 
 </div>
 
+## Message flow diagrams
+
+Three common shapes a message flow takes in practice — who exchanges what, and where clearing hands off to settlement.
+
+<div class="cheat-diagram" markdown="1">
+![Cross-border payment message flow: payer to originating bank via pain.001/pain.002, originating bank to correspondent bank and correspondent to beneficiary bank via pacs.008 with camt.053/054 returned, beneficiary bank to payee by credit advice.](../../assets/diagrams/cross-border-payment-flow.svg)
+</div>
+
+<div class="cheat-diagram" markdown="1">
+![High-value domestic payment: Participant A and Participant B exchange pacs.008/pacs.009 instructions and pacs.002/pacs.004 responses through a payment messaging network, which separately requests settlement from an RTGS engine that debits A and credits B.](../../assets/diagrams/high-value-domestic-flow.svg)
+</div>
+
+<div class="cheat-diagram" markdown="1">
+![Liquidity transfer between settlement systems: a payment service provider sends a camt.050 liquidity transfer request that moves between a domestic RTGS, a central liquidity manager, and an instant-payments settlement service, each confirming with camt.025 and camt.054.](../../assets/diagrams/liquidity-transfer-flow.svg)
+</div>
+
 </div>
 
 ## Other sections

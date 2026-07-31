@@ -260,6 +260,19 @@
 .cheat-code-section .cheat-section-title {
   margin-bottom: 0.9rem;
 }
+.cheat-diagram {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin: 0 0 1.25rem;
+  background: #fff;
+  overflow-x: auto;
+}
+.cheat-diagram img {
+  display: block;
+  width: 100%;
+  min-width: 640px;
+}
 
 .lesson-crumbs {
   font-size: 0.8rem;
