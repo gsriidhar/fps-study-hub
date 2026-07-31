@@ -1013,6 +1013,7 @@ function backupPanelHtml() {
 const STUDY_SITE_LINKS = [
   { title: "Docs home", desc: "The documentation site's own homepage — lessons, glossary, and everything below.", href: "../" },
   { title: "Deep dives", desc: "Extra topics beyond the core curriculum, e.g. the full end-to-end payment flow.", href: "../deep-dives/" },
+  { title: "Cheat sheets", desc: "ISO 20022, Faster Payments, CPCM, SQL, and testing-tool quick references.", href: "../cheatsheets/" },
   { title: "Interview prep", desc: "Q&A by topic, linked back to lessons.", href: "../interview-prep/" },
   { title: "Mock exams", desc: "50-question timed practice paper with answer key.", href: "../mock-exams/" },
   { title: "Case studies", desc: "Real incidents plus practice investigation scenarios.", href: "../case-studies/" },

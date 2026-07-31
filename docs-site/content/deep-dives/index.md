@@ -14,6 +14,7 @@ Got a topic you want added? Anything dropped here is automatically picked up by 
 
 ## Other sections
 
+- [Cheat sheets](../cheatsheets/index.md)
 - [Interview preparation](../interview-prep/index.md)
 - [Mock exams](../mock-exams/index.md)
 - [Case studies](../case-studies/index.md)

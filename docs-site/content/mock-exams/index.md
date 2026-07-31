@@ -386,6 +386,7 @@ An original 50-question mock paper covering both tracks — Faster Payments anal
 ## Other sections
 
 - [Deep dives](../deep-dives/index.md)
+- [Cheat sheets](../cheatsheets/index.md)
 - [Interview preparation](../interview-prep/index.md)
 - [Case studies](../case-studies/index.md)
 - [Resources](../resources/index.md)

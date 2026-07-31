@@ -73,6 +73,7 @@ Sources: [UK Finance — over £600 million stolen in H1 2025](https://www.ukfin
 ## Other sections
 
 - [Deep dives](../deep-dives/index.md)
+- [Cheat sheets](../cheatsheets/index.md)
 - [Interview preparation](../interview-prep/index.md)
 - [Mock exams](../mock-exams/index.md)
 - [Resources](../resources/index.md)

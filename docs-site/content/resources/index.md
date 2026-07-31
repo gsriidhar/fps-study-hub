@@ -28,6 +28,7 @@ A synthetic mobile-money transaction dataset (not real bank data) built to simul
 ## Other sections
 
 - [Deep dives](../deep-dives/index.md)
+- [Cheat sheets](../cheatsheets/index.md)
 - [Interview preparation](../interview-prep/index.md)
 - [Mock exams](../mock-exams/index.md)
 - [Case studies](../case-studies/index.md)

@@ -92,6 +92,13 @@ nav:
   - Deep dives:
       - deep-dives/index.md
       - "End-to-end payment flow": deep-dives/end-to-end-payment-flow/index.md
+  - Cheat sheets:
+      - cheatsheets/index.md
+      - "ISO 20022": cheatsheets/iso20022/index.md
+      - "Faster Payments": cheatsheets/faster-payments/index.md
+      - "CPCM": cheatsheets/cpcm/index.md
+      - "SQL for payments": cheatsheets/sql-for-payments/index.md
+      - "Testing tools": cheatsheets/testing-tools/index.md
   - Interview prep: interview-prep/index.md
   - Mock exams: mock-exams/index.md
   - Case studies: case-studies/index.md

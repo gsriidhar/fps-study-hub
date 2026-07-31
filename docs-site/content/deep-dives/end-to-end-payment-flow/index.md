@@ -59,5 +59,6 @@ None of this happens in a vacuum — three things run underneath every stage abo
 ## Other sections
 
 - [Deep dives](../index.md)
+- [Cheat sheets](../../cheatsheets/index.md)
 - [Interview preparation](../../interview-prep/index.md)
 - [Case studies](../../case-studies/index.md)

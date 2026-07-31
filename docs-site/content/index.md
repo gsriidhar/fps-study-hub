@@ -89,6 +89,7 @@ Blocks A &rarr; H, 40 lessons spanning payments, treasury, and compliance.
 ## Other sections
 
 - [Deep dives](deep-dives/index.md)
+- [Cheat sheets](cheatsheets/index.md)
 - [Interview preparation](interview-prep/index.md)
 - [Mock exams](mock-exams/index.md)
 - [Case studies](case-studies/index.md)
