@@ -6,6 +6,9 @@ block: "Checks, Submission & Settlement"
 tags: ["Checks, Submission & Settlement", "FPS Submission"]
 summary: "Explain what happens to a payment between passing internal checks and reaching the receiving bank, and understand why \"accepted by FPS\" is not the same as \"the beneficiary has been"
 ---
+[FPS analyst deep-dive](../index.md) / [Checks, Submission & Settlement](index.md) &middot; Lesson 8 of 40
+{: .lesson-crumbs}
+
 # 8. FPS Submission
 
 !!! abstract "Learning objective"
@@ -130,3 +133,15 @@ flowchart TD
     ▫️ The bank's marketing slogan
     ▫️ The customer's date of birth
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 7. Fraud & Risk Controls](07-fraud-and-risk-controls.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[9. Receiving Bank Processing &rarr;](09-receiving-bank-processing.md)
+</div>
+</div>

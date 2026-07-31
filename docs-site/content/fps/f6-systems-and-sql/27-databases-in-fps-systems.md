@@ -6,6 +6,9 @@ block: "Systems & SQL"
 tags: ["Systems & SQL", "Databases in FPS Systems"]
 summary: "Explain how FPS payment data is stored across related tables, and know where to look for evidence during an investigation."
 ---
+[FPS analyst deep-dive](../index.md) / [Systems & SQL](index.md) &middot; Lesson 27 of 40
+{: .lesson-crumbs}
+
 # 27. Databases in FPS Systems
 
 !!! abstract "Learning objective"
@@ -134,3 +137,15 @@ flowchart TD
     ▫️ It's a legal requirement with no technical benefit
     ▫️ To reduce the number of columns
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 26. Middleware (MQ, Kafka, Tibco)](26-middleware-mq-kafka-tibco.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[28. SQL Basics for Payment Analysts &rarr;](28-sql-basics-for-payment-analysts.md)
+</div>
+</div>

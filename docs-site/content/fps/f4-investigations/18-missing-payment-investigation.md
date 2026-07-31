@@ -6,6 +6,9 @@ block: "Investigations"
 tags: ["Investigations", "Missing Payment Investigation"]
 summary: "Run a structured missing-payment investigation from a customer report through to identifying who owns the next action."
 ---
+[FPS analyst deep-dive](../index.md) / [Investigations](index.md) &middot; Lesson 18 of 40
+{: .lesson-crumbs}
+
 # 18. Missing Payment Investigation
 
 !!! abstract "Learning objective"
@@ -135,3 +138,15 @@ flowchart TD
     ▫️ Cancel the payment
     ▫️ Assume customer error and close the case
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 17. Payment Rejections](17-payment-rejections.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[19. Delayed Payment Investigation &rarr;](19-delayed-payment-investigation.md)
+</div>
+</div>

@@ -6,6 +6,9 @@ block: "Regulation, Innovation & Career"
 tags: ["Regulation, Innovation & Career", "Career Pathways, Exam Strategy & Course Wrap-Up"]
 summary: "Summarise the full CPCM syllabus map, describe the common career pathways payments knowledge opens up, and apply practical final exam strategy."
 ---
+[CPCM curriculum](../index.md) / [Regulation, Innovation & Career](index.md) &middot; Lesson 40 of 40
+{: .lesson-crumbs}
+
 # 40. Career Pathways, Exam Strategy & Course Wrap-Up
 
 !!! abstract "Learning objective"
@@ -133,3 +136,15 @@ flowchart TD
     ▫️ Card scheme technology exclusively
     ▫️ Setting national interest rates
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 39. Payments Operations in Practice](39-payments-operations-in-practice.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Course complete</span>
+[Back to overview &rarr;](../index.md)
+</div>
+</div>

@@ -6,6 +6,9 @@ block: "Testing FPS"
 tags: ["Testing FPS", "Negative Testing in FPS"]
 summary: "Design failure scenarios across customer input, business rules, fraud controls, and technical faults, and verify each fails safely with correct evidence."
 ---
+[FPS analyst deep-dive](../index.md) / [Testing FPS](index.md) &middot; Lesson 33 of 40
+{: .lesson-crumbs}
+
 # 33. Negative Testing in FPS
 
 !!! abstract "Learning objective"
@@ -130,3 +133,15 @@ flowchart TD
     ▫️ Race conditions only affect fraud engines
     ▫️ It only applies to business accounts
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 32. Happy Path Testing](32-happy-path-testing.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[34. Confirmation of Payee (CoP) Testing &rarr;](34-confirmation-of-payee-cop-testing.md)
+</div>
+</div>

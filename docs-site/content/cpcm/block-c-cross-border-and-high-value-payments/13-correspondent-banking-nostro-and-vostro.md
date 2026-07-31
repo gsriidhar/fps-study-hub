@@ -6,6 +6,9 @@ block: "Cross-Border & High-Value Payments"
 tags: ["Cross-Border & High-Value Payments", "Correspondent Banking, Nostro & Vostro"]
 summary: "Explain why correspondent banking exists, define nostro and vostro accounts correctly, and describe how correspondent chains affect cross-border payment speed, cost, and transparen"
 ---
+[CPCM curriculum](../index.md) / [Cross-Border & High-Value Payments](index.md) &middot; Lesson 13 of 40
+{: .lesson-crumbs}
+
 # 13. Correspondent Banking, Nostro & Vostro
 
 !!! abstract "Learning objective"
@@ -130,3 +133,15 @@ flowchart TD
     ▫️ SWIFT physically moves the funds between correspondent accounts
     ▫️ Correspondent banking has replaced the need for SWIFT
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 12. The SWIFT Messaging Network](12-the-swift-messaging-network.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[14. SEPA — The Single Euro Payments Area &rarr;](14-sepa-the-single-euro-payments-area.md)
+</div>
+</div>

@@ -6,6 +6,9 @@ block: "Reconciliation & Architecture"
 tags: ["Reconciliation & Architecture", "Typical Bank Architecture"]
 summary: "Read a high-level FPS bank architecture end to end, and know which component and which team owns each stage of the payment journey."
 ---
+[FPS analyst deep-dive](../index.md) / [Reconciliation & Architecture](index.md) &middot; Lesson 25 of 40
+{: .lesson-crumbs}
+
 # 25. Typical Bank Architecture
 
 !!! abstract "Learning objective"
@@ -144,3 +147,15 @@ flowchart TD
     ▫️ Database team
     ▫️ The customer
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 24. Nostro & Settlement Reconciliation](24-nostro-and-settlement-reconciliation.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[26. Middleware (MQ, Kafka, Tibco) &rarr;](../f6-systems-and-sql/26-middleware-mq-kafka-tibco.md)
+</div>
+</div>

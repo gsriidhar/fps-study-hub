@@ -6,6 +6,9 @@ block: "FPS Fundamentals"
 tags: ["FPS Fundamentals", "The FPS Ecosystem: Who Owns Each Stage"]
 summary: "List every organisation a payment passes through on its way from customer to beneficiary, and — critically for investigation work — know who owns each stage, so you know who to con"
 ---
+[FPS analyst deep-dive](../index.md) / [FPS Fundamentals](index.md) &middot; Lesson 2 of 40
+{: .lesson-crumbs}
+
 # 2. The FPS Ecosystem: Who Owns Each Stage
 
 !!! abstract "Learning objective"
@@ -148,3 +151,15 @@ flowchart TD
     ▫️ What is the exchange rate?
     ▫️ Was the app rated well?
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 1. What Is Faster Payments (FPS)?](01-what-is-faster-payments-fps.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[3. Direct vs Indirect Access &rarr;](03-direct-vs-indirect-access.md)
+</div>
+</div>

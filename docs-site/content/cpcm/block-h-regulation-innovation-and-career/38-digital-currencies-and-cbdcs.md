@@ -6,6 +6,9 @@ block: "Regulation, Innovation & Career"
 tags: ["Regulation, Innovation & Career", "Digital Currencies & CBDCs"]
 summary: "Distinguish cryptocurrencies, stablecoins, and Central Bank Digital Currencies, explain why central banks are exploring CBDCs, and describe the key risks and design considerations "
 ---
+[CPCM curriculum](../index.md) / [Regulation, Innovation & Career](index.md) &middot; Lesson 38 of 40
+{: .lesson-crumbs}
+
 # 38. Digital Currencies & CBDCs
 
 !!! abstract "Learning objective"
@@ -127,3 +130,15 @@ flowchart TD
     ▫️ Being issued directly by central banks
     ▫️ Having no real-world use cases
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 37. Emerging Payment Technologies](37-emerging-payment-technologies.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[39. Payments Operations in Practice &rarr;](39-payments-operations-in-practice.md)
+</div>
+</div>

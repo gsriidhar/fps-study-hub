@@ -6,6 +6,9 @@ block: "Risk, Compliance & Security"
 tags: ["Risk, Compliance & Security", "Cybersecurity in Payments"]
 summary: "Describe the key cyber threats facing payments infrastructure, explain PCI DSS at a conceptual level, and describe how encryption, tokenisation, and multi-factor authentication wor"
 ---
+[CPCM curriculum](../index.md) / [Risk, Compliance & Security](index.md) &middot; Lesson 34 of 40
+{: .lesson-crumbs}
+
 # 34. Cybersecurity in Payments
 
 !!! abstract "Learning objective"
@@ -130,3 +133,15 @@ flowchart TD
     ▫️ Only card schemes themselves
     ▫️ Only financial regulators
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 33. Operational Risk in Payments](33-operational-risk-in-payments.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[35. Data Protection: GDPR & Data Privacy &rarr;](35-data-protection-gdpr-and-data-privacy.md)
+</div>
+</div>

@@ -6,6 +6,9 @@ block: "UK Domestic Clearing"
 tags: ["UK Domestic Clearing", "UK Payment Systems Overview"]
 summary: "Identify the main UK payment systems, name their operators, and match each system to the situation it's actually built for."
 ---
+[CPCM curriculum](../index.md) / [UK Domestic Clearing](index.md) &middot; Lesson 7 of 40
+{: .lesson-crumbs}
+
 # 7. UK Payment Systems Overview
 
 !!! abstract "Learning objective"
@@ -130,3 +133,15 @@ flowchart TD
     ▫️ Pay.UK regulates the Bank of England
     ▫️ They have no operational relationship
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 6. Clearing and Settlement Basics](06-clearing-and-settlement-basics.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[8. Bacs Deep Dive &rarr;](08-bacs-deep-dive.md)
+</div>
+</div>

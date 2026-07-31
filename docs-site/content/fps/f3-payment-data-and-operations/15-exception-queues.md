@@ -6,6 +6,9 @@ block: "Payment Data & Operations"
 tags: ["Payment Data & Operations", "Exception Queues"]
 summary: "Explain what exception queues are and why payments enter them, distinguish the main queue types, and understand the controls around manually repairing a payment."
 ---
+[FPS analyst deep-dive](../index.md) / [Payment Data & Operations](index.md) &middot; Lesson 15 of 40
+{: .lesson-crumbs}
+
 # 15. Exception Queues
 
 !!! abstract "Learning objective"
@@ -140,3 +143,15 @@ flowchart TD
     ▫️ It should always be ignored
     ▫️ It means the customer made an error
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 14. The FPS Operations Team](14-the-fps-operations-team.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[16. Payment Returns &rarr;](../f4-investigations/16-payment-returns.md)
+</div>
+</div>

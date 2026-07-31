@@ -6,6 +6,9 @@ block: "Systems & SQL"
 tags: ["Systems & SQL", "Middleware (MQ, Kafka, Tibco)"]
 summary: "Explain what middleware does, how MQ and Kafka differ, and how tier-1 UK banks combine them in practice."
 ---
+[FPS analyst deep-dive](../index.md) / [Systems & SQL](index.md) &middot; Lesson 26 of 40
+{: .lesson-crumbs}
+
 # 26. Middleware (MQ, Kafka, Tibco)
 
 !!! abstract "Learning objective"
@@ -130,3 +133,15 @@ flowchart TD
     ▫️ Database indexing
     ▫️ Fraud engine rules
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 25. Typical Bank Architecture](../f5-reconciliation-and-architecture/25-typical-bank-architecture.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[27. Databases in FPS Systems &rarr;](27-databases-in-fps-systems.md)
+</div>
+</div>

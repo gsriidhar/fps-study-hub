@@ -6,6 +6,9 @@ block: "Foundations"
 tags: ["Foundations", "Introduction to Payments & Cash Management"]
 summary: "Explain what \"payments\" and \"cash management\" mean in banking; describe why banks, companies, and regulators care about moving money safely and quickly; place the CPCM qualificatio"
 ---
+[CPCM curriculum](../index.md) / [Foundations](index.md) &middot; Lesson 1 of 40
+{: .lesson-crumbs}
+
 # 1. Introduction to Payments & Cash Management
 
 !!! abstract "Learning objective"
@@ -162,3 +165,15 @@ flowchart TD
     ▫️ It is legally required everywhere
     ▫️ Banks insist on it
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">&nbsp;</span>
+[&larr; Back to block index](index.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[2. The Payments Ecosystem Overview &rarr;](02-the-payments-ecosystem-overview.md)
+</div>
+</div>

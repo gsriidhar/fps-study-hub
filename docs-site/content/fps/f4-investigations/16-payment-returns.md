@@ -6,6 +6,9 @@ block: "Investigations"
 tags: ["Investigations", "Payment Returns"]
 summary: "Explain what a payment return is, distinguish it clearly from a rejection, and investigate why a completed payment came back."
 ---
+[FPS analyst deep-dive](../index.md) / [Investigations](index.md) &middot; Lesson 16 of 40
+{: .lesson-crumbs}
+
 # 16. Payment Returns
 
 !!! abstract "Learning objective"
@@ -130,3 +133,15 @@ flowchart TD
     ▫️ A phone call from the sending bank only
     ▫️ Approval from the customer's employer
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 15. Exception Queues](../f3-payment-data-and-operations/15-exception-queues.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[17. Payment Rejections &rarr;](17-payment-rejections.md)
+</div>
+</div>

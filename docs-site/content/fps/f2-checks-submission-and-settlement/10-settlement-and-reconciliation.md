@@ -6,6 +6,9 @@ block: "Checks, Submission & Settlement"
 tags: ["Checks, Submission & Settlement", "Settlement & Reconciliation"]
 summary: "Explain the difference between payment processing and settlement, understand RTGS's role, and describe why reconciliation matters in production support."
 ---
+[FPS analyst deep-dive](../index.md) / [Checks, Submission & Settlement](index.md) &middot; Lesson 10 of 40
+{: .lesson-crumbs}
+
 # 10. Settlement & Reconciliation
 
 !!! abstract "Learning objective"
@@ -130,3 +133,15 @@ flowchart TD
     ▫️ Only for CHAPS
     ▫️ Only on weekends
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 9. Receiving Bank Processing](09-receiving-bank-processing.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[11. Payment Fields &rarr;](../f3-payment-data-and-operations/11-payment-fields.md)
+</div>
+</div>

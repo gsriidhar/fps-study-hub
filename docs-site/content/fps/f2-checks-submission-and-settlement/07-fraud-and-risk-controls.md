@@ -6,6 +6,9 @@ block: "Checks, Submission & Settlement"
 tags: ["Checks, Submission & Settlement", "Fraud & Risk Controls"]
 summary: "Explain why a technically valid payment can still be stopped, and describe the main fraud controls: APP fraud detection, velocity checks, mule detection, AML, sanctions screening, "
 ---
+[FPS analyst deep-dive](../index.md) / [Checks, Submission & Settlement](index.md) &middot; Lesson 7 of 40
+{: .lesson-crumbs}
+
 # 7. Fraud & Risk Controls
 
 !!! abstract "Learning objective"
@@ -140,3 +143,15 @@ flowchart TD
     ▫️ Only after the receiving bank credits the account
     ▫️ Before the customer enters any details
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 6. Confirmation of Payee (CoP)](06-confirmation-of-payee-cop.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[8. FPS Submission &rarr;](08-fps-submission.md)
+</div>
+</div>

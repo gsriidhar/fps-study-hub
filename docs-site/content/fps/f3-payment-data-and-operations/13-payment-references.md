@@ -6,6 +6,9 @@ block: "Payment Data & Operations"
 tags: ["Payment Data & Operations", "Payment References"]
 summary: "Explain the different reference types an FPS payment carries, and use them to trace a single payment across multiple internal and external systems."
 ---
+[FPS analyst deep-dive](../index.md) / [Payment Data & Operations](index.md) &middot; Lesson 13 of 40
+{: .lesson-crumbs}
+
 # 13. Payment References
 
 !!! abstract "Learning objective"
@@ -137,3 +140,15 @@ flowchart TD
     ▫️ A card's expiry date
     ▫️ A bank's marketing code
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 12. Payment Statuses](12-payment-statuses.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[14. The FPS Operations Team &rarr;](14-the-fps-operations-team.md)
+</div>
+</div>

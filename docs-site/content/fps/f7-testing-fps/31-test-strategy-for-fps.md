@@ -6,6 +6,9 @@ block: "Testing FPS"
 tags: ["Testing FPS", "Test Strategy for FPS"]
 summary: "Explain what a test strategy defines, distinguish the test levels, and describe the standard banking environment chain and its entry/exit criteria."
 ---
+[FPS analyst deep-dive](../index.md) / [Testing FPS](index.md) &middot; Lesson 31 of 40
+{: .lesson-crumbs}
+
 # 31. Test Strategy for FPS
 
 !!! abstract "Learning objective"
@@ -133,3 +136,15 @@ flowchart TD
     ▫️ They are optional and rarely used
     ▫️ To replace the need for regression testing
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 30. Operational Reporting](../f6-systems-and-sql/30-operational-reporting.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[32. Happy Path Testing &rarr;](32-happy-path-testing.md)
+</div>
+</div>

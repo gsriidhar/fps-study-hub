@@ -6,6 +6,9 @@ block: "FPS Fundamentals"
 tags: ["FPS Fundamentals", "Payment Initiation"]
 summary: "Describe what happens the moment a customer submits a payment, name the core mandatory fields, and understand why most investigations should start by confirming the payment was cre"
 ---
+[FPS analyst deep-dive](../index.md) / [FPS Fundamentals](index.md) &middot; Lesson 4 of 40
+{: .lesson-crumbs}
+
 # 4. Payment Initiation
 
 !!! abstract "Learning objective"
@@ -130,3 +133,15 @@ flowchart TD
     ▫️ SETTLED
     ▫️ ARCHIVED
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 3. Direct vs Indirect Access](03-direct-vs-indirect-access.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[5. Validation Rules &rarr;](05-validation-rules.md)
+</div>
+</div>

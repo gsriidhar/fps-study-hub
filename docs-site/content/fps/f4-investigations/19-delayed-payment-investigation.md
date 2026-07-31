@@ -6,6 +6,9 @@ block: "Investigations"
 tags: ["Investigations", "Delayed Payment Investigation"]
 summary: "Distinguish a delayed payment from a failed one, and investigate the timeline to find where processing slowed and who owns it."
 ---
+[FPS analyst deep-dive](../index.md) / [Investigations](index.md) &middot; Lesson 19 of 40
+{: .lesson-crumbs}
+
 # 19. Delayed Payment Investigation
 
 !!! abstract "Learning objective"
@@ -134,3 +137,15 @@ flowchart TD
     ▫️ Definitely fraud
     ▫️ The customer made an error
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 18. Missing Payment Investigation](18-missing-payment-investigation.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[20. Duplicate Payment Investigation &rarr;](20-duplicate-payment-investigation.md)
+</div>
+</div>

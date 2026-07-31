@@ -6,6 +6,9 @@ block: "Foundations"
 tags: ["Foundations", "Payment Instruments Overview"]
 summary: "List the main payment instruments used by consumers and businesses; explain the pros/cons of each; understand how instrument choice relates to risk and speed."
 ---
+[CPCM curriculum](../index.md) / [Foundations](index.md) &middot; Lesson 5 of 40
+{: .lesson-crumbs}
+
 # 5. Payment Instruments Overview
 
 !!! abstract "Learning objective"
@@ -149,3 +152,15 @@ Each instrument trades off speed, cost, reversibility, and traceability. Cash is
     ▫️ Typical use case
     ✅ Font used on the receipt
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 4. Types of Payments](04-types-of-payments.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[6. Clearing and Settlement Basics &rarr;](../block-b-uk-domestic-clearing/06-clearing-and-settlement-basics.md)
+</div>
+</div>

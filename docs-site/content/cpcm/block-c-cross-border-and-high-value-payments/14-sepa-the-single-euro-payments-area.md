@@ -6,6 +6,9 @@ block: "Cross-Border & High-Value Payments"
 tags: ["Cross-Border & High-Value Payments", "SEPA — The Single Euro Payments Area"]
 summary: "Explain what SEPA achieves for euro payments, name its main payment instruments, and describe how they compare to their nearest UK equivalents."
 ---
+[CPCM curriculum](../index.md) / [Cross-Border & High-Value Payments](index.md) &middot; Lesson 14 of 40
+{: .lesson-crumbs}
+
 # 14. SEPA — The Single Euro Payments Area
 
 !!! abstract "Learning objective"
@@ -130,3 +133,15 @@ flowchart TD
     ▫️ Authorises a Direct Debit mandate
     ▫️ Confirms settlement finality
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 13. Correspondent Banking, Nostro & Vostro](13-correspondent-banking-nostro-and-vostro.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[15. ACH — The US Automated Clearing House &rarr;](15-ach-the-us-automated-clearing-house.md)
+</div>
+</div>

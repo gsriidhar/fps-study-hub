@@ -6,6 +6,9 @@ block: "UK Domestic Clearing"
 tags: ["UK Domestic Clearing", "Bacs Deep Dive"]
 summary: "Explain how the Bacs 3-day cycle actually works, distinguish Direct Credit from Direct Debit, and describe the consumer protection built specifically around Direct Debit."
 ---
+[CPCM curriculum](../index.md) / [UK Domestic Clearing](index.md) &middot; Lesson 8 of 40
+{: .lesson-crumbs}
+
 # 8. Bacs Deep Dive
 
 !!! abstract "Learning objective"
@@ -128,3 +131,15 @@ flowchart TD
     ▫️ Faster Payments cannot process business payments at all
     ▫️ Bacs offers a stronger consumer guarantee for Direct Credit
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 7. UK Payment Systems Overview](07-uk-payment-systems-overview.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[9. Faster Payments Deep Dive &rarr;](09-faster-payments-deep-dive.md)
+</div>
+</div>

@@ -6,6 +6,9 @@ block: "Payment Data & Operations"
 tags: ["Payment Data & Operations", "Payment Statuses"]
 summary: "Explain the FPS status lifecycle end to end, and use status history to diagnose exactly where a payment has stalled."
 ---
+[FPS analyst deep-dive](../index.md) / [Payment Data & Operations](index.md) &middot; Lesson 12 of 40
+{: .lesson-crumbs}
+
 # 12. Payment Statuses
 
 !!! abstract "Learning objective"
@@ -135,3 +138,15 @@ flowchart TD
     ▫️ Currency conversion
     ▫️ Nothing — this status doesn't exist
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 11. Payment Fields](11-payment-fields.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[13. Payment References &rarr;](13-payment-references.md)
+</div>
+</div>

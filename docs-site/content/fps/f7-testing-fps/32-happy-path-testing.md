@@ -6,6 +6,9 @@ block: "Testing FPS"
 tags: ["Testing FPS", "Happy Path Testing"]
 summary: "Design a successful FPS payment test scenario across the full status journey, and collect evidence proving each system touchpoint worked."
 ---
+[FPS analyst deep-dive](../index.md) / [Testing FPS](index.md) &middot; Lesson 32 of 40
+{: .lesson-crumbs}
+
 # 32. Happy Path Testing
 
 !!! abstract "Learning objective"
@@ -133,3 +136,15 @@ flowchart TD
     ▫️ Saved beneficiaries never need CoP checks
     ▫️ It only matters for business accounts
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 31. Test Strategy for FPS](31-test-strategy-for-fps.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[33. Negative Testing in FPS &rarr;](33-negative-testing-in-fps.md)
+</div>
+</div>

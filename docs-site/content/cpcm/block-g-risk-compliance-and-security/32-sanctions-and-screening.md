@@ -6,6 +6,9 @@ block: "Risk, Compliance & Security"
 tags: ["Risk, Compliance & Security", "Sanctions & Screening"]
 summary: "Explain what sanctions are and why financial institutions must screen for them, identify the key sanctions bodies and lists, and describe the consequences of a sanctions breach."
 ---
+[CPCM curriculum](../index.md) / [Risk, Compliance & Security](index.md) &middot; Lesson 32 of 40
+{: .lesson-crumbs}
+
 # 32. Sanctions & Screening
 
 !!! abstract "Learning objective"
@@ -131,3 +134,15 @@ flowchart TD
     ▫️ Automatic forgiveness from regulators
     ▫️ Only ever a warning letter
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 31. Know Your Customer (KYC) & Customer Due Diligence](31-know-your-customer-kyc-and-customer-due-diligence.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[33. Operational Risk in Payments &rarr;](33-operational-risk-in-payments.md)
+</div>
+</div>

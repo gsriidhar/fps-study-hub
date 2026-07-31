@@ -6,6 +6,9 @@ block: "Cross-Border & High-Value Payments"
 tags: ["Cross-Border & High-Value Payments", "RTGS Systems Around the World"]
 summary: "Explain what RTGS means as a global concept rather than a UK-specific one, name the major national RTGS systems, and describe why they matter to financial stability."
 ---
+[CPCM curriculum](../index.md) / [Cross-Border & High-Value Payments](index.md) &middot; Lesson 11 of 40
+{: .lesson-crumbs}
+
 # 11. RTGS Systems Around the World
 
 !!! abstract "Learning objective"
@@ -133,3 +136,15 @@ flowchart TD
     ✅ Bacs
     ▫️ CHAPS
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 10. CHAPS Deep Dive](../block-b-uk-domestic-clearing/10-chaps-deep-dive.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[12. The SWIFT Messaging Network &rarr;](12-the-swift-messaging-network.md)
+</div>
+</div>

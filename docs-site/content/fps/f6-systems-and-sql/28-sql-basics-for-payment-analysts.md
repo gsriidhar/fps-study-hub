@@ -6,6 +6,9 @@ block: "Systems & SQL"
 tags: ["Systems & SQL", "SQL Basics for Payment Analysts"]
 summary: "Write basic SQL to retrieve, filter, sort, and join payment data to answer real operational questions independently."
 ---
+[FPS analyst deep-dive](../index.md) / [Systems & SQL](index.md) &middot; Lesson 28 of 40
+{: .lesson-crumbs}
+
 # 28. SQL Basics for Payment Analysts
 
 !!! abstract "Learning objective"
@@ -134,3 +137,15 @@ flowchart TD
     ▫️ It always returns zero results
     ▫️ It replaces the need for a payment ID
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 27. Databases in FPS Systems](27-databases-in-fps-systems.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[29. Failed Payment Analysis Using SQL &rarr;](29-failed-payment-analysis-using-sql.md)
+</div>
+</div>

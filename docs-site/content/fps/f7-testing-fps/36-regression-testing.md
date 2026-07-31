@@ -6,6 +6,9 @@ block: "Testing FPS"
 tags: ["Testing FPS", "Regression Testing"]
 summary: "Build a tiered, maintainable FPS regression pack drawing from happy path, negative, CoP, and fraud scenarios, and run the defect verification workflow correctly."
 ---
+[FPS analyst deep-dive](../index.md) / [Testing FPS](index.md) &middot; Lesson 36 of 40
+{: .lesson-crumbs}
+
 # 36. Regression Testing
 
 !!! abstract "Learning objective"
@@ -135,3 +138,15 @@ flowchart TD
     ▫️ Regression packs automatically update themselves
     ▫️ Only automated tests require maintenance
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 35. Fraud Testing in FPS](35-fraud-testing-in-fps.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[37. Monitoring FPS Systems in Production &rarr;](../f8-monitoring-and-live-simulation/37-monitoring-fps-systems-in-production.md)
+</div>
+</div>

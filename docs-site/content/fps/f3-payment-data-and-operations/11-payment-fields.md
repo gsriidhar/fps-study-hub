@@ -6,6 +6,9 @@ block: "Payment Data & Operations"
 tags: ["Payment Data & Operations", "Payment Fields"]
 summary: "Read an FPS payment record confidently, and know which fields matter most when investigating a support case."
 ---
+[FPS analyst deep-dive](../index.md) / [Payment Data & Operations](index.md) &middot; Lesson 11 of 40
+{: .lesson-crumbs}
+
 # 11. Payment Fields
 
 !!! abstract "Learning objective"
@@ -129,3 +132,15 @@ flowchart TD
     ▫️ A valid sort code
     ▫️ A unique Payment ID
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 10. Settlement & Reconciliation](../f2-checks-submission-and-settlement/10-settlement-and-reconciliation.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[12. Payment Statuses &rarr;](12-payment-statuses.md)
+</div>
+</div>

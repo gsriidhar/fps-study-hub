@@ -6,6 +6,9 @@ block: "Payment Data & Operations"
 tags: ["Payment Data & Operations", "The FPS Operations Team"]
 summary: "Explain what an FPS Operations team actually does day to day, how incidents are escalated and classified, and how Operations works with Development, QA, Business, and Compliance."
 ---
+[FPS analyst deep-dive](../index.md) / [Payment Data & Operations](index.md) &middot; Lesson 14 of 40
+{: .lesson-crumbs}
+
 # 14. The FPS Operations Team
 
 !!! abstract "Learning objective"
@@ -140,3 +143,15 @@ flowchart TD
     ▫️ Exception management
     ▫️ SLA and regulatory reporting
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 13. Payment References](13-payment-references.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[15. Exception Queues &rarr;](15-exception-queues.md)
+</div>
+</div>

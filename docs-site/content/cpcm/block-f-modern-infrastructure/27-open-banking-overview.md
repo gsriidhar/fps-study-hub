@@ -6,6 +6,9 @@ block: "Modern Infrastructure"
 tags: ["Modern Infrastructure", "Open Banking Overview"]
 summary: "Explain what Open Banking enables and the regulatory driver (PSD2) behind it, distinguish AISPs from PISPs, and describe the consumer protections built into the framework."
 ---
+[CPCM curriculum](../index.md) / [Modern Infrastructure](index.md) &middot; Lesson 27 of 40
+{: .lesson-crumbs}
+
 # 27. Open Banking Overview
 
 !!! abstract "Learning objective"
@@ -130,3 +133,15 @@ flowchart TD
     ▫️ Slower checkout in every case
     ▫️ No benefit to the merchant at all
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 26. The ISO 20022 Messaging Standard](26-the-iso-20022-messaging-standard.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[28. APIs in Payments &rarr;](28-apis-in-payments.md)
+</div>
+</div>

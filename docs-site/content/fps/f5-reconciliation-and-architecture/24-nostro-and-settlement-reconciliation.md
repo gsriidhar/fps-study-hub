@@ -6,6 +6,9 @@ block: "Reconciliation & Architecture"
 tags: ["Reconciliation & Architecture", "Nostro & Settlement Reconciliation"]
 summary: "Explain settlement accounts and the Nostro concept, and reconcile settlement positions including for indirect participants."
 ---
+[FPS analyst deep-dive](../index.md) / [Reconciliation & Architecture](index.md) &middot; Lesson 24 of 40
+{: .lesson-crumbs}
+
 # 24. Nostro & Settlement Reconciliation
 
 !!! abstract "Learning objective"
@@ -132,3 +135,15 @@ flowchart TD
     ▫️ A customer complaint
     ▫️ A CoP mismatch
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 23. Reconciliation Breaks](23-reconciliation-breaks.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[25. Typical Bank Architecture &rarr;](25-typical-bank-architecture.md)
+</div>
+</div>

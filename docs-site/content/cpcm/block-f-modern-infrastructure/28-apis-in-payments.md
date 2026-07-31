@@ -6,6 +6,9 @@ block: "Modern Infrastructure"
 tags: ["Modern Infrastructure", "APIs in Payments"]
 summary: "Explain what an API is in plain terms, describe how APIs are used across payments beyond Open Banking specifically, and understand the basics of API security."
 ---
+[CPCM curriculum](../index.md) / [Modern Infrastructure](index.md) &middot; Lesson 28 of 40
+{: .lesson-crumbs}
+
 # 28. APIs in Payments
 
 !!! abstract "Learning objective"
@@ -128,3 +131,15 @@ flowchart TD
     ▫️ No meaningful change at all
     ▫️ A shift from digital processing back to paper
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 27. Open Banking Overview](27-open-banking-overview.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[29. Payment Fraud Types & Prevention &rarr;](29-payment-fraud-types-and-prevention.md)
+</div>
+</div>

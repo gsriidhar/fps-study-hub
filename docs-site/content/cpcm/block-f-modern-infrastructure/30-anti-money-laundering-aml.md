@@ -6,6 +6,9 @@ block: "Modern Infrastructure"
 tags: ["Modern Infrastructure", "Anti-Money Laundering (AML)"]
 summary: "Define money laundering and explain its three classic stages, describe the core AML obligations financial institutions carry, and explain why tipping off a customer is treated so s"
 ---
+[CPCM curriculum](../index.md) / [Modern Infrastructure](index.md) &middot; Lesson 30 of 40
+{: .lesson-crumbs}
+
 # 30. Anti-Money Laundering (AML)
 
 !!! abstract "Learning objective"
@@ -128,3 +131,15 @@ flowchart TD
     ▫️ It only applies to cash-only transactions
     ▫️ It replaces the need for Customer Due Diligence
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 29. Payment Fraud Types & Prevention](29-payment-fraud-types-and-prevention.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[31. Know Your Customer (KYC) & Customer Due Diligence &rarr;](../block-g-risk-compliance-and-security/31-know-your-customer-kyc-and-customer-due-diligence.md)
+</div>
+</div>

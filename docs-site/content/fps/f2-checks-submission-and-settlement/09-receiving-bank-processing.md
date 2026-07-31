@@ -6,6 +6,9 @@ block: "Checks, Submission & Settlement"
 tags: ["Checks, Submission & Settlement", "Receiving Bank Processing"]
 summary: "Explain what the receiving bank does after FPS delivers a payment, distinguish a rejection from a return, and know how to investigate an inbound payment issue."
 ---
+[FPS analyst deep-dive](../index.md) / [Checks, Submission & Settlement](index.md) &middot; Lesson 9 of 40
+{: .lesson-crumbs}
+
 # 9. Receiving Bank Processing
 
 !!! abstract "Learning objective"
@@ -128,3 +131,15 @@ flowchart TD
     ▫️ Only the customer's device
     ▫️ The scheme operator's marketing team
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 8. FPS Submission](08-fps-submission.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[10. Settlement & Reconciliation &rarr;](10-settlement-and-reconciliation.md)
+</div>
+</div>

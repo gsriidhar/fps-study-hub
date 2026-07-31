@@ -6,6 +6,9 @@ block: "Cards & Merchant Payments"
 tags: ["Cards & Merchant Payments", "Payment Gateways"]
 summary: "Explain what a payment gateway actually does, distinguish it clearly from an acquirer or processor, and describe the role tokenisation plays in reducing merchant risk."
 ---
+[CPCM curriculum](../index.md) / [Cards & Merchant Payments](index.md) &middot; Lesson 19 of 40
+{: .lesson-crumbs}
+
 # 19. Payment Gateways
 
 !!! abstract "Learning objective"
@@ -131,3 +134,15 @@ flowchart TD
     ▫️ It removes all card fees entirely
     ▫️ It bypasses the need for card schemes altogether
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 18. Visa and Mastercard: How Card Schemes Work](18-visa-and-mastercard-how-card-schemes-work.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[20. Merchant Acquiring &rarr;](20-merchant-acquiring.md)
+</div>
+</div>

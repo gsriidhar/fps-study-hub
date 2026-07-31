@@ -6,6 +6,9 @@ block: "Modern Infrastructure"
 tags: ["Modern Infrastructure", "The ISO 20022 Messaging Standard"]
 summary: "Explain what ISO 20022 actually is, describe the concrete benefits its structured data brings over legacy formats, and identify where it's being adopted globally."
 ---
+[CPCM curriculum](../index.md) / [Modern Infrastructure](index.md) &middot; Lesson 26 of 40
+{: .lesson-crumbs}
+
 # 26. The ISO 20022 Messaging Standard
 
 !!! abstract "Learning objective"
@@ -128,3 +131,15 @@ flowchart TD
     ▫️ It removes the need for screening entirely
     ▫️ It's related to EMV chip technology
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 25. Reconciliation Processes](../block-e-corporate-cash-and-treasury/25-reconciliation-processes.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[27. Open Banking Overview &rarr;](27-open-banking-overview.md)
+</div>
+</div>

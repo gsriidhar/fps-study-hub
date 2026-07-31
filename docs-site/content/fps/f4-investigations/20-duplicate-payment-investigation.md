@@ -6,6 +6,9 @@ block: "Investigations"
 tags: ["Investigations", "Duplicate Payment Investigation"]
 summary: "Identify duplicate payment patterns, understand idempotency as the core preventive concept, and recover from a confirmed duplicate correctly."
 ---
+[FPS analyst deep-dive](../index.md) / [Investigations](index.md) &middot; Lesson 20 of 40
+{: .lesson-crumbs}
+
 # 20. Duplicate Payment Investigation
 
 !!! abstract "Learning objective"
@@ -135,3 +138,15 @@ flowchart TD
     ▫️ Customer's opinion only
     ▫️ The time of day alone
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 19. Delayed Payment Investigation](19-delayed-payment-investigation.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[21. Fraud Investigation &rarr;](21-fraud-investigation.md)
+</div>
+</div>

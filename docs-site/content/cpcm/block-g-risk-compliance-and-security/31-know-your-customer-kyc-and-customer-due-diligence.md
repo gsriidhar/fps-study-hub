@@ -6,6 +6,9 @@ block: "Risk, Compliance & Security"
 tags: ["Risk, Compliance & Security", "Know Your Customer (KYC) & Customer Due Diligence"]
 summary: "Explain how KYC fits within the broader AML framework, distinguish Simplified, Standard, and Enhanced Due Diligence, and explain why ongoing monitoring matters even after onboardin"
 ---
+[CPCM curriculum](../index.md) / [Risk, Compliance & Security](index.md) &middot; Lesson 31 of 40
+{: .lesson-crumbs}
+
 # 31. Know Your Customer (KYC) & Customer Due Diligence
 
 !!! abstract "Learning objective"
@@ -129,3 +132,15 @@ flowchart TD
     ▫️ It never actually happens in practice
     ▫️ Only if the customer complains directly
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 30. Anti-Money Laundering (AML)](../block-f-modern-infrastructure/30-anti-money-laundering-aml.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[32. Sanctions & Screening &rarr;](32-sanctions-and-screening.md)
+</div>
+</div>

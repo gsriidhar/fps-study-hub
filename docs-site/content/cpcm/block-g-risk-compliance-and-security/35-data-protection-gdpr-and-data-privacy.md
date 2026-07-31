@@ -6,6 +6,9 @@ block: "Risk, Compliance & Security"
 tags: ["Risk, Compliance & Security", "Data Protection: GDPR & Data Privacy"]
 summary: "Explain the core principles of GDPR/UK GDPR, describe why data protection is particularly relevant to payments specifically, and describe the key individual rights and their practi"
 ---
+[CPCM curriculum](../index.md) / [Risk, Compliance & Security](index.md) &middot; Lesson 35 of 40
+{: .lesson-crumbs}
+
 # 35. Data Protection: GDPR & Data Privacy
 
 !!! abstract "Learning objective"
@@ -130,3 +133,15 @@ flowchart TD
     ▫️ No fines are possible under GDPR
     ▫️ Fines only apply to US-based companies
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 34. Cybersecurity in Payments](34-cybersecurity-in-payments.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[36. Payment Regulations &rarr;](../block-h-regulation-innovation-and-career/36-payment-regulations.md)
+</div>
+</div>

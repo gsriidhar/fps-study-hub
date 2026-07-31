@@ -6,6 +6,9 @@ block: "Testing FPS"
 tags: ["Testing FPS", "Confirmation of Payee (CoP) Testing"]
 summary: "Design test scenarios for all four CoP outcomes plus realistic edge cases, and validate both customer journey and backend evidence for each."
 ---
+[FPS analyst deep-dive](../index.md) / [Testing FPS](index.md) &middot; Lesson 34 of 40
+{: .lesson-crumbs}
+
 # 34. Confirmation of Payee (CoP) Testing
 
 !!! abstract "Learning objective"
@@ -134,3 +137,15 @@ flowchart TD
     ▫️ CoP responses are never needed after the payment completes
     ▫️ Only No Match responses need to be stored
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 33. Negative Testing in FPS](33-negative-testing-in-fps.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[35. Fraud Testing in FPS &rarr;](35-fraud-testing-in-fps.md)
+</div>
+</div>

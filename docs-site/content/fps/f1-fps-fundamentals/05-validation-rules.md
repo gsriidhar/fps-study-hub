@@ -6,6 +6,9 @@ block: "FPS Fundamentals"
 tags: ["FPS Fundamentals", "Validation Rules"]
 summary: "Explain the major categories of validation a payment goes through before it can be submitted to FPS, recognise common rejection reasons, and be able to design basic validation test"
 ---
+[FPS analyst deep-dive](../index.md) / [FPS Fundamentals](index.md) &middot; Lesson 5 of 40
+{: .lesson-crumbs}
+
 # 5. Validation Rules
 
 !!! abstract "Learning objective"
@@ -140,3 +143,15 @@ flowchart TD
     ▫️ Duplicate detection
     ▫️ Reference validation
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 4. Payment Initiation](04-payment-initiation.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[6. Confirmation of Payee (CoP) &rarr;](../f2-checks-submission-and-settlement/06-confirmation-of-payee-cop.md)
+</div>
+</div>

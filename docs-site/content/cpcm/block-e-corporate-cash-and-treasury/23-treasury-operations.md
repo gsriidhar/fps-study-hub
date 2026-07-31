@@ -6,6 +6,9 @@ block: "Corporate Cash & Treasury"
 tags: ["Corporate Cash & Treasury", "Treasury Operations"]
 summary: "Describe the core functions a corporate treasury department covers, and explain, at a conceptual level, how FX risk and interest rate risk are actually managed."
 ---
+[CPCM curriculum](../index.md) / [Corporate Cash & Treasury](index.md) &middot; Lesson 23 of 40
+{: .lesson-crumbs}
+
 # 23. Treasury Operations
 
 !!! abstract "Learning objective"
@@ -131,3 +134,15 @@ flowchart TD
     ▫️ Only interest rate risk
     ▫️ Only settlement risk
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 22. Liquidity Management](22-liquidity-management.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[24. Corporate Banking Products & Services &rarr;](24-corporate-banking-products-and-services.md)
+</div>
+</div>

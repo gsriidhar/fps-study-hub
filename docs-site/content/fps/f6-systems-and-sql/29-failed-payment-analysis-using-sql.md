@@ -6,6 +6,9 @@ block: "Systems & SQL"
 tags: ["Systems & SQL", "Failed Payment Analysis Using SQL"]
 summary: "Quantify a failure spike, find its pattern, and distinguish a one-off customer error from a systemic incident using SQL."
 ---
+[FPS analyst deep-dive](../index.md) / [Systems & SQL](index.md) &middot; Lesson 29 of 40
+{: .lesson-crumbs}
+
 # 29. Failed Payment Analysis Using SQL
 
 !!! abstract "Learning objective"
@@ -135,3 +138,15 @@ flowchart TD
     ▫️ Ignore it until a customer complains
     ▫️ Only check fraud rules first
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 28. SQL Basics for Payment Analysts](28-sql-basics-for-payment-analysts.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[30. Operational Reporting &rarr;](30-operational-reporting.md)
+</div>
+</div>

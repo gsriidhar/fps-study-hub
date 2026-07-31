@@ -6,6 +6,9 @@ block: "Regulation, Innovation & Career"
 tags: ["Regulation, Innovation & Career", "Payments Operations in Practice"]
 summary: "Describe the core day-to-day responsibilities of a Payments Operations role, walk through a typical exception-handling workflow, and explain how SLAs and KPIs shape the work."
 ---
+[CPCM curriculum](../index.md) / [Regulation, Innovation & Career](index.md) &middot; Lesson 39 of 40
+{: .lesson-crumbs}
+
 # 39. Payments Operations in Practice
 
 !!! abstract "Learning objective"
@@ -130,3 +133,15 @@ flowchart TD
     ▫️ Immediate escalation to law enforcement in every case
     ▫️ Automatic cancellation with no follow-up whatsoever
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 38. Digital Currencies & CBDCs](38-digital-currencies-and-cbdcs.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[40. Career Pathways, Exam Strategy & Course Wrap-Up &rarr;](40-career-pathways-exam-strategy-and-course-wrap-up.md)
+</div>
+</div>

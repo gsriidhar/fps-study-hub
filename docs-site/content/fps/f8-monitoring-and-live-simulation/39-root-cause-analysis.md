@@ -6,6 +6,9 @@ block: "Monitoring & Live Simulation"
 tags: ["Monitoring & Live Simulation", "Root Cause Analysis"]
 summary: "Build an evidence-based incident timeline, apply the 5 Whys technique to reach a genuine root cause, and structure findings into immediate, corrective, and preventive actions."
 ---
+[FPS analyst deep-dive](../index.md) / [Monitoring & Live Simulation](index.md) &middot; Lesson 39 of 40
+{: .lesson-crumbs}
+
 # 39. Root Cause Analysis
 
 !!! abstract "Learning objective"
@@ -131,3 +134,15 @@ flowchart TD
     ▫️ Only for P4 incidents
     ▫️ It replaces the need for an incident timeline
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 38. Incident Management](38-incident-management.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[40. Live Production Simulation (End-to-End FPS Investigation) &rarr;](40-live-production-simulation-end-to-end-fps-investigation.md)
+</div>
+</div>

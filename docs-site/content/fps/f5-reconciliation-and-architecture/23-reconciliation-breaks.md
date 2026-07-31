@@ -6,6 +6,9 @@ block: "Reconciliation & Architecture"
 tags: ["Reconciliation & Architecture", "Reconciliation Breaks"]
 summary: "Classify the recurring types of FPS reconciliation break, and run a structured investigation from detection to closure."
 ---
+[FPS analyst deep-dive](../index.md) / [Reconciliation & Architecture](index.md) &middot; Lesson 23 of 40
+{: .lesson-crumbs}
+
 # 23. Reconciliation Breaks
 
 !!! abstract "Learning objective"
@@ -142,3 +145,15 @@ flowchart TD
     ▫️ A customer changing their address
     ▫️ A system upgrade
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 22. FPS Reconciliation Fundamentals](22-fps-reconciliation-fundamentals.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[24. Nostro & Settlement Reconciliation &rarr;](24-nostro-and-settlement-reconciliation.md)
+</div>
+</div>

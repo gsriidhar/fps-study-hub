@@ -6,6 +6,9 @@ block: "Investigations"
 tags: ["Investigations", "Fraud Investigation"]
 summary: "Distinguish APP fraud, account takeover, and mule accounts, run the fraud investigation and recall workflow, and apply the PSR's mandatory APP fraud reimbursement rules to a case."
 ---
+[FPS analyst deep-dive](../index.md) / [Investigations](index.md) &middot; Lesson 21 of 40
+{: .lesson-crumbs}
+
 # 21. Fraud Investigation
 
 !!! abstract "Learning objective"
@@ -143,3 +146,15 @@ flowchart TD
     ▫️ The exchange rate at time of payment
     ▫️ The customer's marketing preferences
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 20. Duplicate Payment Investigation](20-duplicate-payment-investigation.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[22. FPS Reconciliation Fundamentals &rarr;](../f5-reconciliation-and-architecture/22-fps-reconciliation-fundamentals.md)
+</div>
+</div>

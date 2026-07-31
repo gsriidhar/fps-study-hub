@@ -6,6 +6,9 @@ block: "Cross-Border & High-Value Payments"
 tags: ["Cross-Border & High-Value Payments", "The SWIFT Messaging Network"]
 summary: "Explain precisely what SWIFT does and doesn't do, distinguish the main SWIFT message types, and describe how SWIFT enables — without itself performing — cross-border correspondent "
 ---
+[CPCM curriculum](../index.md) / [Cross-Border & High-Value Payments](index.md) &middot; Lesson 12 of 40
+{: .lesson-crumbs}
+
 # 12. The SWIFT Messaging Network
 
 !!! abstract "Learning objective"
@@ -130,3 +133,15 @@ flowchart TD
     ▫️ Cheque clearing
     ▫️ Setting CHAPS cut-off times
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 11. RTGS Systems Around the World](11-rtgs-systems-around-the-world.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[13. Correspondent Banking, Nostro & Vostro &rarr;](13-correspondent-banking-nostro-and-vostro.md)
+</div>
+</div>

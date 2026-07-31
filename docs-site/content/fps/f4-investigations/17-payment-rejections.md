@@ -6,6 +6,9 @@ block: "Investigations"
 tags: ["Investigations", "Payment Rejections"]
 summary: "Explain what causes an FPS payment to be rejected, read a rejection reason code correctly, and investigate a rejection for a customer."
 ---
+[FPS analyst deep-dive](../index.md) / [Investigations](index.md) &middot; Lesson 17 of 40
+{: .lesson-crumbs}
+
 # 17. Payment Rejections
 
 !!! abstract "Learning objective"
@@ -132,3 +135,15 @@ flowchart TD
     ▫️ Say nothing until asked twice
     ▫️ Blame the receiving bank without evidence
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 16. Payment Returns](16-payment-returns.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[18. Missing Payment Investigation &rarr;](18-missing-payment-investigation.md)
+</div>
+</div>

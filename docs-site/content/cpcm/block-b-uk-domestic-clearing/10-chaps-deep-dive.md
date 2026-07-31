@@ -6,6 +6,9 @@ block: "UK Domestic Clearing"
 tags: ["UK Domestic Clearing", "CHAPS Deep Dive"]
 summary: "Explain what makes CHAPS distinct as a real-time gross settlement system, describe its relationship to the Bank of England's RTGS platform, and identify the situations it's genuine"
 ---
+[CPCM curriculum](../index.md) / [UK Domestic Clearing](index.md) &middot; Lesson 10 of 40
+{: .lesson-crumbs}
+
 # 10. CHAPS Deep Dive
 
 !!! abstract "Learning objective"
@@ -128,3 +131,15 @@ flowchart TD
     ▫️ Central bank money is only used for cheques
     ▫️ It makes CHAPS payments reversible
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 9. Faster Payments Deep Dive](09-faster-payments-deep-dive.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[11. RTGS Systems Around the World &rarr;](../block-c-cross-border-and-high-value-payments/11-rtgs-systems-around-the-world.md)
+</div>
+</div>

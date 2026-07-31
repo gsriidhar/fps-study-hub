@@ -6,6 +6,9 @@ block: "Foundations"
 tags: ["Foundations", "Payment Participants"]
 summary: "Identify the roles of payer, payee, issuing bank, acquiring bank, correspondent bank, scheme operator, and regulator; understand how these roles interact in a transaction."
 ---
+[CPCM curriculum](../index.md) / [Foundations](index.md) &middot; Lesson 3 of 40
+{: .lesson-crumbs}
+
 # 3. Payment Participants
 
 !!! abstract "Learning objective"
@@ -171,3 +174,15 @@ flowchart LR
     ▫️ Only for card schemes
     ▫️ Only for SWIFT
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 2. The Payments Ecosystem Overview](02-the-payments-ecosystem-overview.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[4. Types of Payments &rarr;](04-types-of-payments.md)
+</div>
+</div>

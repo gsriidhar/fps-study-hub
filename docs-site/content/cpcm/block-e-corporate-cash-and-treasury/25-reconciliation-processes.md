@@ -6,6 +6,9 @@ block: "Corporate Cash & Treasury"
 tags: ["Corporate Cash & Treasury", "Reconciliation Processes"]
 summary: "Explain what reconciliation is for, describe the main reconciliation types used in payments operations, and describe how a reconciliation exception should actually be handled."
 ---
+[CPCM curriculum](../index.md) / [Corporate Cash & Treasury](index.md) &middot; Lesson 25 of 40
+{: .lesson-crumbs}
+
 # 25. Reconciliation Processes
 
 !!! abstract "Learning objective"
@@ -131,3 +134,15 @@ flowchart TD
     ▫️ Only large exceptions are ever worth investigating
     ▫️ Reconciliation exceptions are always resolved automatically
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 24. Corporate Banking Products & Services](24-corporate-banking-products-and-services.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[26. The ISO 20022 Messaging Standard &rarr;](../block-f-modern-infrastructure/26-the-iso-20022-messaging-standard.md)
+</div>
+</div>

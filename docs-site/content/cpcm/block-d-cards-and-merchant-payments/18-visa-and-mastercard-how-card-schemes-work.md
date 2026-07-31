@@ -6,6 +6,9 @@ block: "Cards & Merchant Payments"
 tags: ["Cards & Merchant Payments", "Visa and Mastercard: How Card Schemes Work"]
 summary: "Explain the role card schemes actually play, distinguish interchange fees from scheme fees, and compare the four-party model to the traditional three-party model."
 ---
+[CPCM curriculum](../index.md) / [Cards & Merchant Payments](index.md) &middot; Lesson 18 of 40
+{: .lesson-crumbs}
+
 # 18. Visa and Mastercard: How Card Schemes Work
 
 !!! abstract "Learning objective"
@@ -126,3 +129,15 @@ flowchart TD
     ▫️ It's illegal for small merchants to accept Amex
     ▫️ Amex charges no scheme fee at all
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 17. Card Payments Fundamentals](17-card-payments-fundamentals.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[19. Payment Gateways &rarr;](19-payment-gateways.md)
+</div>
+</div>

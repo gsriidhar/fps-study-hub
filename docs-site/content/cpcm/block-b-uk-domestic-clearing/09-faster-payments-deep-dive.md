@@ -6,6 +6,9 @@ block: "UK Domestic Clearing"
 tags: ["UK Domestic Clearing", "Faster Payments Deep Dive"]
 summary: "Explain how Faster Payments delivers near-instant transfers despite being a net settlement system, and describe the role of Confirmation of Payee in reducing misdirected and fraudu"
 ---
+[CPCM curriculum](../index.md) / [UK Domestic Clearing](index.md) &middot; Lesson 9 of 40
+{: .lesson-crumbs}
+
 # 9. Faster Payments Deep Dive
 
 !!! abstract "Learning objective"
@@ -129,3 +132,15 @@ flowchart TD
     ▫️ CoP only checks sort codes, never names
     ▫️ CoP is only available for CHAPS payments
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 8. Bacs Deep Dive](08-bacs-deep-dive.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[10. CHAPS Deep Dive &rarr;](10-chaps-deep-dive.md)
+</div>
+</div>

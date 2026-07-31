@@ -6,6 +6,9 @@ block: "Corporate Cash & Treasury"
 tags: ["Corporate Cash & Treasury", "Cash Management Fundamentals for Corporates"]
 summary: "Explain what corporate cash forecasting is for, describe the working capital cycle, and calculate and interpret a company's cash conversion cycle."
 ---
+[CPCM curriculum](../index.md) / [Corporate Cash & Treasury](index.md) &middot; Lesson 21 of 40
+{: .lesson-crumbs}
+
 # 21. Cash Management Fundamentals for Corporates
 
 !!! abstract "Learning objective"
@@ -131,3 +134,15 @@ flowchart TD
     ▫️ Days taken to pay suppliers
     ▫️ Days needed to process a chargeback
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 20. Merchant Acquiring](../block-d-cards-and-merchant-payments/20-merchant-acquiring.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[22. Liquidity Management &rarr;](22-liquidity-management.md)
+</div>
+</div>

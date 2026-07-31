@@ -6,6 +6,9 @@ block: "Corporate Cash & Treasury"
 tags: ["Corporate Cash & Treasury", "Liquidity Management"]
 summary: "Explain what liquidity management aims to achieve, distinguish physical (zero-balancing) pooling from notional pooling, and describe intercompany loans as a liquidity tool."
 ---
+[CPCM curriculum](../index.md) / [Corporate Cash & Treasury](index.md) &middot; Lesson 22 of 40
+{: .lesson-crumbs}
+
 # 22. Liquidity Management
 
 !!! abstract "Learning objective"
@@ -128,3 +131,15 @@ flowchart TD
     ▫️ Eliminating all foreign exchange exposure
     ▫️ Avoiding all banking relationships
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 21. Cash Management Fundamentals for Corporates](21-cash-management-fundamentals-for-corporates.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[23. Treasury Operations &rarr;](23-treasury-operations.md)
+</div>
+</div>

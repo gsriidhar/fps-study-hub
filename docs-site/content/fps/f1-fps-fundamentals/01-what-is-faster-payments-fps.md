@@ -6,6 +6,9 @@ block: "FPS Fundamentals"
 tags: ["FPS Fundamentals", "What Is Faster Payments (FPS)?"]
 summary: "Explain what FPS is and why it exists, name who operates the scheme, and describe the difference between a direct and indirect participant — in under a minute, the way you'd say it"
 ---
+[FPS analyst deep-dive](../index.md) / [FPS Fundamentals](index.md) &middot; Lesson 1 of 40
+{: .lesson-crumbs}
+
 # 1. What Is Faster Payments (FPS)?
 
 !!! abstract "Learning objective"
@@ -144,3 +147,15 @@ flowchart TD
     ▫️ Only Pay.UK
     ▫️ Customer and Pay.UK directly
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">&nbsp;</span>
+[&larr; Back to block index](index.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[2. The FPS Ecosystem: Who Owns Each Stage &rarr;](02-the-fps-ecosystem-who-owns-each-stage.md)
+</div>
+</div>

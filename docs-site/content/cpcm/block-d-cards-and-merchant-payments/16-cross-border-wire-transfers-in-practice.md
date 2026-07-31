@@ -6,6 +6,9 @@ block: "Cards & Merchant Payments"
 tags: ["Cards & Merchant Payments", "Cross-Border Wire Transfers in Practice"]
 summary: "Explain how a cross-border wire transfer is actually assembled from the pieces covered in earlier lessons, describe the OUR/SHA/BEN fee options, and identify the most common causes"
 ---
+[CPCM curriculum](../index.md) / [Cards & Merchant Payments](index.md) &middot; Lesson 16 of 40
+{: .lesson-crumbs}
+
 # 16. Cross-Border Wire Transfers in Practice
 
 !!! abstract "Learning objective"
@@ -131,3 +134,15 @@ flowchart TD
     ▫️ SHA is illegal in most countries
     ▫️ The sender didn't send enough money
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 15. ACH — The US Automated Clearing House](../block-c-cross-border-and-high-value-payments/15-ach-the-us-automated-clearing-house.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[17. Card Payments Fundamentals &rarr;](17-card-payments-fundamentals.md)
+</div>
+</div>

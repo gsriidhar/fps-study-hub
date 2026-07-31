@@ -6,6 +6,9 @@ block: "Monitoring & Live Simulation"
 tags: ["Monitoring & Live Simulation", "Incident Management"]
 summary: "Classify incident severity using a P1-P4 framework, describe the stages of the incident response lifecycle, and communicate correctly and consistently during a live incident."
 ---
+[FPS analyst deep-dive](../index.md) / [Monitoring & Live Simulation](index.md) &middot; Lesson 38 of 40
+{: .lesson-crumbs}
+
 # 38. Incident Management
 
 !!! abstract "Learning objective"
@@ -132,3 +135,15 @@ flowchart TD
     ▫️ Marketing communications only
     ▫️ It replaces the need for monitoring
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 37. Monitoring FPS Systems in Production](37-monitoring-fps-systems-in-production.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[39. Root Cause Analysis &rarr;](39-root-cause-analysis.md)
+</div>
+</div>

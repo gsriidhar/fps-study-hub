@@ -6,6 +6,9 @@ block: "Modern Infrastructure"
 tags: ["Modern Infrastructure", "Payment Fraud Types & Prevention"]
 summary: "Distinguish unauthorised fraud from Authorised Push Payment (APP) fraud, identify the most common fraud types encountered in payments, and describe the main prevention and detectio"
 ---
+[CPCM curriculum](../index.md) / [Modern Infrastructure](index.md) &middot; Lesson 29 of 40
+{: .lesson-crumbs}
+
 # 29. Payment Fraud Types & Prevention
 
 !!! abstract "Learning objective"
@@ -128,3 +131,15 @@ flowchart TD
     ▫️ Removing Confirmation of Payee from use
     ▫️ Eliminating Faster Payments entirely
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 28. APIs in Payments](28-apis-in-payments.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[30. Anti-Money Laundering (AML) &rarr;](30-anti-money-laundering-aml.md)
+</div>
+</div>

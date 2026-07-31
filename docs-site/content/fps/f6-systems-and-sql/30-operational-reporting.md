@@ -6,6 +6,9 @@ block: "Systems & SQL"
 tags: ["Systems & SQL", "Operational Reporting"]
 summary: "Build the standard set of FPS operational reports, and match each report's content and cadence to the audience it actually serves."
 ---
+[FPS analyst deep-dive](../index.md) / [Systems & SQL](index.md) &middot; Lesson 30 of 40
+{: .lesson-crumbs}
+
 # 30. Operational Reporting
 
 !!! abstract "Learning objective"
@@ -136,3 +139,15 @@ flowchart TD
     ▫️ Raw figures should never be reported
     ▫️ It should always be rounded to the nearest thousand
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 29. Failed Payment Analysis Using SQL](29-failed-payment-analysis-using-sql.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[31. Test Strategy for FPS &rarr;](../f7-testing-fps/31-test-strategy-for-fps.md)
+</div>
+</div>

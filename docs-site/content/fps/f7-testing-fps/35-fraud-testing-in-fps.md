@@ -6,6 +6,9 @@ block: "Testing FPS"
 tags: ["Testing FPS", "Fraud Testing in FPS"]
 summary: "Design fraud test scenarios across APP fraud, velocity, mule indicators, and account takeover, and validate that genuine customers aren't unnecessarily blocked."
 ---
+[FPS analyst deep-dive](../index.md) / [Testing FPS](index.md) &middot; Lesson 35 of 40
+{: .lesson-crumbs}
+
 # 35. Fraud Testing in FPS
 
 !!! abstract "Learning objective"
@@ -132,3 +135,15 @@ flowchart TD
     ▫️ A customer forgetting their password
     ▫️ A payment to an existing, long-used beneficiary
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 34. Confirmation of Payee (CoP) Testing](34-confirmation-of-payee-cop-testing.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[36. Regression Testing &rarr;](36-regression-testing.md)
+</div>
+</div>

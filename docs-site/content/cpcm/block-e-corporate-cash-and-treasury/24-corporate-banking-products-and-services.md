@@ -6,6 +6,9 @@ block: "Corporate Cash & Treasury"
 tags: ["Corporate Cash & Treasury", "Corporate Banking Products & Services"]
 summary: "Identify common corporate banking products beyond day-to-day payments, explain the basic purpose of a Letter of Credit, and distinguish revolving credit facilities from term loans."
 ---
+[CPCM curriculum](../index.md) / [Corporate Cash & Treasury](index.md) &middot; Lesson 24 of 40
+{: .lesson-crumbs}
+
 # 24. Corporate Banking Products & Services
 
 !!! abstract "Learning objective"
@@ -131,3 +134,15 @@ flowchart TD
     ▫️ A type of chargeback dispute process
     ▫️ A regulator's reporting tool
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 23. Treasury Operations](23-treasury-operations.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[25. Reconciliation Processes &rarr;](25-reconciliation-processes.md)
+</div>
+</div>

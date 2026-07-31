@@ -6,6 +6,9 @@ block: "Monitoring & Live Simulation"
 tags: ["Monitoring & Live Simulation", "Monitoring FPS Systems in Production"]
 summary: "Explain why proactive FPS monitoring matters, describe the layered approach to watching a live payment system, and design alert thresholds that catch real problems without drowning"
 ---
+[FPS analyst deep-dive](../index.md) / [Monitoring & Live Simulation](index.md) &middot; Lesson 37 of 40
+{: .lesson-crumbs}
+
 # 37. Monitoring FPS Systems in Production
 
 !!! abstract "Learning objective"
@@ -131,3 +134,15 @@ flowchart TD
     ▫️ External dependencies are irrelevant to payment success
     ▫️ Only internal systems need monitoring
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 36. Regression Testing](../f7-testing-fps/36-regression-testing.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[38. Incident Management &rarr;](38-incident-management.md)
+</div>
+</div>

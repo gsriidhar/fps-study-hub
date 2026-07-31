@@ -6,6 +6,9 @@ block: "FPS Fundamentals"
 tags: ["FPS Fundamentals", "Direct vs Indirect Access"]
 summary: "Explain the difference between direct and indirect FPS participants, what a sponsor bank does, and why the distinction between payment processing and settlement matters for investi"
 ---
+[FPS analyst deep-dive](../index.md) / [FPS Fundamentals](index.md) &middot; Lesson 3 of 40
+{: .lesson-crumbs}
+
 # 3. Direct vs Indirect Access
 
 !!! abstract "Learning objective"
@@ -118,3 +121,15 @@ A second distinction that trips people up: processing and settlement are not the
     ▫️ Pay.UK's core infrastructure
     ▫️ No one, FPS has no single points of failure
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 2. The FPS Ecosystem: Who Owns Each Stage](02-the-fps-ecosystem-who-owns-each-stage.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[4. Payment Initiation &rarr;](04-payment-initiation.md)
+</div>
+</div>

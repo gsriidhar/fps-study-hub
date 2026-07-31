@@ -62,7 +62,28 @@ function tableFromComparison(cmp) {
   return out;
 }
 
-function lessonMarkdown(lesson, blockMeta, trackTitle, blockTitle, keywords) {
+// Builds the small link-navigation block used at the top (breadcrumb) and
+// bottom (prev/next pager) of every lesson page, so a reader never has to
+// fall back to the browser's back button to get to the next lesson, the
+// block index, or the track overview.
+function lessonNavMarkdown(nav) {
+  const { trackTitle, blockTitle, index, total, prevRel, prevLabel, nextRel, nextLabel } = nav;
+  const crumbs =
+    `[${trackTitle}](../index.md) / [${blockTitle}](index.md) &middot; Lesson ${index} of ${total}\n{: .lesson-crumbs}\n\n`;
+
+  const prevBlock = prevRel
+    ? `<div markdown="1">\n<span class="label">Previous</span>\n[&larr; ${esc(prevLabel)}](${prevRel})\n</div>`
+    : `<div markdown="1">\n<span class="label">&nbsp;</span>\n[&larr; Back to block index](index.md)\n</div>`;
+  const nextBlock = nextRel
+    ? `<div class="next" markdown="1">\n<span class="label">Next</span>\n[${esc(nextLabel)} &rarr;](${nextRel})\n</div>`
+    : `<div class="next" markdown="1">\n<span class="label">Course complete</span>\n[Back to overview &rarr;](../index.md)\n</div>`;
+
+  const pager = `\n<div class="lesson-pager" markdown="1">\n${prevBlock}\n\n${nextBlock}\n</div>\n`;
+
+  return { crumbs, pager };
+}
+
+function lessonMarkdown(lesson, blockMeta, trackTitle, blockTitle, keywords, nav) {
   const fm = [
     "---",
     `title: "${esc(lesson.title)}"`,
@@ -75,7 +96,10 @@ function lessonMarkdown(lesson, blockMeta, trackTitle, blockTitle, keywords) {
     "",
   ].join("\n");
 
-  let body = `# ${lesson.n}. ${lesson.title}\n\n`;
+  const { crumbs, pager } = lessonNavMarkdown(nav);
+
+  let body = crumbs;
+  body += `# ${lesson.n}. ${lesson.title}\n\n`;
   body += `!!! abstract "Learning objective"\n    ${lesson.objectives}\n\n`;
 
   body += `## Core concepts\n\n${lesson.explanation}\n\n`;
@@ -140,6 +164,8 @@ function lessonMarkdown(lesson, blockMeta, trackTitle, blockTitle, keywords) {
     });
   }
 
+  body += pager;
+
   return fm + body;
 }
 
@@ -202,39 +228,67 @@ function blocksFromMap(courseMap, globalNameFor) {
   return out;
 }
 
+// Writes one track (CPCM or FPS): computes block-slug/lesson-slug for every
+// lesson first, builds one flat prev/next chain across all blocks in
+// course-map order (lessons are numbered continuously across a track, e.g.
+// FPS block F2 picks up at lesson 6 right after F1's lesson 5), then writes
+// each lesson with a breadcrumb + prev/next pager wired to that chain.
+function writeTrack(blocks, trackDir, trackTitle, blockSlugPrefix) {
+  fs.mkdirSync(trackDir, { recursive: true });
+
+  const blockEntries = Object.entries(blocks); // preserves course-map order
+  const perBlockSlugs = {}; // blockId -> { lessonN: lessonSlug }
+  const perBlockDirSlug = {}; // blockId -> directory slug
+
+  const flat = []; // [{ blockId, n, title }] across the whole track, in order
+  blockEntries.forEach(([id, block]) => {
+    const blockDirSlug = `${blockSlugPrefix(id)}-${slugify(block.title)}`;
+    perBlockDirSlug[id] = blockDirSlug;
+    const slugs = {};
+    block.lessons.forEach((l) => (slugs[l.n] = String(l.n).padStart(2, "0") + "-" + slugify(l.title)));
+    perBlockSlugs[id] = slugs;
+    block.lessons.forEach((l) => flat.push({ blockId: id, n: l.n, title: l.title }));
+  });
+
+  function relPathBetween(fromBlockId, toBlockId, toN) {
+    const toSlug = perBlockSlugs[toBlockId][toN] + ".md";
+    if (toBlockId === fromBlockId) return toSlug;
+    return `../${perBlockDirSlug[toBlockId]}/${toSlug}`;
+  }
+
+  blockEntries.forEach(([id, block]) => {
+    const blockDir = path.join(trackDir, perBlockDirSlug[id]);
+    fs.mkdirSync(blockDir, { recursive: true });
+    const slugs = perBlockSlugs[id];
+
+    block.lessons.forEach((l) => {
+      const flatIndex = flat.findIndex((f) => f.blockId === id && f.n === l.n);
+      const prev = flatIndex > 0 ? flat[flatIndex - 1] : null;
+      const next = flatIndex < flat.length - 1 ? flat[flatIndex + 1] : null;
+      const nav = {
+        trackTitle,
+        blockTitle: block.title,
+        index: flatIndex + 1,
+        total: flat.length,
+        prevRel: prev ? relPathBetween(id, prev.blockId, prev.n) : null,
+        prevLabel: prev ? `${prev.n}. ${prev.title}` : null,
+        nextRel: next ? relPathBetween(id, next.blockId, next.n) : null,
+        nextLabel: next ? `${next.n}. ${next.title}` : null,
+      };
+      const md = lessonMarkdown(l, block, trackTitle, block.title, [block.title, l.title], nav);
+      fs.writeFileSync(path.join(blockDir, slugs[l.n] + ".md"), md);
+    });
+    fs.writeFileSync(path.join(blockDir, "index.md"), blockIndexMarkdown(block, trackTitle, slugs));
+  });
+}
+
 // CPCM track
 const cpcmBlocks = blocksFromMap(data.COURSE_MAP, (id) => "BLOCK_" + id);
-const cpcmDir = path.join(OUT, "cpcm");
-fs.mkdirSync(cpcmDir, { recursive: true });
-Object.entries(cpcmBlocks).forEach(([id, block]) => {
-  const blockSlug = `block-${id.toLowerCase()}-${slugify(block.title)}`;
-  const blockDir = path.join(cpcmDir, blockSlug);
-  fs.mkdirSync(blockDir, { recursive: true });
-  const slugs = {};
-  block.lessons.forEach((l) => (slugs[l.n] = String(l.n).padStart(2, "0") + "-" + slugify(l.title)));
-  block.lessons.forEach((l) => {
-    const md = lessonMarkdown(l, block, "CPCM curriculum", block.title, [block.title, l.title]);
-    fs.writeFileSync(path.join(blockDir, slugs[l.n] + ".md"), md);
-  });
-  fs.writeFileSync(path.join(blockDir, "index.md"), blockIndexMarkdown(block, "CPCM curriculum", slugs));
-});
+writeTrack(cpcmBlocks, path.join(OUT, "cpcm"), "CPCM curriculum", (id) => `block-${id.toLowerCase()}`);
 
 // FPS track
 const fpsBlocks = blocksFromMap(data.FPS_COURSE_MAP, (id) => "FPS_BLOCK" + id.slice(1));
-const fpsDir = path.join(OUT, "fps");
-fs.mkdirSync(fpsDir, { recursive: true });
-Object.entries(fpsBlocks).forEach(([id, block]) => {
-  const blockSlug = `${id.toLowerCase()}-${slugify(block.title)}`;
-  const blockDir = path.join(fpsDir, blockSlug);
-  fs.mkdirSync(blockDir, { recursive: true });
-  const slugs = {};
-  block.lessons.forEach((l) => (slugs[l.n] = String(l.n).padStart(2, "0") + "-" + slugify(l.title)));
-  block.lessons.forEach((l) => {
-    const md = lessonMarkdown(l, block, "FPS analyst deep-dive", block.title, [block.title, l.title]);
-    fs.writeFileSync(path.join(blockDir, slugs[l.n] + ".md"), md);
-  });
-  fs.writeFileSync(path.join(blockDir, "index.md"), blockIndexMarkdown(block, "FPS analyst deep-dive", slugs));
-});
+writeTrack(fpsBlocks, path.join(OUT, "fps"), "FPS analyst deep-dive", (id) => id.toLowerCase());
 
 // Glossary
 fs.mkdirSync(path.join(OUT, "glossary"), { recursive: true });

@@ -6,6 +6,9 @@ block: "Foundations"
 tags: ["Foundations", "Types of Payments"]
 summary: "Distinguish retail vs wholesale payments; credit transfers vs Direct Debits; push vs pull payments; single vs bulk/batch payments."
 ---
+[CPCM curriculum](../index.md) / [Foundations](index.md) &middot; Lesson 4 of 40
+{: .lesson-crumbs}
+
 # 4. Types of Payments
 
 !!! abstract "Learning objective"
@@ -157,3 +160,15 @@ Single vs batch/bulk: a single payment is processed individually, often instantl
     ✅ Direct Debit
     ▫️ Faster Payments credit transfer
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 3. Payment Participants](03-payment-participants.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[5. Payment Instruments Overview &rarr;](05-payment-instruments-overview.md)
+</div>
+</div>

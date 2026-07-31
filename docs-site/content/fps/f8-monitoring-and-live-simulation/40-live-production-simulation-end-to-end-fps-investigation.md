@@ -6,6 +6,9 @@ block: "Monitoring & Live Simulation"
 tags: ["Monitoring & Live Simulation", "Live Production Simulation (End-to-End FPS Investigation)"]
 summary: "Apply the full investigation framework to failed, missing, duplicate, and settlement-mismatch payment scenarios, correctly classify and communicate during a live incident, and brin"
 ---
+[FPS analyst deep-dive](../index.md) / [Monitoring & Live Simulation](index.md) &middot; Lesson 40 of 40
+{: .lesson-crumbs}
+
 # 40. Live Production Simulation (End-to-End FPS Investigation)
 
 !!! abstract "Learning objective"
@@ -138,3 +141,15 @@ flowchart TD
     ▫️ Only the executive dashboard needs checking
     ▫️ Customer complaint volume from the previous month
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 39. Root Cause Analysis](39-root-cause-analysis.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Course complete</span>
+[Back to overview &rarr;](../index.md)
+</div>
+</div>

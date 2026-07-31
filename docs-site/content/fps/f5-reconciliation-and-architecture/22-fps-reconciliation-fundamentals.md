@@ -6,6 +6,9 @@ block: "Reconciliation & Architecture"
 tags: ["Reconciliation & Architecture", "FPS Reconciliation Fundamentals"]
 summary: "Explain why reconciliation exists, what it checks for, and how FPS's settlement-cycle timing shapes the whole discipline."
 ---
+[FPS analyst deep-dive](../index.md) / [Reconciliation & Architecture](index.md) &middot; Lesson 22 of 40
+{: .lesson-crumbs}
+
 # 22. FPS Reconciliation Fundamentals
 
 !!! abstract "Learning objective"
@@ -131,3 +134,15 @@ flowchart TD
     ▫️ They are automatically approved
     ▫️ They are sent to the customer
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 21. Fraud Investigation](../f4-investigations/21-fraud-investigation.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[23. Reconciliation Breaks &rarr;](23-reconciliation-breaks.md)
+</div>
+</div>

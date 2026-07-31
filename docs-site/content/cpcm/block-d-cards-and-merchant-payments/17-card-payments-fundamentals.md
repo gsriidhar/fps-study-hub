@@ -6,6 +6,9 @@ block: "Cards & Merchant Payments"
 tags: ["Cards & Merchant Payments", "Card Payments Fundamentals"]
 summary: "Explain the four-party card model, walk through the authorisation-clearing-settlement lifecycle, and describe the core card security features and what each one actually protects ag"
 ---
+[CPCM curriculum](../index.md) / [Cards & Merchant Payments](index.md) &middot; Lesson 17 of 40
+{: .lesson-crumbs}
+
 # 17. Card Payments Fundamentals
 
 !!! abstract "Learning objective"
@@ -128,3 +131,15 @@ flowchart TD
     ▫️ It removes the need for any authorisation check
     ▫️ It is cheaper for banks to produce
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 16. Cross-Border Wire Transfers in Practice](16-cross-border-wire-transfers-in-practice.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[18. Visa and Mastercard: How Card Schemes Work &rarr;](18-visa-and-mastercard-how-card-schemes-work.md)
+</div>
+</div>

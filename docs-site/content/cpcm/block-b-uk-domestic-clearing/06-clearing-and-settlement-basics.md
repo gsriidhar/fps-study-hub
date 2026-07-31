@@ -6,6 +6,9 @@ block: "UK Domestic Clearing"
 tags: ["UK Domestic Clearing", "Clearing and Settlement Basics"]
 summary: "Distinguish clearing from settlement, explain net vs gross settlement, and describe why settlement finality is the point that actually matters legally."
 ---
+[CPCM curriculum](../index.md) / [UK Domestic Clearing](index.md) &middot; Lesson 6 of 40
+{: .lesson-crumbs}
+
 # 6. Clearing and Settlement Basics
 
 !!! abstract "Learning objective"
@@ -130,3 +133,15 @@ flowchart TD
     ▫️ The Image Clearing System only
     ▫️ None of the UK systems use net settlement
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 5. Payment Instruments Overview](../block-a-foundations/05-payment-instruments-overview.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[7. UK Payment Systems Overview &rarr;](07-uk-payment-systems-overview.md)
+</div>
+</div>

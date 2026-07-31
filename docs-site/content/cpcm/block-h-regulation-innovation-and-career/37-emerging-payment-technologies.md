@@ -6,6 +6,9 @@ block: "Regulation, Innovation & Career"
 tags: ["Regulation, Innovation & Career", "Emerging Payment Technologies"]
 summary: "Describe key emerging payment technologies — global instant payments, Request to Pay, Buy Now Pay Later, and embedded finance — and explain the drivers and concerns behind each."
 ---
+[CPCM curriculum](../index.md) / [Regulation, Innovation & Career](index.md) &middot; Lesson 37 of 40
+{: .lesson-crumbs}
+
 # 37. Emerging Payment Technologies
 
 !!! abstract "Learning objective"
@@ -130,3 +133,15 @@ flowchart TD
     ▫️ Card schemes fully replacing traditional banks
     ▫️ A move toward cash-only transactions
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 36. Payment Regulations](36-payment-regulations.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[38. Digital Currencies & CBDCs &rarr;](38-digital-currencies-and-cbdcs.md)
+</div>
+</div>

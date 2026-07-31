@@ -6,6 +6,9 @@ block: "Regulation, Innovation & Career"
 tags: ["Regulation, Innovation & Career", "Payment Regulations"]
 summary: "Distinguish the FCA's role from the PRA's, explain what the Payment Services Regulations require, and describe why payments regulation keeps evolving."
 ---
+[CPCM curriculum](../index.md) / [Regulation, Innovation & Career](index.md) &middot; Lesson 36 of 40
+{: .lesson-crumbs}
+
 # 36. Payment Regulations
 
 !!! abstract "Learning objective"
@@ -131,3 +134,15 @@ flowchart TD
     ▫️ Avoid using technology altogether
     ▫️ Focus exclusively on marketing strategy
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 35. Data Protection: GDPR & Data Privacy](../block-g-risk-compliance-and-security/35-data-protection-gdpr-and-data-privacy.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[37. Emerging Payment Technologies &rarr;](37-emerging-payment-technologies.md)
+</div>
+</div>

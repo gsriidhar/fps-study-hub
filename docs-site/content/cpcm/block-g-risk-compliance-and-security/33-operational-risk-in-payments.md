@@ -6,6 +6,9 @@ block: "Risk, Compliance & Security"
 tags: ["Risk, Compliance & Security", "Operational Risk in Payments"]
 summary: "Define operational risk and distinguish it from credit and market risk, identify the four main sources of operational risk in payments, and describe the core mitigation approaches "
 ---
+[CPCM curriculum](../index.md) / [Risk, Compliance & Security](index.md) &middot; Lesson 33 of 40
+{: .lesson-crumbs}
+
 # 33. Operational Risk in Payments
 
 !!! abstract "Learning objective"
@@ -128,3 +131,15 @@ flowchart TD
     ▫️ By eliminating the need for any controls at all
     ▫️ By increasing the number of single points of failure
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 32. Sanctions & Screening](32-sanctions-and-screening.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[34. Cybersecurity in Payments &rarr;](34-cybersecurity-in-payments.md)
+</div>
+</div>

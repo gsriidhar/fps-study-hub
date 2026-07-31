@@ -6,6 +6,9 @@ block: "Foundations"
 tags: ["Foundations", "The Payments Ecosystem Overview"]
 summary: "Describe the overall structure of the payments ecosystem; identify the main categories of players; explain how money \"physically\" moves between banks."
 ---
+[CPCM curriculum](../index.md) / [Foundations](index.md) &middot; Lesson 2 of 40
+{: .lesson-crumbs}
+
 # 2. The Payments Ecosystem Overview
 
 !!! abstract "Learning objective"
@@ -161,3 +164,15 @@ flowchart TD
     ✅ Social media platform
     ▫️ Bank
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 1. Introduction to Payments & Cash Management](01-introduction-to-payments-and-cash-management.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[3. Payment Participants &rarr;](03-payment-participants.md)
+</div>
+</div>

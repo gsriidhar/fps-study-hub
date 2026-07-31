@@ -6,6 +6,9 @@ block: "Cards & Merchant Payments"
 tags: ["Cards & Merchant Payments", "Merchant Acquiring"]
 summary: "Explain the acquirer's role in depth, describe the components of the Merchant Service Charge, and walk through how a chargeback dispute actually unfolds."
 ---
+[CPCM curriculum](../index.md) / [Cards & Merchant Payments](index.md) &middot; Lesson 20 of 40
+{: .lesson-crumbs}
+
 # 20. Merchant Acquiring
 
 !!! abstract "Learning objective"
@@ -131,3 +134,15 @@ flowchart TD
     ▫️ Regulation actually raises interchange fees
     ▫️ Scheme fees are always larger than interchange fees
 
+
+<div class="lesson-pager" markdown="1">
+<div markdown="1">
+<span class="label">Previous</span>
+[&larr; 19. Payment Gateways](19-payment-gateways.md)
+</div>
+
+<div class="next" markdown="1">
+<span class="label">Next</span>
+[21. Cash Management Fundamentals for Corporates &rarr;](../block-e-corporate-cash-and-treasury/21-cash-management-fundamentals-for-corporates.md)
+</div>
+</div>
