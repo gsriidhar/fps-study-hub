@@ -203,9 +203,12 @@
   font-weight: 700;
   margin-bottom: 0.3rem;
 }
-.cheat-hub-card h3 {
+.cheat-hub-card .cheat-hub-title {
+  display: block;
   margin: 0 0 0.3rem;
   font-size: 1rem;
+  font-weight: 700;
+  color: var(--md-default-fg-color);
 }
 .cheat-hub-card p {
   margin: 0;

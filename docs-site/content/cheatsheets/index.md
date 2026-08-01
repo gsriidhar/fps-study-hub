@@ -6,31 +6,36 @@ Quick-reference pages for exam day, interviews, or a fast refresher before a cal
 
 <a class="cheat-hub-card" href="iso20022/" style="--cheat-accent:#1d4ed8;" markdown="1">
 <span class="eyebrow">Messaging</span>
-### ISO 20022
+<strong class="cheat-hub-title">ISO 20022</strong>
+
 Message families, common message types, and the XML building blocks.
 </a>
 
 <a class="cheat-hub-card" href="faster-payments/" style="--cheat-accent:#059669;" markdown="1">
 <span class="eyebrow">Scheme</span>
-### Faster Payments
+<strong class="cheat-hub-title">Faster Payments</strong>
+
 Scheme facts, participant types, limits, CoP, and settlement timing.
 </a>
 
 <a class="cheat-hub-card" href="cpcm/" style="--cheat-accent:#7c3aed;" markdown="1">
 <span class="eyebrow">Certification</span>
-### CPCM
+<strong class="cheat-hub-title">CPCM</strong>
+
 Core payments-industry terminology from the certification syllabus.
 </a>
 
 <a class="cheat-hub-card" href="sql-for-payments/" style="--cheat-accent:#d97706;" markdown="1">
 <span class="eyebrow">Data</span>
-### SQL for payments
+<strong class="cheat-hub-title">SQL for payments</strong>
+
 Reconciliation, duplicate-detection, and investigation queries.
 </a>
 
 <a class="cheat-hub-card" href="testing-tools/" style="--cheat-accent:#0d9488;" markdown="1">
 <span class="eyebrow">QA</span>
-### Testing tools
+<strong class="cheat-hub-title">Testing tools</strong>
+
 Selenium, Playwright, SoapUI, and REST API testing for payment flows.
 </a>
 
