@@ -326,15 +326,113 @@
   text-align: left;
 }
 
-/* ---- responsive breakpoint: radial => stacked below 760px ---- */
+/* ---- stage path layout (numbered vertical roadmap) ---- */
+
+.fd-stagepath-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.fd-flow-path--spine {
+  stroke-width: 2.5;
+}
+
+.fd-flow-path--branch {
+  stroke-width: 1.75;
+  animation-duration: 1.3s;
+}
+
+.fd-stage-circle {
+  fill: var(--fd-bg-raised);
+  stroke: var(--fd-accent);
+  stroke-width: 2;
+}
+
+.fd-stage-circle--accent {
+  fill: var(--fd-accent-soft);
+}
+
+.fd-stage-number {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  fill: var(--fd-text);
+  text-anchor: middle;
+}
+
+.fd-stagepath-stack {
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+.fd-stagepath-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.fd-stage-number-badge {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  background: var(--fd-bg-raised);
+  border: 2px solid var(--fd-accent);
+  color: var(--fd-text);
+}
+
+.fd-stage-number-badge--accent {
+  background: var(--fd-accent-soft);
+}
+
+.fd-stagepath-stack .fd-stack-node {
+  flex: 1;
+  align-items: flex-start;
+  text-align: left;
+  padding: 0.6rem 0.85rem;
+}
+
+.fd-stagepath-connector {
+  width: 2px;
+  height: 1.4rem;
+  margin-left: 16px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--fd-accent) 0,
+    var(--fd-accent) 5px,
+    transparent 5px,
+    transparent 11px
+  );
+  background-size: 2px 24px;
+  animation: fd-flow-vertical 0.9s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fd-stagepath-connector {
+    animation: none;
+  }
+}
+
+/* ---- responsive breakpoint: radial/stagepath => stacked below 760px ---- */
 
 @media (max-width: 760px) {
   .fd-radial-svg,
-  .fd-pipeline-svg {
+  .fd-pipeline-svg,
+  .fd-stagepath-svg {
     display: none;
   }
   .fd-radial-stack,
-  .fd-pipeline-stack {
+  .fd-pipeline-stack,
+  .fd-stagepath-stack {
     display: flex;
   }
 }

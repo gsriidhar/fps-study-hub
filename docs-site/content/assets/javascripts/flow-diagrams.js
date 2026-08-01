@@ -1,7 +1,7 @@
 /* ==========================================================================
    Flow diagrams — reusable animated SVG diagram engine.
-   Renders two diagram types, driven entirely by a JSON config embedded in
-   each page's markup (progressive-enhancement style, same pattern as
+   Renders three diagram types, driven entirely by a JSON config embedded
+   in each page's markup (progressive-enhancement style, same pattern as
    assets/javascripts/assistant.js):
 
      <div class="flow-diagram" data-flow="pipeline" markdown="0">
@@ -12,7 +12,11 @@
        <script type="application/json">{ "center": {...}, "spokes": [...] }</script>
      </div>
 
-   Both types render a full SVG diagram for wider viewports (with an
+     <div class="flow-diagram" data-flow="stagepath" markdown="0">
+       <script type="application/json">{ "stages": [{ "label": ..., "facts": [...] }, ...] }</script>
+     </div>
+
+   All three render a full SVG diagram for wider viewports (with an
    animated "flowing dash" effect along every connector) and a simpler
    vertical stacked fallback for narrow viewports — toggled purely by CSS
    media query in flow-diagrams.css, so no JS resize handling is needed.
@@ -274,6 +278,109 @@
   }
 
   // -------------------------------------------------------------------
+  // Stage path: a numbered vertical spine (a linear roadmap/timeline)
+  // where each stage branches sideways to a labelled card with its own
+  // short fact list. Used for ordered, multi-step curricula/journeys.
+  // -------------------------------------------------------------------
+  function renderStagePath(container, cfg) {
+    var stages = cfg.stages || [];
+    if (!stages.length) return;
+
+    if (cfg.title) container.appendChild(titleEl(cfg.title, cfg.eyebrow));
+
+    var n = stages.length;
+    var circleR = 20;
+    var cardW = 460;
+    var cardH = 100;
+    var branchLen = 46;
+    var spineX = 30;
+    var cardX = spineX + circleR + branchLen;
+    var totalW = cardX + cardW + 24;
+    var firstY = 40;
+    var stageGap = cardH + 34;
+    var totalH = firstY + (n - 1) * stageGap + cardH / 2 + 34;
+
+    var svg = svgEl("svg", {
+      class: "fd-stagepath-svg",
+      viewBox: "0 0 " + totalW + " " + totalH,
+      role: "img",
+      "aria-label": cfg.ariaLabel || cfg.title || "Stage path diagram",
+    });
+
+    var ys = [];
+    var i;
+    for (i = 0; i < n; i++) ys.push(firstY + i * stageGap);
+
+    if (n > 1) {
+      svg.appendChild(
+        svgEl("path", {
+          d: pathBetween(spineX, ys[0], spineX, ys[n - 1]),
+          class: "fd-flow-path fd-flow-path--spine",
+        })
+      );
+    }
+
+    for (i = 0; i < n; i++) {
+      var y = ys[i];
+      var accent = !!stages[i].accent;
+
+      svg.appendChild(
+        svgEl("path", {
+          d: pathBetween(spineX + circleR, y, cardX, y),
+          class: "fd-flow-path fd-flow-path--branch",
+        })
+      );
+
+      svg.appendChild(
+        svgEl("circle", {
+          cx: spineX,
+          cy: y,
+          r: circleR,
+          class: "fd-stage-circle" + (accent ? " fd-stage-circle--accent" : ""),
+        })
+      );
+      svg.appendChild(
+        labelText(spineX, y + 4, stages[i].number != null ? String(stages[i].number) : String(i + 1), "fd-stage-number")
+      );
+
+      svg.appendChild(
+        foreignNode(cardX, y - cardH / 2, cardW, cardH, nodeInnerHTML(stages[i]), accent ? "fd-node--accent" : "")
+      );
+    }
+
+    container.appendChild(svg);
+    container.appendChild(renderStagePathStack(stages));
+  }
+
+  function renderStagePathStack(stages) {
+    var stack = document.createElement("div");
+    stack.className = "fd-stagepath-stack";
+
+    stages.forEach(function (stage, idx) {
+      var row = document.createElement("div");
+      row.className = "fd-stagepath-row";
+
+      var badge = document.createElement("div");
+      badge.className = "fd-stage-number-badge" + (stage.accent ? " fd-stage-number-badge--accent" : "");
+      badge.textContent = stage.number != null ? String(stage.number) : String(idx + 1);
+
+      var card = document.createElement("div");
+      card.className = "fd-node fd-stack-node" + (stage.accent ? " fd-node--accent" : "");
+      card.innerHTML = nodeInnerHTML(stage);
+
+      row.appendChild(badge);
+      row.appendChild(card);
+      stack.appendChild(row);
+
+      if (idx < stages.length - 1) {
+        stack.appendChild(document.createElement("div")).className = "fd-stagepath-connector";
+      }
+    });
+
+    return stack;
+  }
+
+  // -------------------------------------------------------------------
   // Auto-init: find every undressed .flow-diagram[data-flow] on the page,
   // read its embedded JSON config, and render into it.
   // -------------------------------------------------------------------
@@ -296,6 +403,7 @@
 
       if (type === "pipeline") renderPipeline(container, cfg);
       else if (type === "radial") renderRadial(container, cfg);
+      else if (type === "stagepath") renderStagePath(container, cfg);
 
       container.setAttribute("data-fd-rendered", "true");
     }

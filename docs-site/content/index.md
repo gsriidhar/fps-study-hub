@@ -73,6 +73,28 @@ Blocks A &rarr; H, 40 lessons spanning payments, treasury, and compliance.
 | F7 — Testing FPS | Happy-path, negative, CoP and fraud testing | Ready |
 | F8 — Monitoring & Live Simulation | Production monitoring, end-to-end investigation simulation | Ready |
 
+### The recommended route through F1 → F8
+
+<div class="flow-diagram" data-flow="stagepath" markdown="0">
+<script type="application/json">
+{
+  "eyebrow": "FPS analyst deep-dive",
+  "title": "F1 to F8 — the interview-ready path",
+  "ariaLabel": "Stage-path diagram showing the eight FPS analyst deep-dive blocks in order, from F1 fundamentals through F8 monitoring and live simulation, each branching to its main topics.",
+  "stages": [
+    { "number": 1, "label": "F1 · Fundamentals", "accent": true, "facts": ["FPS ecosystem, direct vs indirect access", "Payment initiation & validation rules"] },
+    { "number": 2, "label": "F2 · Checks, Submission & Settlement", "facts": ["Confirmation of Payee, fraud & risk controls", "Submission, receiving-bank processing, settlement"] },
+    { "number": 3, "label": "F3 · Payment Data & Operations", "facts": ["Payment fields, statuses, references", "The Ops team & exception queues"] },
+    { "number": 4, "label": "F4 · Investigations", "facts": ["Returns and rejections investigation", "Missing, delayed, duplicate payment & fraud investigation"] },
+    { "number": 5, "label": "F5 · Reconciliation & Architecture", "facts": ["Reconciliation fundamentals & breaks", "Settlement & typical bank architecture"] },
+    { "number": 6, "label": "F6 · Systems & SQL", "facts": ["Middleware & databases", "SQL for failed-payment analysis"] },
+    { "number": 7, "label": "F7 · Testing FPS", "facts": ["Happy-path & negative testing", "CoP and fraud testing"] },
+    { "number": 8, "label": "F8 · Monitoring & Live Simulation", "facts": ["Production monitoring", "End-to-end investigation simulation"] }
+  ]
+}
+</script>
+</div>
+
 ## CPCM curriculum track
 
 | Block | Focus | Status |
