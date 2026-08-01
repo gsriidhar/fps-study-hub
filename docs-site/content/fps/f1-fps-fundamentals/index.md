@@ -18,6 +18,22 @@ title: "FPS Fundamentals"
 
 FPS is the UK's real-time, 24/7 bank-to-bank payment scheme, run by Pay.UK, built to close the gap between slow Bacs and expensive CHAPS. A payment crosses several owners — channel, sending bank, fraud/risk systems, payment hub, FPS gateway, Pay.UK, receiving bank — and most investigations start by asking where the payment is now and who owns that stage. Banks can be direct participants (own FPS connection) or indirect (via a sponsor bank); processing and settlement are separate concepts. Every payment starts as an initiated instruction with a unique ID and status, then passes five validation categories — mandatory fields, sort code, account number (incl. modulus check), amount/limits, and account status — before it can reach FPS at all.
 
+<div class="flow-diagram" data-flow="radial" markdown="0">
+<script type="application/json">
+{
+  "eyebrow": "F1 · FPS Fundamentals",
+  "title": "Getting a payment ready for FPS",
+  "ariaLabel": "Radial diagram summarising F1: direct vs indirect access, payment initiation, and validation rules.",
+  "center": { "label": "Before FPS is even contacted" },
+  "spokes": [
+    { "label": "Direct vs indirect access", "facts": ["Direct: own FPS connection + gateway", "Indirect: reaches FPS via a sponsor bank"] },
+    { "label": "Payment initiation", "facts": ["Customer submits → instruction gets an ID + status", "No money moves yet; FPS not contacted"] },
+    { "label": "Validation rules", "facts": ["5 checks: fields, sort code, account, limits, balance", "Outcome: Pass / Reject / Hold / Repair"] }
+  ]
+}
+</script>
+</div>
+
 ## Flashcards
 
 ??? question "What problem was FPS designed to solve?"

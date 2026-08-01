@@ -1,0 +1,346 @@
+/* ==========================================================================
+   Flow diagrams — reusable animated SVG diagram engine
+   Pipeline (linear) + Radial (hub-and-spoke) styles.
+   Dark navy theme, teal accent, IBM Plex Sans/Mono + Space Grotesk.
+   Scoped entirely to .flow-diagram so it never touches the site's own
+   Material theme typography or palette.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap");
+
+.flow-diagram {
+  --fd-bg: #0a1628;
+  --fd-bg-raised: #101f38;
+  --fd-border: #1e3357;
+  --fd-accent: #00e6a8;
+  --fd-accent-soft: rgba(0, 230, 168, 0.16);
+  --fd-text: #eef4fb;
+  --fd-muted: #8fa3c2;
+  --fd-tag-bg: rgba(0, 230, 168, 0.12);
+  --fd-return: #6f88ad;
+
+  position: relative;
+  margin: 1.5rem 0;
+  padding: 1.25rem 1.25rem 1.5rem;
+  border-radius: 14px;
+  background: linear-gradient(180deg, var(--fd-bg) 0%, #0d1d33 100%);
+  border: 1px solid var(--fd-border);
+  color: var(--fd-text);
+  font-family: "IBM Plex Sans", -apple-system, sans-serif;
+  overflow: hidden;
+}
+
+.flow-diagram * {
+  box-sizing: border-box;
+}
+
+.fd-title {
+  margin: 0 0 1rem;
+  font-family: "Space Grotesk", "IBM Plex Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--fd-text);
+  letter-spacing: 0.01em;
+}
+
+.fd-title .fd-eyebrow {
+  display: block;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 500;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fd-accent);
+  margin-bottom: 0.3rem;
+}
+
+/* ---- shared node / card styling (used inside foreignObject + stacks) ---- */
+
+.fd-node {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.15rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 10px;
+  background: var(--fd-bg-raised);
+  border: 1.5px solid var(--fd-border);
+}
+
+.fd-node--accent {
+  border-color: var(--fd-accent);
+  background: radial-gradient(circle at 50% 0%, rgba(0, 230, 168, 0.18), var(--fd-bg-raised) 70%);
+}
+
+.fd-node-label {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--fd-text);
+  line-height: 1.22;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.fd-node-sublabel {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 400;
+  font-size: 0.68rem;
+  color: var(--fd-muted);
+  line-height: 1.28;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.fd-facts {
+  margin: 0.2rem 0 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+  width: 100%;
+}
+
+.fd-facts li {
+  position: relative;
+  padding-left: 0.7rem;
+  font-size: 0.64rem;
+  line-height: 1.32;
+  color: var(--fd-muted);
+  margin-bottom: 0.2rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.fd-facts li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.42em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--fd-accent);
+}
+
+.fd-tag {
+  display: inline-block;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 500;
+  font-size: 0.62rem;
+  letter-spacing: 0.02em;
+  color: var(--fd-accent);
+  background: var(--fd-tag-bg);
+  border: 1px solid rgba(0, 230, 168, 0.35);
+  border-radius: 4px;
+  padding: 0.08rem 0.4rem;
+}
+
+.fd-tag--muted {
+  color: var(--fd-muted);
+  background: rgba(143, 163, 194, 0.1);
+  border-color: rgba(143, 163, 194, 0.3);
+}
+
+/* SVG text labels sitting directly on connector paths */
+.fd-edge-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 500;
+  font-size: 10.5px;
+  fill: var(--fd-accent);
+}
+
+.fd-edge-label--muted {
+  fill: var(--fd-muted);
+  font-size: 9.5px;
+}
+
+/* Radial hub node — square foreignObject clipped to a circle */
+.fd-radial-center {
+  border-radius: 50%;
+}
+
+.fd-radial-center-label {
+  font-size: 0.9rem;
+}
+
+/* ---- animated flow paths ---- */
+
+.fd-flow-path {
+  fill: none;
+  stroke: var(--fd-accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 5 7;
+  animation: fd-flow-forward 1.1s linear infinite;
+}
+
+.fd-flow-path--return {
+  stroke: var(--fd-return);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 6;
+  animation: fd-flow-reverse 1.4s linear infinite;
+  opacity: 0.75;
+}
+
+.fd-flow-path--spoke {
+  stroke-width: 1.75;
+  animation-duration: 1.6s;
+}
+
+@keyframes fd-flow-forward {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+@keyframes fd-flow-reverse {
+  to {
+    stroke-dashoffset: 20;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fd-flow-path,
+  .fd-flow-path--return {
+    animation: none;
+  }
+}
+
+/* ---- pipeline layout ---- */
+
+.fd-pipeline-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.fd-pipeline-stack {
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+.fd-pipeline-stack .fd-stack-node {
+  padding: 0.7rem 0.85rem;
+}
+
+.fd-pipeline-stack .fd-stack-connector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-left: 1.4rem;
+  min-height: 2.1rem;
+}
+
+.fd-pipeline-stack .fd-stack-connector-line {
+  position: relative;
+  width: 2px;
+  align-self: stretch;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--fd-accent) 0,
+    var(--fd-accent) 5px,
+    transparent 5px,
+    transparent 11px
+  );
+  background-size: 2px 24px;
+  animation: fd-flow-vertical 0.9s linear infinite;
+}
+
+@keyframes fd-flow-vertical {
+  to {
+    background-position: 0 -24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fd-pipeline-stack .fd-stack-connector-line {
+    animation: none;
+  }
+}
+
+.fd-pipeline-stack .fd-stack-connector-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+/* ---- radial layout ---- */
+
+.fd-radial-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.fd-radial-stack {
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.6rem;
+}
+
+.fd-radial-stack .fd-stack-center {
+  align-self: center;
+  min-width: 60%;
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+
+.fd-radial-stack .fd-stack-spoke {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+
+.fd-radial-stack .fd-stack-spoke-bar {
+  width: 3px;
+  border-radius: 3px;
+  align-self: stretch;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--fd-accent) 0,
+    var(--fd-accent) 5px,
+    transparent 5px,
+    transparent 11px
+  );
+  background-size: 3px 24px;
+  animation: fd-flow-vertical 1s linear infinite;
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fd-radial-stack .fd-stack-spoke-bar {
+    animation: none;
+  }
+}
+
+.fd-radial-stack .fd-stack-spoke-card {
+  flex: 1;
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+}
+
+/* ---- responsive breakpoint: radial => stacked below 760px ---- */
+
+@media (max-width: 760px) {
+  .fd-radial-svg,
+  .fd-pipeline-svg {
+    display: none;
+  }
+  .fd-radial-stack,
+  .fd-pipeline-stack {
+    display: flex;
+  }
+}
+
+@media (max-width: 500px) {
+  .flow-diagram {
+    padding: 1rem 0.85rem 1.2rem;
+  }
+}

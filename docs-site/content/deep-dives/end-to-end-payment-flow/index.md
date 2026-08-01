@@ -12,6 +12,31 @@ This is a genuinely common interview question in its own right — "walk me thro
 
 Customer → sending bank (capture, validate, check, submit) → Pay.UK / FPS infrastructure (route) → receiving bank (validate, credit) → beneficiary — with a status and timestamp written at every stage.
 
+## Message path at a glance
+
+<div class="flow-diagram" data-flow="pipeline" markdown="0">
+<script type="application/json">
+{
+  "eyebrow": "End-to-end payment flow",
+  "title": "Payer to payee — the message path",
+  "ariaLabel": "Diagram: the payer sends a pain.001 instruction to their bank, which exchanges pacs.008 and pacs.002 messages with the FPS central infrastructure and the payee bank, ending with the payee being credited.",
+  "nodes": [
+    { "label": "Payer", "sublabel": "sends the payment" },
+    { "label": "Payer bank", "sublabel": "validates + submits" },
+    { "label": "FPS central infrastructure", "sublabel": "Pay.UK routes the message", "accent": true },
+    { "label": "Payee bank", "sublabel": "checks + credits" },
+    { "label": "Payee", "sublabel": "funds land" }
+  ],
+  "edges": [
+    { "label": "pain.001", "returnLabel": "pain.002" },
+    { "label": "pacs.008", "returnLabel": "pacs.002" },
+    { "label": "pacs.008", "returnLabel": "pacs.002" },
+    { "label": "credited" }
+  ]
+}
+</script>
+</div>
+
 ## Stage 1 — Initiation
 
 The customer submits a payment through a channel — mobile banking, online banking, a standing order due to run, or a business payment file. The bank captures the instruction and creates an internal payment record with a unique identifier before anything else happens. See [F1 · Payment initiation](../../fps/f1-fps-fundamentals/index.md).

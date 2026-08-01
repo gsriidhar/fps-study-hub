@@ -38,8 +38,10 @@ theme:
 
 extra_css:
   - assets/stylesheets/extra.css
+  - assets/stylesheets/flow-diagrams.css
 extra_javascript:
   - assets/javascripts/assistant.js
+  - assets/javascripts/flow-diagrams.js
 
 plugins:
   - search:
