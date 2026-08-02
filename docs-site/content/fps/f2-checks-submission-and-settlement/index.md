@@ -24,13 +24,45 @@ Confirmation of Payee checks the beneficiary name before submission and returns 
   "eyebrow": "F2 · Checks, Submission & Settlement",
   "title": "From validated payment to settled obligation",
   "ariaLabel": "Radial diagram summarising F2: Confirmation of Payee, fraud and risk controls, FPS submission, receiving-bank processing, and settlement and reconciliation.",
-  "center": { "label": "Checks, submission & settlement" },
+  "center": {
+    "label": "Checks, submission & settlement"
+  },
   "spokes": [
-    { "label": "Confirmation of Payee", "facts": ["Match / Close Match / No Match / Unable to Check", "No Match is a warning, not an automatic block"] },
-    { "label": "Fraud & risk controls", "facts": ["Velocity checks, mule detection, AML, sanctions", "Risk score → Approve / Hold / Reject / Step-up"] },
-    { "label": "FPS submission", "facts": ["Payment hub routes + formats the message", "'Accepted by FPS' only confirms routing"] },
-    { "label": "Receiving-bank processing", "facts": ["Technical, duplicate + account checks first", "Reject before credit; Return after credit"] },
-    { "label": "Settlement & reconciliation", "facts": ["Processing (instant) vs settlement (BoE RTGS)", "Reconciliation compares 3 record sets"] }
+    {
+      "label": "Confirmation of Payee",
+      "facts": [
+        "Match / Close Match / No Match / Unable to Check",
+        "No Match is a warning, not an automatic block"
+      ]
+    },
+    {
+      "label": "Fraud & risk controls",
+      "facts": [
+        "Velocity checks, mule detection, AML, sanctions",
+        "Risk score → Approve / Hold / Reject / Step-up"
+      ]
+    },
+    {
+      "label": "FPS submission",
+      "facts": [
+        "Payment hub routes + formats the message",
+        "'Accepted by FPS' only confirms routing"
+      ]
+    },
+    {
+      "label": "Receiving-bank processing",
+      "facts": [
+        "Technical, duplicate + account checks first",
+        "Reject before credit; Return after credit"
+      ]
+    },
+    {
+      "label": "Settlement & reconciliation",
+      "facts": [
+        "Processing (instant) vs settlement (BoE RTGS)",
+        "Reconciliation compares 3 record sets"
+      ]
+    }
   ]
 }
 </script>

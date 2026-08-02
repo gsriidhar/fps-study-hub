@@ -198,6 +198,22 @@ const FPS_BLOCK2 = {
     },
   ],
   revisionSummary: "Confirmation of Payee checks the beneficiary name before submission and returns Match, Close Match, No Match, or Unable to Check — a warning system, not an automatic block. Fraud and risk controls (APP fraud detection, velocity checks, mule detection, AML, sanctions screening) can hold or reject a technically valid payment based on risk signals. Submission moves the payment through the bank's payment hub and FPS gateway to Pay.UK — but 'accepted by FPS' only confirms routing, not that the beneficiary has been paid. The receiving bank then validates the destination account and either credits it (rejecting first if invalid) or, in rarer cases, returns it after the fact. Finally, settlement (via Bank of England RTGS) squares up net obligations between banks separately from customer-facing processing, and reconciliation proves the bank's internal, FPS, and settlement records all agree.",
+  flowDiagram: {
+    type: "radial",
+    config: {
+      eyebrow: "F2 · Checks, Submission & Settlement",
+      title: "From validated payment to settled obligation",
+      ariaLabel: "Radial diagram summarising F2: Confirmation of Payee, fraud and risk controls, FPS submission, receiving-bank processing, and settlement and reconciliation.",
+      center: { label: "Checks, submission & settlement" },
+      spokes: [
+        { label: "Confirmation of Payee", facts: ["Match / Close Match / No Match / Unable to Check", "No Match is a warning, not an automatic block"] },
+        { label: "Fraud & risk controls", facts: ["Velocity checks, mule detection, AML, sanctions", "Risk score → Approve / Hold / Reject / Step-up"] },
+        { label: "FPS submission", facts: ["Payment hub routes + formats the message", "'Accepted by FPS' only confirms routing"] },
+        { label: "Receiving-bank processing", facts: ["Technical, duplicate + account checks first", "Reject before credit; Return after credit"] },
+        { label: "Settlement & reconciliation", facts: ["Processing (instant) vs settlement (BoE RTGS)", "Reconciliation compares 3 record sets"] },
+      ],
+    },
+  },
   flashcards: [
     ["Name the four CoP outcomes.", "Match, Close Match, No Match, Unable to Check."],
     ["Does a CoP No Match always block a payment?", "No — it's a warning; the customer may often still proceed depending on bank policy."],

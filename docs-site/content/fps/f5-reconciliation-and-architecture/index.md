@@ -23,12 +23,38 @@ Reconciliation compares independent records (payment processing vs settlement) t
   "eyebrow": "F5 · Reconciliation & Architecture",
   "title": "Keeping the books straight",
   "ariaLabel": "Radial diagram summarising F5: reconciliation fundamentals, reconciliation breaks, nostro and settlement reconciliation, and typical bank architecture.",
-  "center": { "label": "Reconciliation & architecture" },
+  "center": {
+    "label": "Reconciliation & architecture"
+  },
   "spokes": [
-    { "label": "Reconciliation fundamentals", "facts": ["Checks completeness, accuracy, timeliness", "Deferred net settlement vs instant processing"] },
-    { "label": "Reconciliation breaks", "facts": ["Missing, mismatch, duplicate, timing + more", "Workflow: classify → root cause → close"] },
-    { "label": "Nostro & settlement reconciliation", "facts": ["Nostro = our account held at another bank", "Direct settles at BoE; indirect via sponsor"] },
-    { "label": "Typical bank architecture", "facts": ["Channel → hub → fraud engine → FPS gateway", "Legacy: MQ/Tibco; digital-native: Kafka/Postgres"] }
+    {
+      "label": "Reconciliation fundamentals",
+      "facts": [
+        "Checks completeness, accuracy, timeliness",
+        "Deferred net settlement vs instant processing"
+      ]
+    },
+    {
+      "label": "Reconciliation breaks",
+      "facts": [
+        "Missing, mismatch, duplicate, timing + more",
+        "Workflow: classify → root cause → close"
+      ]
+    },
+    {
+      "label": "Nostro & settlement reconciliation",
+      "facts": [
+        "Nostro = our account held at another bank",
+        "Direct settles at BoE; indirect via sponsor"
+      ]
+    },
+    {
+      "label": "Typical bank architecture",
+      "facts": [
+        "Channel → hub → fraud engine → FPS gateway",
+        "Legacy: MQ/Tibco; digital-native: Kafka/Postgres"
+      ]
+    }
   ]
 }
 </script>

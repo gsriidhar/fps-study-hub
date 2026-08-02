@@ -238,6 +238,23 @@ const FPS_BLOCK4 = {
     },
   ],
   revisionSummary: "A reject stops a payment before it ever completes (no funds move); a return reverses a payment that already completed (funds moved, then came back) and is tracked as its own linked event. Rejections carry ISO 20022 reason codes (AC01 incorrect account, AC04 closed account, AC06 blocked, AM02 limit exceeded, RC01 invalid identifier) that should be translated into plain, actionable language for customers. Missing and delayed payment investigations are both timeline exercises: trace status history to find the last successful stage, then assign ownership to whichever system or bank owns the next step — distinguishing an isolated case from a systemic incident via queue depth and processing rate against baseline. Duplicate investigations combine business-level pattern matching (payer, beneficiary, amount, reference, timing) with technical evidence (correlation/message IDs, retry logs), governed by idempotency as the core preventive control, and never assume recovery is automatic — check whether funds have already left the account, which can signal fraud rather than a routine duplicate. Fraud investigations flip the core question to legitimacy and recoverability rather than technical fault: APP fraud (deceived customer, PSR reimbursement rules) differs from account takeover (unauthorised access, Payment Services Regulations 2017), recall success depends heavily on speed against mule-account drainage, and since October 2024 most APP fraud victims must be reimbursed, cost-split 50/50 between sending and receiving bank, subject to a narrow Standard of Caution exception.",
+  flowDiagram: {
+    type: "radial",
+    config: {
+      eyebrow: "F4 · Investigations",
+      title: "Six investigation types",
+      ariaLabel: "Radial diagram summarising the six FPS investigation types covered in F4: payment returns, payment rejections, missing payment, delayed payment, duplicate payment, and fraud investigation.",
+      center: { label: "FPS investigations" },
+      spokes: [
+        { label: "Payment returns", facts: ["Reversal after completion (funds delivered first)", "Needs consent, a fraud finding, or legal basis"] },
+        { label: "Payment rejections", facts: ["Stopped before completion, no funds move", "Reason codes: AC01, AC04, AC06, AM02, RC01"] },
+        { label: "Missing payment", facts: ["Trace end-to-end across every hop", "Find the last successful stage first"] },
+        { label: "Delayed payment", facts: ["Still processing, not stopped", "Isolated case vs a systemic issue"] },
+        { label: "Duplicate payment", facts: ["Same instruction processed more than once", "Idempotency key is the core prevention"] },
+        { label: "Fraud investigation", facts: ["APP fraud vs takeover vs mule accounts", "PSR rules: reimbursement, 50/50 cost split"] },
+      ],
+    },
+  },
   flashcards: [
     ["Reject vs return, in one line each?", "Reject: stopped before completion, no funds move. Return: completed, then reversed — funds moved first."],
     ["Why does a return get its own identifier?", "It's a distinct financial event needing independent tracking and reconciliation, even though it's linked to the original payment."],

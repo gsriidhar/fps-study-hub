@@ -181,6 +181,12 @@ function blockIndexMarkdown(block, trackTitle, slugs) {
   if (block.revisionSummary) {
     out += `\n## Revision summary\n\n${block.revisionSummary}\n`;
   }
+  if (block.flowDiagram) {
+    out +=
+      `\n<div class="flow-diagram" data-flow="${block.flowDiagram.type}" markdown="0">\n` +
+      `<script type="application/json">\n${JSON.stringify(block.flowDiagram.config, null, 2)}\n</script>\n` +
+      `</div>\n`;
+  }
   if (Array.isArray(block.flashcards) && block.flashcards.length) {
     out += `\n## Flashcards\n\n`;
     block.flashcards.forEach(([q, a]) => {

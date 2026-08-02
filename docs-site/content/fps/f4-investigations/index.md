@@ -25,14 +25,52 @@ A reject stops a payment before it ever completes (no funds move); a return reve
   "eyebrow": "F4 · Investigations",
   "title": "Six investigation types",
   "ariaLabel": "Radial diagram summarising the six FPS investigation types covered in F4: payment returns, payment rejections, missing payment, delayed payment, duplicate payment, and fraud investigation.",
-  "center": { "label": "FPS investigations" },
+  "center": {
+    "label": "FPS investigations"
+  },
   "spokes": [
-    { "label": "Payment returns", "facts": ["Reversal after completion (funds delivered first)", "Needs consent, a fraud finding, or legal basis"] },
-    { "label": "Payment rejections", "facts": ["Stopped before completion, no funds move", "Reason codes: AC01, AC04, AC06, AM02, RC01"] },
-    { "label": "Missing payment", "facts": ["Trace end-to-end across every hop", "Find the last successful stage first"] },
-    { "label": "Delayed payment", "facts": ["Still processing, not stopped", "Isolated case vs a systemic issue"] },
-    { "label": "Duplicate payment", "facts": ["Same instruction processed more than once", "Idempotency key is the core prevention"] },
-    { "label": "Fraud investigation", "facts": ["APP fraud vs takeover vs mule accounts", "PSR rules: reimbursement, 50/50 cost split"] }
+    {
+      "label": "Payment returns",
+      "facts": [
+        "Reversal after completion (funds delivered first)",
+        "Needs consent, a fraud finding, or legal basis"
+      ]
+    },
+    {
+      "label": "Payment rejections",
+      "facts": [
+        "Stopped before completion, no funds move",
+        "Reason codes: AC01, AC04, AC06, AM02, RC01"
+      ]
+    },
+    {
+      "label": "Missing payment",
+      "facts": [
+        "Trace end-to-end across every hop",
+        "Find the last successful stage first"
+      ]
+    },
+    {
+      "label": "Delayed payment",
+      "facts": [
+        "Still processing, not stopped",
+        "Isolated case vs a systemic issue"
+      ]
+    },
+    {
+      "label": "Duplicate payment",
+      "facts": [
+        "Same instruction processed more than once",
+        "Idempotency key is the core prevention"
+      ]
+    },
+    {
+      "label": "Fraud investigation",
+      "facts": [
+        "APP fraud vs takeover vs mule accounts",
+        "PSR rules: reimbursement, 50/50 cost split"
+      ]
+    }
   ]
 }
 </script>

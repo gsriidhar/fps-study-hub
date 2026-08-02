@@ -24,11 +24,31 @@ FPS is the UK's real-time, 24/7 bank-to-bank payment scheme, run by Pay.UK, buil
   "eyebrow": "F1 · FPS Fundamentals",
   "title": "Getting a payment ready for FPS",
   "ariaLabel": "Radial diagram summarising F1: direct vs indirect access, payment initiation, and validation rules.",
-  "center": { "label": "Before FPS is even contacted" },
+  "center": {
+    "label": "Before FPS is even contacted"
+  },
   "spokes": [
-    { "label": "Direct vs indirect access", "facts": ["Direct: own FPS connection + gateway", "Indirect: reaches FPS via a sponsor bank"] },
-    { "label": "Payment initiation", "facts": ["Customer submits → instruction gets an ID + status", "No money moves yet; FPS not contacted"] },
-    { "label": "Validation rules", "facts": ["5 checks: fields, sort code, account, limits, balance", "Outcome: Pass / Reject / Hold / Repair"] }
+    {
+      "label": "Direct vs indirect access",
+      "facts": [
+        "Direct: own FPS connection + gateway",
+        "Indirect: reaches FPS via a sponsor bank"
+      ]
+    },
+    {
+      "label": "Payment initiation",
+      "facts": [
+        "Customer submits → instruction gets an ID + status",
+        "No money moves yet; FPS not contacted"
+      ]
+    },
+    {
+      "label": "Validation rules",
+      "facts": [
+        "5 checks: fields, sort code, account, limits, balance",
+        "Outcome: Pass / Reject / Hold / Repair"
+      ]
+    }
   ]
 }
 </script>
